@@ -1159,10 +1159,10 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
+    width: 45px;
+    height: 45px;
+    background: var(--primary-color); /* Cor primária para maior visibilidade */
+    border: 2px solid white; /* Borda branca para melhor contraste */
     border-radius: 50%;
     color: white;
     font-size: 18px;
@@ -1171,20 +1171,21 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10; /* CORREÇÃO: Aumentando o z-index para garantir que seja clicável */
+    z-index: 10; /* Z-index alto para garantir que seja clicável */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para destacar o botão */
 }
 
 .lightbox-nav:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-50%) scale(1.1);
+    background: #7d634e; /* Tom mais escuro do primary-color */
+    transform: translateY(-50%) scale(1.15);
 }
 
 .lightbox-prev {
-    left: 10px; /* CORREÇÃO: Reduzido para 10px em vez de -60px para ser mais visível em telas pequenas */
+    left: 10px; /* Posicionado para ser visível em telas pequenas */
 }
 
 .lightbox-next {
-    right: 10px; /* CORREÇÃO: Reduzido para 10px em vez de -60px para ser mais visível em telas pequenas */
+    right: 10px; /* Posicionado para ser visível em telas pequenas */
 }
 
 /* Responsividade para todos os dispositivos */
@@ -1271,9 +1272,9 @@ footer {
     
     /* CORREÇÃO: Ajustando botões do carrossel em tela médias */
     .slider-nav-arrow {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
     }
     
     .slider-arrow-left {
@@ -1393,9 +1394,9 @@ footer {
     
     /* CORREÇÃO: Ajustando botões do carrossel em tela grande */
     .slider-nav-arrow {
-        width: 50px;
-        height: 50px;
-        font-size: 1.3rem;
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
     }
     
     .slider-arrow-left {

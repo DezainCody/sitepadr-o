@@ -603,15 +603,15 @@ nav ul li a::after {
 
 .destaques-container {
     position: relative;
-    padding: 0 50px;
+    padding: 0 40px; /* Reduzido o padding para dar mais espaço aos itens */
     z-index: 2;
 }
 
 .destaques-slider {
     display: flex;
     overflow-x: auto;
-    gap: 2rem;
-    padding: 1rem 0.5rem 3rem 0.5rem;
+    gap: 1.5rem; /* Reduzido o gap para melhor uso do espaço em telas pequenas */
+    padding: 1rem 0.25rem 3rem 0.25rem; /* Reduzido o padding lateral */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     transition: transform var(--transition-medium);
@@ -624,7 +624,8 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 300px;
+    width: 85%; /* ALTERAÇÃO: Aumentado para 85% da largura disponível em telas muito pequenas */
+    max-width: 350px; /* Adicionado um max-width para controlar tamanho em telas maiores */
     text-align: center;
     background-color: var(--white-color);
     padding: 1.5rem;
@@ -633,6 +634,7 @@ nav ul li a::after {
     transition: all var(--transition-medium);
     position: relative;
     overflow: hidden;
+    margin: 0 auto; /* Centralizar o item */
 }
 
 .destaque-item::before {
@@ -660,7 +662,7 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: 350px;
+    height: 250px; /* Ajustado para melhor proporção em telas pequenas */
     object-fit: cover;
     margin-bottom: 1.5rem;
     border-radius: 2px;
@@ -1499,7 +1501,8 @@ img:hover {
 /* Responsividade para todos os dispositivos */
 @media (min-width: 576px) {
     .destaque-item {
-        width: 320px;
+        width: 90%; /* ALTERAÇÃO: Ajustado para ocupar menos da largura total */
+        max-width: 320px;
     }
     
     .colecoes-grid {
@@ -1548,6 +1551,15 @@ img:hover {
     
     .testimonial {
         padding: 3rem;
+    }
+    
+    .destaque-item {
+        width: 75%; /* ALTERAÇÃO: Reduzindo largura relativa em tablets */
+        max-width: 320px;
+    }
+    
+    .destaques-slider {
+        gap: 2rem; /* Aumentado o espaçamento entre itens */
     }
 }
 
@@ -1626,6 +1638,16 @@ img:hover {
         flex: 2;
     }
     
+    /* Destaque item para desktop */
+    .destaque-item {
+        width: 300px; /* ALTERAÇÃO: largura fixa em desktop */
+        max-width: 300px;
+    }
+    
+    .destaques-container {
+        padding: 0 60px; /* Mais espaço para as setas de navegação */
+    }
+    
     /* Footer para desktop */
     .footer-content {
         flex-direction: row;
@@ -1661,6 +1683,11 @@ img:hover {
     }
     
     .destaque-item {
-        width: 350px;
+        width: 350px; /* ALTERAÇÃO: Tamanho maior para telas grandes */
+        max-width: 350px;
+    }
+    
+    .destaque-item img {
+        height: 300px; /* ALTERAÇÃO: Imagens maiores para telas grandes */
     }
 }

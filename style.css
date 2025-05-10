@@ -313,12 +313,13 @@ nav ul li a::after {
     transform: rotate(90deg);
 }
 
-/* Hero Section com animação de texto e Parallax */
+/* Hero Section com animação de texto e Parallax - Posicionamento melhorado */
 .hero {
-    height: 90vh; /* Aumentado para dar mais espaço ao conteúdo em telas pequenas */
+    height: 100vh; /* Altura total da viewport para melhor distribuição */
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center; /* Centraliza horizontalmente */
     margin-top: 70px;
     overflow: hidden;
 }
@@ -351,23 +352,30 @@ nav ul li a::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.7)); /* Ajustado para melhor legibilidade sem o backdrop filter */
 }
 
 .hero .container {
     position: relative;
     z-index: 2;
-    width: 95%; /* Ligeiramente mais largo em telas pequenas */
+    width: 100%; /* Largura total para aproveitamento máximo em telas pequenas */
+    display: flex;
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    align-items: center;
+    height: 100%;
 }
 
 .hero-content {
     width: 100%;
     max-width: 800px;
     text-align: left;
-    padding: 0 1rem; /* Reduzido o padding lateral */
+    padding: 2rem 1rem; /* Aumentado o padding vertical */
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s forwards 0.5s;
+    margin-top: -50px; /* Ajusta posição vertical para melhor equilíbrio visual */
+    /* Removido: background-color e backdrop-filter */
+    /* Removido: border-radius e box-shadow */
 }
 
 @keyframes fadeInUp {
@@ -379,14 +387,16 @@ nav ul li a::after {
 
 .hero-content h2 {
     font-size: 2.5rem; /* Tamanho base reduzido para telas pequenas */
-    margin-bottom: 1rem;
-    color: var(--secondary-color);
+    margin-bottom: 1.2rem;
+    color: var(--primary-color); /* Usando a cor primária para maior contraste */
     line-height: 1.2;
     position: relative;
     overflow: hidden;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem; /* Maior espaçamento após o título */
     word-wrap: break-word; /* Garante quebra de palavras adequada */
     hyphens: auto; /* Habilita hifenização automática se necessário */
+    font-weight: 600; /* Negrito para mais destaque */
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); /* Sombra sutil para destacar texto */
 }
 
 .hero-content h2::after {
@@ -395,18 +405,19 @@ nav ul li a::after {
     bottom: 0;
     left: 0;
     width: 120px;
-    height: 2px;
+    height: 3px; /* Linha mais espessa */
     background-color: var(--primary-color);
 }
 
 .hero-content p {
-    font-size: 1rem; /* Tamanho base reduzido para telas pequenas */
-    margin-bottom: 2rem;
+    font-size: 1.05rem; /* Tamanho base ajustado para telas pequenas */
+    margin-bottom: 2.5rem; /* Mais espaço antes do botão */
     color: var(--secondary-color);
-    font-weight: 300;
+    font-weight: 400; /* Um pouco mais pesado para melhor legibilidade */
     line-height: 1.5;
     max-width: 100%; /* Usa toda a largura disponível */
     word-wrap: break-word; /* Garante quebra de palavras adequada */
+    opacity: 0.9; /* Leve opacidade para hierarquia visual */
 }
 
 /* Sobre Section com efeito de reveal */
@@ -505,7 +516,7 @@ nav ul li a::after {
     opacity: 0.9;
 }
 
-/* Coleções/Projetos Section com efeito de hover refinado */
+/* Coleções/Projetos Section com descrições sempre visíveis */
 .colecoes {
     padding: 6rem 0;
     background-color: var(--white-color);
@@ -549,40 +560,27 @@ nav ul li a::after {
     left: 0;
     width: 100%;
     padding: 2rem 1.5rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6) 80%, rgba(0, 0, 0, 0));
     color: var(--white-color);
-    transform: translateY(20px);
-    opacity: 0.85;
+    /* Removido: transform e opacity para que o texto seja sempre visível */
     transition: all var(--transition-medium);
 }
 
 .colecao-item:hover .colecao-info {
-    transform: translateY(0);
-    opacity: 1;
+    /* Apenas um leve efeito de destaque no hover */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7) 80%, rgba(0, 0, 0, 0));
 }
 
 .colecao-info h3 {
     margin-bottom: 0.5rem;
     font-size: 1.4rem;
-    transform: translateY(10px);
-    transition: transform var(--transition-medium);
-}
-
-.colecao-item:hover .colecao-info h3 {
-    transform: translateY(0);
+    transition: all var(--transition-medium);
 }
 
 .colecao-info p {
     font-size: 0.95rem;
     margin-bottom: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease 0.1s;
-}
-
-.colecao-item:hover .colecao-info p {
-    opacity: 1;
-    transform: translateY(0);
+    transition: all 0.4s ease;
 }
 
 /* Destaques Section com efeito de carrossel melhorado */
@@ -1193,6 +1191,27 @@ footer {
 }
 
 /* Responsividade para todos os dispositivos */
+/* Ajustes específicos para melhor visualização em dispositivos móveis */
+@media (max-width: 767px) {
+    .colecao-info {
+        padding: 1.5rem 1.2rem; /* Padding reduzido para telas menores */
+    }
+    
+    .colecao-info h3 {
+        font-size: 1.2rem; /* Fonte reduzida para melhor legibilidade */
+        margin-bottom: 0.3rem;
+    }
+    
+    .colecao-info p {
+        font-size: 0.85rem; /* Fonte reduzida para melhor caber em telas pequenas */
+        line-height: 1.4;
+    }
+    
+    .colecao-item img {
+        height: 350px; /* Altura reduzida para melhor proporção em dispositivos móveis */
+    }
+}
+
 @media (max-width: 575px) {
     /* Estilos específicos para telas muito pequenas */
     .hero-content h2 {
@@ -1207,11 +1226,17 @@ footer {
     }
     
     .hero-content {
-        padding: 0 0.75rem; /* Reduz ainda mais o padding */
+        padding: 1.5rem 1rem; /* Reduz ainda mais o padding */
+        margin-top: -30px; /* Ajuste de posição */
+        max-width: 95%; /* Limita levemente a largura */
     }
     
     .hero {
-        height: 95vh; /* Mais alto para acomodar o conteúdo em dispositivos muito pequenos */
+        height: 100vh; /* Altura total para dispositivos muito pequenos */
+    }
+    
+    .hero-overlay {
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.85));
     }
     
     /* Destacando mais as setas de navegação em telas muito pequenas */
@@ -1246,6 +1271,12 @@ footer {
         font-size: 1.1rem; /* Aumenta ligeiramente em telas maiores que 576px */
     }
     
+    .hero-content {
+        padding: 2rem 1.5rem;
+        margin-top: -40px;
+        max-width: 90%;
+    }
+    
     /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas pequenas */
     .lightbox-prev {
         left: 15px;
@@ -1262,16 +1293,25 @@ footer {
     }
     
     .hero {
-        height: 75vh;
+        height: 80vh;
+    }
+    
+    .hero-content {
+        padding: 2.5rem 2rem;
+        margin-top: -50px;
+        max-width: 85%;
+        /* Removido: background-color */
     }
     
     .hero-content h2 {
         font-size: 3.2rem; /* Aumentado para tablets */
+        padding-bottom: 1rem;
     }
     
     .hero-content p {
         font-size: 1.2rem; /* Aumentado para tablets */
         max-width: 95%; /* Ligeiramente mais estreito em tablets */
+        margin-bottom: 2.5rem;
     }
     
     .section-header h2 {
@@ -1357,23 +1397,43 @@ footer {
     
     /* Hero para desktop */
     .hero {
-        height: 80vh;
+        height: 90vh;
         margin-top: 80px;
     }
     
     .hero-content {
         text-align: left;
-        max-width: 600px;
+        max-width: 650px;
+        padding: 3rem 3rem 3rem 5rem; /* Mais padding à esquerda */
+        margin-top: -80px;
+        /* Removido: background-color, box-shadow, border-radius */
+        transform: translateX(-50px); /* Deslocado para a esquerda inicialmente para animação */
+        animation: fadeSlideIn 1.2s forwards 0.3s;
+    }
+    
+    @keyframes fadeSlideIn {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
     
     .hero-content h2 {
         font-size: 3.8rem; /* Tamanho ajustado para desktop */
+        padding-bottom: 1.2rem;
+    }
+    
+    .hero-content h2::after {
+        height: 4px;
+        width: 150px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
     }
     
     .hero-content p {
         font-size: 1.3rem;
         max-width: 90%; /* Mais estreito em desktop */
         line-height: 1.6;
+        margin-bottom: 3rem;
     }
     
     /* Sobre Section para desktop */
@@ -1466,13 +1526,26 @@ footer {
         font-size: 2.8rem;
     }
     
+    .hero-content {
+        padding: 4rem 4rem 4rem 6rem; /* Mais espaço em telas grandes */
+        max-width: 700px; /* Um pouco mais largo em telas grandes */
+        margin-top: -90px;
+    }
+    
     .hero-content h2 {
         font-size: 4.5rem;
+        padding-bottom: 1.5rem;
+    }
+    
+    .hero-content h2::after {
+        width: 180px;
+        height: 5px;
     }
     
     .hero-content p {
         font-size: 1.4rem;
         line-height: 1.7;
+        margin-bottom: 3.5rem;
     }
     
     .colecoes-grid {
@@ -1486,5 +1559,12 @@ footer {
     
     .destaque-item img {
         height: 300px; /* ALTERAÇÃO: Imagens maiores para telas grandes */
+    }
+    
+    /* Ajustar botão para ser mais proeminente em telas grandes */
+    .hero-content .btn {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        letter-spacing: 3px;
     }
 }

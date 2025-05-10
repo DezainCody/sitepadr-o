@@ -692,7 +692,7 @@ nav ul li a::after {
     margin-bottom: 0;
 }
 
-/* Setas de navegação com animação */
+/* Setas de navegação com animação - CORRIGIDO para melhor visibilidade em dispositivos móveis */
 .slider-nav-arrow {
     position: absolute;
     top: 50%;
@@ -1064,16 +1064,6 @@ footer {
     transform: translateY(0);
 }
 
-/* Efeitos de transição para imagens */
-img {
-    cursor: pointer;
-    transition: transform var(--transition-medium), filter var(--transition-medium);
-}
-
-img:hover {
-    filter: brightness(1.05);
-}
-
 /* Estilos para mensagens de erro no formulário com animação */
 .error {
     border-color: #ff3860 !important;
@@ -1095,407 +1085,106 @@ img:hover {
     }
 }
 
-/* Animações para elementos quando entram na viewport */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.fade-in-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-in-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.fade-in-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-in-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Efeito de loading para botões */
-.btn-loading {
-    position: relative;
-    pointer-events: none;
-}
-
-.btn-loading span {
-    visibility: hidden;
-}
-
-.btn-loading::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: rotate 0.8s linear infinite;
-}
-
-@keyframes rotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Efeito de zoom suave para imagens em foco */
-.zoom-container {
-    overflow: hidden;
-    position: relative;
-}
-
-.zoom-effect {
-    transition: transform 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.zoom-container:hover .zoom-effect {
-    transform: scale(1.1);
-}
-
-/* Efeito overlay para imagens com texto */
-.image-overlay {
-    position: relative;
-    overflow: hidden;
-}
-
-.image-overlay::before {
-    content: '';
-    position: absolute;
+/* CORREÇÃO - Lightbox para exibir imagens em telas pequenas */
+.lightbox-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
-    opacity: 0;
-    transition: opacity var(--transition-medium);
-    z-index: 1;
-}
-
-.image-overlay:hover::before {
-    opacity: 1;
-}
-
-.overlay-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
-    color: var(--white-color);
-    z-index: 2;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all var(--transition-medium);
-}
-
-.image-overlay:hover .overlay-content {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Efeito de borda animada */
-.border-hover {
-    position: relative;
-}
-
-.border-hover::before,
-.border-hover::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width var(--transition-medium);
-}
-
-.border-hover::before {
-    top: 0;
-    left: 0;
-}
-
-.border-hover::after {
-    bottom: 0;
-    right: 0;
-}
-
-.border-hover:hover::before,
-.border-hover:hover::after {
-    width: 100%;
-}
-
-.border-hover span::before,
-.border-hover span::after {
-    content: '';
-    position: absolute;
-    height: 0;
-    width: 2px;
-    background-color: var(--primary-color);
-    transition: height var(--transition-medium);
-}
-
-.border-hover span::before {
-    top: 0;
-    left: 0;
-}
-
-.border-hover span::after {
-    bottom: 0;
-    right: 0;
-}
-
-.border-hover:hover span::before,
-.border-hover:hover span::after {
-    height: 100%;
-}
-
-/* Estilo para texto dividido */
-.split-text-container {
-    overflow: hidden;
-}
-
-.split-text {
-    display: inline-block;
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.6s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.split-text-container.visible .split-text {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Efeito para cards com sombras suaves */
-.card {
-    background-color: var(--white-color);
-    border-radius: 3px;
-    overflow: hidden;
-    transition: all var(--transition-medium);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.card-content {
-    padding: 2rem;
-}
-
-.card-img {
-    overflow: hidden;
-    height: 250px;
-}
-
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-}
-
-.card:hover .card-img img {
-    transform: scale(1.08);
-}
-
-/* Efeito de hover para links de navegação refinado */
-.nav-link {
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-color);
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform var(--transition-medium);
-}
-
-.nav-link:hover::before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-.nav-link:after {
-    display: none;
-}
-
-/* Estilo minimalista para o seletor de quantidade */
-.quantity-selector {
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
-    border: 1px solid #e0e0e0;
-    border-radius: 3px;
-    overflow: hidden;
-    width: fit-content;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.quantity-btn {
-    background-color: var(--light-color);
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-container {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.lightbox-overlay.active .lightbox-container {
+    transform: scale(1);
+}
+
+.lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: transparent;
     border: none;
-    color: var(--secondary-color);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.lightbox-close:hover {
+    transform: rotate(90deg);
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 40px;
     height: 40px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all var(--transition-medium);
-}
-
-.quantity-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--white-color);
-}
-
-.quantity-input {
-    width: 50px;
-    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
-    font-size: 1rem;
-    color: var(--secondary-color);
-    padding: 0.5rem;
-}
-
-.quantity-input:focus {
-    outline: none;
-}
-
-/* Efeitos de transição para tabs */
-.tabs {
-    display: flex;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.tab {
-    padding: 1rem 1.5rem;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
     cursor: pointer;
-    color: var(--grey-color);
-    position: relative;
-    transition: all var(--transition-medium);
-}
-
-.tab::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-color);
-    transform: scaleX(0);
-    transition: transform var(--transition-medium);
-}
-
-.tab.active {
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
-.tab.active::after {
-    transform: scaleX(1);
-}
-
-.tab-content {
-    display: none;
-    animation: fadeIn 0.5s forwards;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Efeito de destaque para depoimentos */
-.testimonial {
-    padding: 2rem;
-    background-color: var(--white-color);
-    border-radius: 3px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    position: relative;
-    transition: all var(--transition-medium);
-}
-
-.testimonial::before {
-    content: '"';
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 4rem;
-    font-family: Georgia, serif;
-    color: var(--primary-color);
-    opacity: 0.2;
-    line-height: 1;
-}
-
-.testimonial:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial-content {
-    position: relative;
-    z-index: 1;
-}
-
-.testimonial-author {
+    transition: background 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
-    margin-top: 1.5rem;
+    justify-content: center;
+    z-index: 10; /* CORREÇÃO: Aumentando o z-index para garantir que seja clicável */
 }
 
-.testimonial-author img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 1rem;
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.testimonial-author-info h4 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--secondary-color);
+.lightbox-prev {
+    left: 10px; /* CORREÇÃO: Reduzido para 10px em vez de -60px para ser mais visível em telas pequenas */
 }
 
-.testimonial-author-info p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--grey-color);
+.lightbox-next {
+    right: 10px; /* CORREÇÃO: Reduzido para 10px em vez de -60px para ser mais visível em telas pequenas */
 }
 
 /* Responsividade para todos os dispositivos */
@@ -1512,6 +1201,15 @@ img:hover {
     
     .hero-content h2 {
         font-size: 3.2rem;
+    }
+    
+    /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas pequenas */
+    .lightbox-prev {
+        left: 15px;
+    }
+    
+    .lightbox-next {
+        right: 15px;
     }
 }
 
@@ -1560,6 +1258,30 @@ img:hover {
     
     .destaques-slider {
         gap: 2rem; /* Aumentado o espaçamento entre itens */
+    }
+    
+    /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas médias */
+    .lightbox-prev {
+        left: 20px;
+    }
+    
+    .lightbox-next {
+        right: 20px;
+    }
+    
+    /* CORREÇÃO: Ajustando botões do carrossel em tela médias */
+    .slider-nav-arrow {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .slider-arrow-left {
+        left: 10px;
+    }
+    
+    .slider-arrow-right {
+        right: 10px;
     }
 }
 
@@ -1658,6 +1380,30 @@ img:hover {
     
     .footer-links ul {
         align-items: flex-start;
+    }
+    
+    /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas grandes */
+    .lightbox-prev {
+        left: -60px;
+    }
+    
+    .lightbox-next {
+        right: -60px;
+    }
+    
+    /* CORREÇÃO: Ajustando botões do carrossel em tela grande */
+    .slider-nav-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .slider-arrow-left {
+        left: 20px;
+    }
+    
+    .slider-arrow-right {
+        right: 20px;
     }
 }
 

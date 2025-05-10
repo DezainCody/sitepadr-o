@@ -315,7 +315,7 @@ nav ul li a::after {
 
 /* Hero Section com animação de texto e Parallax */
 .hero {
-    height: 80vh;
+    height: 90vh; /* Aumentado para dar mais espaço ao conteúdo em telas pequenas */
     position: relative;
     display: flex;
     align-items: center;
@@ -351,19 +351,20 @@ nav ul li a::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
 }
 
 .hero .container {
     position: relative;
     z-index: 2;
+    width: 95%; /* Ligeiramente mais largo em telas pequenas */
 }
 
 .hero-content {
     width: 100%;
     max-width: 800px;
     text-align: left;
-    padding: 0 1.5rem;
+    padding: 0 1rem; /* Reduzido o padding lateral */
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s forwards 0.5s;
@@ -377,13 +378,15 @@ nav ul li a::after {
 }
 
 .hero-content h2 {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Tamanho base reduzido para telas pequenas */
     margin-bottom: 1rem;
     color: var(--secondary-color);
     line-height: 1.2;
     position: relative;
     overflow: hidden;
     padding-bottom: 0.5rem;
+    word-wrap: break-word; /* Garante quebra de palavras adequada */
+    hyphens: auto; /* Habilita hifenização automática se necessário */
 }
 
 .hero-content h2::after {
@@ -397,12 +400,13 @@ nav ul li a::after {
 }
 
 .hero-content p {
-    font-size: 1.2rem;
+    font-size: 1rem; /* Tamanho base reduzido para telas pequenas */
     margin-bottom: 2rem;
     color: var(--secondary-color);
     font-weight: 300;
-    line-height: 1.6;
-    max-width: 90%;
+    line-height: 1.5;
+    max-width: 100%; /* Usa toda a largura disponível */
+    word-wrap: break-word; /* Garante quebra de palavras adequada */
 }
 
 /* Sobre Section com efeito de reveal */
@@ -1189,6 +1193,40 @@ footer {
 }
 
 /* Responsividade para todos os dispositivos */
+@media (max-width: 575px) {
+    /* Estilos específicos para telas muito pequenas */
+    .hero-content h2 {
+        font-size: 2.2rem; /* Título ainda menor para dispositivos realmente pequenos */
+        word-break: break-word; /* Quebra palavras longas se necessário */
+        letter-spacing: -0.02em; /* Reduz levemente o espaço entre letras */
+    }
+    
+    .hero-content p {
+        font-size: 0.95rem; /* Texto um pouco menor para dispositivos muito pequenos */
+        line-height: 1.4; /* Entrelinhamento mais compacto */
+    }
+    
+    .hero-content {
+        padding: 0 0.75rem; /* Reduz ainda mais o padding */
+    }
+    
+    .hero {
+        height: 95vh; /* Mais alto para acomodar o conteúdo em dispositivos muito pequenos */
+    }
+    
+    /* Destacando mais as setas de navegação em telas muito pequenas */
+    .slider-nav-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+    
+    .lightbox-nav {
+        width: 42px;
+        height: 42px;
+    }
+}
+
 @media (min-width: 576px) {
     .destaque-item {
         width: 90%; /* ALTERAÇÃO: Ajustado para ocupar menos da largura total */
@@ -1201,7 +1239,11 @@ footer {
     }
     
     .hero-content h2 {
-        font-size: 3.2rem;
+        font-size: 2.8rem; /* Aumenta ligeiramente em telas maiores que 576px */
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem; /* Aumenta ligeiramente em telas maiores que 576px */
     }
     
     /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas pequenas */
@@ -1220,15 +1262,16 @@ footer {
     }
     
     .hero {
-        height: 70vh;
+        height: 75vh;
     }
     
     .hero-content h2 {
-        font-size: 3.5rem;
+        font-size: 3.2rem; /* Aumentado para tablets */
     }
     
     .hero-content p {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Aumentado para tablets */
+        max-width: 95%; /* Ligeiramente mais estreito em tablets */
     }
     
     .section-header h2 {
@@ -1324,11 +1367,13 @@ footer {
     }
     
     .hero-content h2 {
-        font-size: 4rem;
+        font-size: 3.8rem; /* Tamanho ajustado para desktop */
     }
     
     .hero-content p {
         font-size: 1.3rem;
+        max-width: 90%; /* Mais estreito em desktop */
+        line-height: 1.6;
     }
     
     /* Sobre Section para desktop */
@@ -1423,6 +1468,11 @@ footer {
     
     .hero-content h2 {
         font-size: 4.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.4rem;
+        line-height: 1.7;
     }
     
     .colecoes-grid {

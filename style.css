@@ -640,7 +640,7 @@ nav ul li a::after {
 
 .destaques-container {
     position: relative;
-    padding: 0 clamp(30px, 8vw, 60px);
+    padding: 0 clamp(35px, 8vw, 70px);
     z-index: 2;
     margin: 0 auto;
 }
@@ -663,8 +663,8 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: clamp(300px, 85vw, 400px);
-    max-width: 450px;
+    width: clamp(340px, 90vw, 500px);
+    max-width: 550px;
     text-align: center;
     background-color: var(--white-color);
     padding: clamp(1.2rem, 3vw, 1.8rem);
@@ -702,7 +702,7 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: clamp(380px, 65vw, 550px);
+    height: clamp(420px, 70vw, 580px);
     object-fit: cover;
     margin-bottom: 1.2rem;
     border-radius: 2px;
@@ -734,15 +734,15 @@ nav ul li a::after {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: clamp(40px, 12vw, 60px);
-    height: clamp(40px, 12vw, 60px);
+    width: clamp(45px, 12vw, 65px);
+    height: clamp(45px, 12vw, 65px);
     background-color: var(--white-color);
     color: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     z-index: 5;
@@ -757,11 +757,11 @@ nav ul li a::after {
 }
 
 .slider-arrow-left {
-    left: -10px;
+    left: -15px;
 }
 
 .slider-arrow-right {
-    right: -10px;
+    right: -15px;
 }
 
 /* Contato Section com formulário elegante */
@@ -1295,15 +1295,15 @@ footer {
     
     /* Ajustes para os botões do slider em telas pequenas */
     .slider-arrow-left {
-        left: 0;
+        left: -5px;
     }
     
     .slider-arrow-right {
-        right: 0;
+        right: -5px;
     }
     
     .destaques-container {
-        padding: 0 clamp(20px, 6vw, 40px);
+        padding: 0 clamp(25px, 6vw, 40px);
     }
 }
 
@@ -1335,7 +1335,7 @@ footer {
     }
 
     .destaque-item {
-        width: 360px;
+        width: 400px;
     }
 
     .colecoes-grid {
@@ -1462,7 +1462,7 @@ footer {
     }
 
     .destaque-item {
-        width: 420px;
+        width: 480px;
     }
 }
 

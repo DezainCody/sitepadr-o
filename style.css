@@ -648,7 +648,7 @@ nav ul li a::after {
 .destaques-slider {
     display: flex;
     overflow-x: auto;
-    gap: clamp(1rem, 2.5vw, 1.5rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
     padding: 1rem 0.25rem 3rem 0.25rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -663,8 +663,8 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: clamp(280px, 85vw, 380px);
-    max-width: 420px;
+    width: clamp(300px, 85vw, 400px);
+    max-width: 450px;
     text-align: center;
     background-color: var(--white-color);
     padding: clamp(1.2rem, 3vw, 1.8rem);
@@ -702,9 +702,9 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: clamp(220px, 45vw, 320px);
+    height: clamp(380px, 65vw, 550px);
     object-fit: cover;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     border-radius: 2px;
     transition: all var(--transition-medium);
 }
@@ -716,9 +716,9 @@ nav ul li a::after {
 
 .destaque-item h3 {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
-    margin-bottom: 0.75rem;
     color: var(--secondary-color);
     transition: color var(--transition-medium);
+    margin-bottom: 0;
 }
 
 .destaque-item:hover h3 {
@@ -726,10 +726,7 @@ nav ul li a::after {
 }
 
 .destaque-item p {
-    font-size: clamp(0.9rem, 2.2vw, 1rem);
-    color: var(--grey-color);
-    font-weight: 300;
-    margin-bottom: 0;
+    display: none; /* Oculta a descrição do projeto */
 }
 
 /* Setas de navegação com animação - Melhorado para visibilidade em dispositivos móveis */
@@ -1338,7 +1335,7 @@ footer {
     }
 
     .destaque-item {
-        width: 340px;
+        width: 360px;
     }
 
     .colecoes-grid {
@@ -1465,7 +1462,7 @@ footer {
     }
 
     .destaque-item {
-        width: 400px;
+        width: 420px;
     }
 }
 

@@ -1,4 +1,32 @@
-/* Geral - Visual Minimalista e Elegante com Responsividade Aprimorada */
+/* Classe para animações de entrada durante o scroll */
+.scroll-animation {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 1s ease;
+}
+
+.scroll-animation.animated {
+    opacity: 1;
+    transform: translateY(0);
+}/* Script específico para quebrar o título em dispositivos móveis */
+@media (max-width: 767px) {
+    /* Adiciona uma pequena alteração ao script.js existente para modificar o título em dispositivos móveis */
+    /* Esse código só será aplicado quando o viewport for menor que 767px */
+
+    /* Classe especial para quando o JavaScript substituir o conteúdo */
+    .hero-content h2.mobile-title-break {
+        line-height: 1.3;
+    }
+    
+    .hero-content h2.mobile-title-break .line1 {
+        display: block;
+        margin-bottom: 0.1em;
+    }
+    
+    .hero-content h2.mobile-title-break .line2 {
+        display: block;
+    }
+}/* Geral - Visual Minimalista e Elegante com Responsividade Aprimorada */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
@@ -532,7 +560,7 @@ nav ul li a::after {
 
 .colecoes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
     gap: clamp(1.25rem, 4vw, 2rem);
 }
 
@@ -1237,7 +1265,8 @@ footer {
     }
 
     .colecao-item img {
-        height: clamp(350px, 70vw, 450px);
+        height: clamp(450px, 90vw, 550px);
+        width: 100%;
     }
 
     /* Evitar que elementos saiam da tela */
@@ -1389,6 +1418,8 @@ footer {
 
     .colecoes-grid {
         grid-template-columns: repeat(3, 1fr);
+        max-width: 1300px;
+        margin: 0 auto;
     }
 
     .footer-content {
@@ -1421,6 +1452,7 @@ footer {
     .colecoes-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 2.5rem;
+        max-width: 1400px;
     }
 
     /* Controles mais afastados para melhor visualização */

@@ -1,5 +1,97 @@
-// Script principal
+// Script principal com ajustes para responsividade e animações
 document.addEventListener('DOMContentLoaded', function() {
+    // Função para quebrar o título em duas linhas em dispositivos móveis
+    function adjustTitleForMobile() {
+        // Seleciona o título na seção hero
+        const heroTitle = document.querySelector('.hero-content h2');
+        
+        if (heroTitle) {
+            // Verifica se o texto contém "Design e Funcionalidade"
+            if (heroTitle.textContent.includes('Design e Funcionalidade')) {
+                // Função para verificar se estamos em um dispositivo móvel
+                function isMobile() {
+                    return window.innerWidth <= 767;
+                }
+                
+                // Função para ajustar o título
+                function updateTitle() {
+                    if (isMobile()) {
+                        // Em dispositivos móveis, adiciona a quebra de linha
+                        if (!heroTitle.innerHTML.includes('<br>')) {
+                            heroTitle.innerHTML = 'Design e<br>Funcionalidade';
+                        }
+                    } else {
+                        // Em desktops, remove a quebra de linha
+                        if (heroTitle.innerHTML.includes('<br>')) {
+                            heroTitle.innerHTML = 'Design e Funcionalidade';
+                        }
+                    }
+                }
+                
+                // Ajusta o título na carga inicial
+                updateTitle();
+                
+                // Ajusta o título quando a janela for redimensionada
+                window.addEventListener('resize', updateTitle);
+            }
+        }
+    }
+
+    // Função para adicionar efeito de entrada com delay nas imagens
+    function initScrollAnimations() {
+        // Seleciona todos os itens que devem ter animação ao scroll
+        const animatedElements = [
+            ...document.querySelectorAll('.colecao-item'),
+            ...document.querySelectorAll('.destaque-item'),
+            ...document.querySelectorAll('.sobre-img'),
+            ...document.querySelectorAll('.contato-content > div')
+        ];
+        
+        // Adiciona classe inicial para esconder os elementos
+        animatedElements.forEach(element => {
+            element.classList.add('scroll-animation');
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 1s ease';
+        });
+        
+        // Função para verificar se um elemento está visível na viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+            );
+        }
+        
+        // Função para animar elementos visíveis
+        function animateElementsOnScroll() {
+            animatedElements.forEach((element, index) => {
+                if (isElementInViewport(element) && element.style.opacity === '0') {
+                    // Calculando um delay escalonado mais rápido
+                    const row = Math.floor(index / 3); // Assume 3 elementos por linha
+                    const col = index % 3;
+                    const delay = 0.1 + (row * 0.15) + (col * 0.1); // Delays bem mais curtos
+                    
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, delay * 1000);
+                }
+            });
+        }
+        
+        // Verificar elementos visíveis no carregamento inicial
+        setTimeout(() => {
+            animateElementsOnScroll();
+        }, 200);
+        
+        // Adicionar listener de scroll para animar elementos quando se tornarem visíveis
+        window.addEventListener('scroll', animateElementsOnScroll, { passive: true });
+        
+        // Executar novamente se a janela for redimensionada (para segurança)
+        window.addEventListener('resize', animateElementsOnScroll, { passive: true });
+    }
+
     // Ativar efeito de menu mobile
     const menuToggle = document.querySelector('.menu-toggle');
     const menuClose = document.querySelector('.menu-close');
@@ -67,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.querySelector('.slider-arrow-right');
     
     if (destaquesSlider && slideItems.length > 0) {
-        // CORREÇÃO: Botões de navegação para carrossel em dispositivos móveis
+        // Botões de navegação para carrossel 
         const itemWidth = slideItems[0].offsetWidth;
         const slideGap = parseInt(window.getComputedStyle(destaquesSlider).columnGap) || 24;
         const moveDistance = itemWidth + slideGap;
@@ -104,10 +196,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // CORREÇÃO: Adicionando lightbox para visualização de projetos
+    // Inicialização do lightbox para visualização de projetos
     initLightbox();
 
-    // CORREÇÃO: Enviando formulário para WhatsApp
+    // Enviando formulário para WhatsApp
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -147,15 +239,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Inicialização de efeitos adicionais
-    setTimeout(() => {
-        initRevealText();
-        initHorizontalScroll();
-        initMasonryLayout();
-        initFilterMenu();
-        initTextFollowCursor();
-        initAdvancedParallax();
-    }, 1000);
+    // Aplicar a função para ajustar o título em dispositivos móveis
+    adjustTitleForMobile();
+    
+    // Iniciar animações de scroll
+    initScrollAnimations();
 });
 
 // Função Lightbox para projetos
@@ -282,180 +370,5 @@ function initLightbox() {
         } else if (e.key === 'ArrowLeft') {
             prevImage();
         }
-    });
-}
-
-// Efeito de texto revelado caractere por caractere
-function initRevealText() {
-    const revealTextElements = document.querySelectorAll('.reveal-text');
-    
-    revealTextElements.forEach(element => {
-        // Pegar o texto original
-        const text = element.textContent;
-        element.textContent = '';
-        
-        // Criar spans para cada caractere
-        for (let i = 0; i < text.length; i++) {
-            const charSpan = document.createElement('span');
-            charSpan.textContent = text[i];
-            charSpan.style.opacity = '0';
-            charSpan.style.transition = `opacity 0.03s ease ${i * 0.03}s`;
-            element.appendChild(charSpan);
-        }
-        
-        // Observador para animar quando visível
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        Array.from(entry.target.children).forEach((span, i) => {
-                            setTimeout(() => {
-                                span.style.opacity = '1';
-                            }, i * 30);
-                        });
-                    }, 300);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        observer.observe(element);
-    });
-}
-
-// Efeito de scroll horizontal para seção selecionada
-function initHorizontalScroll() {
-    const horizontalSections = document.querySelectorAll('.horizontal-scroll-section');
-    
-    horizontalSections.forEach(section => {
-        const container = section.querySelector('.horizontal-scroll-container');
-        if (!container) return;
-        
-        // Calcular a largura total do conteúdo
-        const items = container.querySelectorAll('.horizontal-scroll-item');
-        let totalWidth = 0;
-        
-        items.forEach(item => {
-            totalWidth += item.offsetWidth;
-        });
-        
-        // Configurar o container
-        container.style.width = totalWidth + 'px';
-        section.style.height = (totalWidth - window.innerWidth + window.innerHeight) + 'px';
-        
-        // Atualizar transformação no scroll
-        window.addEventListener('scroll', () => {
-            const sectionRect = section.getBoundingClientRect();
-            const sectionStart = window.pageYOffset + sectionRect.top;
-            const scrollPosition = window.pageYOffset;
-            
-            if (scrollPosition >= sectionStart && scrollPosition <= (sectionStart + section.offsetHeight - window.innerHeight)) {
-                const scrolled = scrollPosition - sectionStart;
-                const maxScroll = section.offsetHeight - window.innerHeight;
-                const transformValue = (scrolled / maxScroll) * (totalWidth - window.innerWidth);
-                
-                container.style.transform = `translateX(-${transformValue}px)`;
-            }
-        });
-    });
-}
-
-// Inicializar Masonry Layout para grids
-function initMasonryLayout() {
-    const grids = document.querySelectorAll('.masonry-grid');
-    
-    grids.forEach(grid => {
-        // Configuração inicial
-        const items = grid.querySelectorAll('.masonry-item');
-        const columns = parseInt(grid.getAttribute('data-columns')) || 3;
-        
-        // Criar colunas
-        const columnElements = [];
-        for (let i = 0; i < columns; i++) {
-            const column = document.createElement('div');
-            column.className = 'masonry-column';
-            columnElements.push(column);
-            grid.appendChild(column);
-        }
-        
-        // Distribuir itens pelas colunas
-        items.forEach((item, index) => {
-            const targetColumn = columnElements[index % columns];
-            targetColumn.appendChild(item);
-        });
-    });
-}
-
-// Menu de filtro para projetos
-function initFilterMenu() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const filterableItems = document.querySelectorAll('.filterable-item');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remover classe ativa de todos os botões
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Adicionar classe ativa ao botão clicado
-            button.classList.add('active');
-            
-            const filter = button.getAttribute('data-filter');
-            
-            // Filtrar itens
-            filterableItems.forEach(item => {
-                const categories = item.getAttribute('data-categories');
-                
-                if (filter === 'all' || categories.includes(filter)) {
-                    item.style.display = '';
-                    setTimeout(() => {
-                        item.style.transform = 'scale(1)';
-                        item.style.opacity = '1';
-                    }, 50);
-                } else {
-                    item.style.transform = 'scale(0.8)';
-                    item.style.opacity = '0';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-}
-
-// Efeito de texto que segue o cursor
-function initTextFollowCursor() {
-    const followTexts = document.querySelectorAll('.follow-cursor-text');
-    
-    followTexts.forEach(text => {
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            
-            const rect = text.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            const distX = (x - centerX) * 0.05;
-            const distY = (y - centerY) * 0.05;
-            
-            text.style.transform = `translate(${distX}px, ${distY}px)`;
-        });
-    });
-}
-
-// Efeito de Parallax avançado com diferentes velocidades
-function initAdvancedParallax() {
-    const parallaxLayers = document.querySelectorAll('[data-parallax-speed]');
-    
-    window.addEventListener('scroll', () => {
-        const scrollY = window.pageYOffset;
-        
-        parallaxLayers.forEach(layer => {
-            const speed = parseFloat(layer.getAttribute('data-parallax-speed'));
-            const offset = scrollY * speed;
-            
-            layer.style.transform = `translateY(${offset}px)`;
-        });
     });
 }

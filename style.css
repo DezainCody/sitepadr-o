@@ -612,8 +612,9 @@ nav ul li a::after {
 
 .destaques-container {
     position: relative;
-    padding: 0 clamp(20px, 5vw, 40px);
+    padding: 0 clamp(30px, 8vw, 60px);
     z-index: 2;
+    margin: 0 auto;
 }
 
 .destaques-slider {
@@ -634,11 +635,11 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: clamp(250px, 75vw, 300px);
-    max-width: 350px;
+    width: clamp(280px, 85vw, 380px);
+    max-width: 420px;
     text-align: center;
     background-color: var(--white-color);
-    padding: clamp(1rem, 2.5vw, 1.5rem);
+    padding: clamp(1.2rem, 3vw, 1.8rem);
     border-radius: 2px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
     transition: all var(--transition-medium);
@@ -673,7 +674,7 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: clamp(180px, 30vw, 250px);
+    height: clamp(220px, 45vw, 320px);
     object-fit: cover;
     margin-bottom: 1.5rem;
     border-radius: 2px;
@@ -686,7 +687,7 @@ nav ul li a::after {
 }
 
 .destaque-item h3 {
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     margin-bottom: 0.75rem;
     color: var(--secondary-color);
     transition: color var(--transition-medium);
@@ -697,7 +698,7 @@ nav ul li a::after {
 }
 
 .destaque-item p {
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
     color: var(--grey-color);
     font-weight: 300;
     margin-bottom: 0;
@@ -708,15 +709,15 @@ nav ul li a::after {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: clamp(32px, 10vw, 50px);
-    height: clamp(32px, 10vw, 50px);
+    width: clamp(40px, 12vw, 60px);
+    height: clamp(40px, 12vw, 60px);
     background-color: var(--white-color);
     color: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     z-index: 5;
@@ -731,11 +732,11 @@ nav ul li a::after {
 }
 
 .slider-arrow-left {
-    left: 5px;
+    left: -10px;
 }
 
 .slider-arrow-right {
-    right: 5px;
+    right: -10px;
 }
 
 /* Contato Section com formulário elegante */
@@ -1263,7 +1264,20 @@ footer {
     /* Ajustes para melhor visualização em telas muito pequenas */
     .destaque-item {
         width: calc(100% - 20px);
-        padding: 1rem;
+        padding: 1.2rem;
+    }
+    
+    /* Ajustes para os botões do slider em telas pequenas */
+    .slider-arrow-left {
+        left: 0;
+    }
+    
+    .slider-arrow-right {
+        right: 0;
+    }
+    
+    .destaques-container {
+        padding: 0 clamp(20px, 6vw, 40px);
     }
 }
 
@@ -1295,7 +1309,7 @@ footer {
     }
 
     .destaque-item {
-        width: 300px;
+        width: 340px;
     }
 
     .colecoes-grid {
@@ -1305,6 +1319,14 @@ footer {
     /* Mais espaço para controles do slider */
     .slider-nav-arrow {
         opacity: 0.9;
+    }
+    
+    .slider-arrow-left {
+        left: -5px;
+    }
+    
+    .slider-arrow-right {
+        right: -5px;
     }
 }
 
@@ -1411,7 +1433,7 @@ footer {
     }
 
     .destaque-item {
-        width: 350px;
+        width: 400px;
     }
 }
 

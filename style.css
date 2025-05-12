@@ -1,4 +1,4 @@
-/* Geral - Novo Visual Minimalista e Elegante */
+/* Geral - Visual Minimalista e Elegante com Responsividade Aprimorada */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
@@ -31,6 +31,8 @@ body {
     color: var(--secondary-color);
     background-color: var(--white-color);
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -100,12 +102,13 @@ ul {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
     cursor: pointer;
     position: relative;
     overflow: hidden;
     z-index: 1;
     transition: all var(--transition-medium);
+    text-align: center;
 }
 
 .btn::before {
@@ -139,10 +142,11 @@ ul {
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     margin-bottom: 1rem;
     position: relative;
     display: inline-block;
+    word-wrap: break-word;
 }
 
 .section-header h2::after {
@@ -200,14 +204,14 @@ header .container {
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
     color: var(--primary-color);
     margin: 0;
     font-weight: 600;
 }
 
 .logo p {
-    font-size: 0.875rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.875rem);
     color: var(--secondary-color);
     letter-spacing: 3px;
     margin: 0;
@@ -234,44 +238,77 @@ header .container {
 }
 
 nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100vh;
-    background-color: var(--white-color);
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    transition: right var(--transition-slow);
-    padding: 5rem 2rem 2rem;
-    z-index: 1001;
-    overflow-y: auto;
+    display: block;
 }
 
-nav.active {
-    right: 0;
-}
-
-nav ul {
-    display: flex;
-    flex-direction: column;
-}
-
-nav ul li {
-    margin: 1rem 0;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity var(--transition-medium), transform var(--transition-medium);
-}
-
-nav.active ul li {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: calc(0.1s * var(--i, 0));
+@media (max-width: 991px) {
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 320px;
+        height: 100vh;
+        background-color: var(--white-color);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right var(--transition-slow);
+        padding: 5rem 2rem 2rem;
+        z-index: 1001;
+        overflow-y: auto;
+    }
+    
+    nav.active {
+        right: 0;
+    }
+    
+    nav ul {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 1rem 0;
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity var(--transition-medium), transform var(--transition-medium);
+    }
+    
+    nav.active ul li {
+        opacity: 1;
+        transform: translateX(0);
+        transition-delay: calc(0.1s * var(--i, 0));
+    }
+    
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        transition: transform var(--transition-fast);
+    }
+    
+    .menu-toggle:hover {
+        transform: rotate(90deg);
+    }
+    
+    .menu-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        cursor: pointer;
+        transition: transform var(--transition-fast);
+    }
+    
+    .menu-close:hover {
+        transform: rotate(90deg);
+    }
 }
 
 nav ul li a {
     color: var(--secondary-color);
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     font-weight: 500;
     display: block;
     padding: 0.5rem 0;
@@ -287,32 +324,6 @@ nav ul li a::after {
     height: 2px;
 }
 
-.menu-toggle {
-    display: block;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    transition: transform var(--transition-fast);
-}
-
-.menu-toggle:hover {
-    transform: rotate(90deg);
-}
-
-.menu-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: transform var(--transition-fast);
-}
-
-.menu-close:hover {
-    transform: rotate(90deg);
-}
-
 /* Hero Section com animação de texto e Parallax - Posicionamento melhorado */
 .hero {
     height: 100vh; /* Altura total da viewport para melhor distribuição */
@@ -320,7 +331,6 @@ nav ul li a::after {
     display: flex;
     align-items: center;
     justify-content: center; /* Centraliza horizontalmente */
-    margin-top: 70px;
     overflow: hidden;
 }
 
@@ -369,13 +379,11 @@ nav ul li a::after {
     width: 100%;
     max-width: 800px;
     text-align: left;
-    padding: 2rem 1rem; /* Aumentado o padding vertical */
+    padding: clamp(1.5rem, 5vw, 2.5rem);
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s forwards 0.5s;
-    margin-top: -50px; /* Ajusta posição vertical para melhor equilíbrio visual */
-    /* Removido: background-color e backdrop-filter */
-    /* Removido: border-radius e box-shadow */
+    margin-top: clamp(-35px, -4vw, -50px); /* Ajusta posição vertical para melhor equilíbrio visual */
 }
 
 @keyframes fadeInUp {
@@ -386,17 +394,17 @@ nav ul li a::after {
 }
 
 .hero-content h2 {
-    font-size: 2.5rem; /* Tamanho base reduzido para telas pequenas */
-    margin-bottom: 1.2rem;
-    color: var(--primary-color); /* Usando a cor primária para maior contraste */
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: clamp(0.8rem, 3vw, 1.2rem);
+    color: var(--primary-color);
     line-height: 1.2;
     position: relative;
     overflow: hidden;
-    padding-bottom: 0.8rem; /* Maior espaçamento após o título */
-    word-wrap: break-word; /* Garante quebra de palavras adequada */
-    hyphens: auto; /* Habilita hifenização automática se necessário */
-    font-weight: 600; /* Negrito para mais destaque */
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); /* Sombra sutil para destacar texto */
+    padding-bottom: 0.8rem;
+    word-wrap: break-word;
+    hyphens: auto;
+    font-weight: 600;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .hero-content h2::after {
@@ -404,25 +412,25 @@ nav ul li a::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 120px;
-    height: 3px; /* Linha mais espessa */
+    width: clamp(80px, 20vw, 120px);
+    height: 3px;
     background-color: var(--primary-color);
 }
 
 .hero-content p {
-    font-size: 1.05rem; /* Tamanho base ajustado para telas pequenas */
-    margin-bottom: 2.5rem; /* Mais espaço antes do botão */
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
     color: var(--secondary-color);
-    font-weight: 400; /* Um pouco mais pesado para melhor legibilidade */
+    font-weight: 400;
     line-height: 1.5;
-    max-width: 100%; /* Usa toda a largura disponível */
-    word-wrap: break-word; /* Garante quebra de palavras adequada */
-    opacity: 0.9; /* Leve opacidade para hierarquia visual */
+    max-width: 100%;
+    word-wrap: break-word;
+    opacity: 0.9;
 }
 
 /* Sobre Section com efeito de reveal */
 .sobre {
-    padding: 6rem 0;
+    padding: clamp(4rem, 10vw, 6rem) 0;
     background-color: var(--light-color);
     position: relative;
     overflow: hidden;
@@ -443,7 +451,7 @@ nav ul li a::after {
 .sobre-content {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: clamp(2rem, 5vw, 3rem);
 }
 
 .sobre-img {
@@ -488,7 +496,7 @@ nav ul li a::after {
 }
 
 .sobre-text h3 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
     margin-bottom: 1rem;
     color: var(--primary-color);
     position: relative;
@@ -511,21 +519,21 @@ nav ul li a::after {
 }
 
 .sobre-text p {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     color: var(--secondary-color);
     opacity: 0.9;
 }
 
 /* Coleções/Projetos Section com descrições sempre visíveis */
 .colecoes {
-    padding: 6rem 0;
+    padding: clamp(4rem, 10vw, 6rem) 0;
     background-color: var(--white-color);
 }
 
 .colecoes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: clamp(1.25rem, 4vw, 2rem);
 }
 
 .colecao-item {
@@ -545,7 +553,7 @@ nav ul li a::after {
 
 .colecao-item img {
     width: 100%;
-    height: 450px;
+    height: clamp(300px, 40vw, 450px);
     object-fit: cover;
     transition: transform var(--transition-slow);
 }
@@ -559,10 +567,9 @@ nav ul li a::after {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 2rem 1.5rem;
+    padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.5rem);
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6) 80%, rgba(0, 0, 0, 0));
     color: var(--white-color);
-    /* Removido: transform e opacity para que o texto seja sempre visível */
     transition: all var(--transition-medium);
 }
 
@@ -573,19 +580,19 @@ nav ul li a::after {
 
 .colecao-info h3 {
     margin-bottom: 0.5rem;
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
     transition: all var(--transition-medium);
 }
 
 .colecao-info p {
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
     margin-bottom: 0;
     transition: all 0.4s ease;
 }
 
 /* Destaques Section com efeito de carrossel melhorado */
 .destaques {
-    padding: 6rem 0;
+    padding: clamp(4rem, 10vw, 6rem) 0;
     background-color: var(--light-color);
     position: relative;
     overflow: hidden;
@@ -605,19 +612,20 @@ nav ul li a::after {
 
 .destaques-container {
     position: relative;
-    padding: 0 40px; /* Reduzido o padding para dar mais espaço aos itens */
+    padding: 0 clamp(20px, 5vw, 40px);
     z-index: 2;
 }
 
 .destaques-slider {
     display: flex;
     overflow-x: auto;
-    gap: 1.5rem; /* Reduzido o gap para melhor uso do espaço em telas pequenas */
-    padding: 1rem 0.25rem 3rem 0.25rem; /* Reduzido o padding lateral */
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    padding: 1rem 0.25rem 3rem 0.25rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     transition: transform var(--transition-medium);
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
 }
 
 .destaques-slider::-webkit-scrollbar {
@@ -626,17 +634,18 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 85%; /* ALTERAÇÃO: Aumentado para 85% da largura disponível em telas muito pequenas */
-    max-width: 350px; /* Adicionado um max-width para controlar tamanho em telas maiores */
+    width: clamp(250px, 75vw, 300px);
+    max-width: 350px;
     text-align: center;
     background-color: var(--white-color);
-    padding: 1.5rem;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
     border-radius: 2px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
     transition: all var(--transition-medium);
     position: relative;
     overflow: hidden;
-    margin: 0 auto; /* Centralizar o item */
+    margin: 0 auto;
+    scroll-snap-align: center;
 }
 
 .destaque-item::before {
@@ -664,7 +673,7 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: 250px; /* Ajustado para melhor proporção em telas pequenas */
+    height: clamp(180px, 30vw, 250px);
     object-fit: cover;
     margin-bottom: 1.5rem;
     border-radius: 2px;
@@ -677,7 +686,7 @@ nav ul li a::after {
 }
 
 .destaque-item h3 {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     margin-bottom: 0.75rem;
     color: var(--secondary-color);
     transition: color var(--transition-medium);
@@ -688,26 +697,26 @@ nav ul li a::after {
 }
 
 .destaque-item p {
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     color: var(--grey-color);
     font-weight: 300;
     margin-bottom: 0;
 }
 
-/* Setas de navegação com animação - CORRIGIDO para melhor visibilidade em dispositivos móveis */
+/* Setas de navegação com animação - Melhorado para visibilidade em dispositivos móveis */
 .slider-nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: clamp(32px, 10vw, 50px);
+    height: clamp(32px, 10vw, 50px);
     background-color: var(--white-color);
     color: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     z-index: 5;
@@ -731,7 +740,7 @@ nav ul li a::after {
 
 /* Contato Section com formulário elegante */
 .contato {
-    padding: 6rem 0;
+    padding: clamp(4rem, 10vw, 6rem) 0;
     background-color: var(--white-color);
     position: relative;
 }
@@ -739,7 +748,7 @@ nav ul li a::after {
 .contato-content {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: clamp(2rem, 5vw, 3rem);
 }
 
 .contato-info {
@@ -747,7 +756,7 @@ nav ul li a::after {
 }
 
 .contato-info h3 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
     margin-bottom: 2rem;
     color: var(--primary-color);
     position: relative;
@@ -785,7 +794,7 @@ nav ul li a::after {
 }
 
 .info-item i {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
     color: var(--primary-color);
     margin-right: 1rem;
     width: 20px;
@@ -793,7 +802,7 @@ nav ul li a::after {
 }
 
 .info-item p {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     margin-bottom: 0;
     font-weight: 300;
 }
@@ -808,12 +817,12 @@ nav ul li a::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: clamp(35px, 8vw, 40px);
+    height: clamp(35px, 8vw, 40px);
     border-radius: 50%;
     background-color: var(--light-color);
     color: var(--primary-color);
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     transition: all var(--transition-medium);
 }
 
@@ -837,7 +846,7 @@ nav ul li a::after {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: var(--secondary-color);
     transition: color var(--transition-medium);
 }
@@ -850,14 +859,16 @@ nav ul li a::after {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: clamp(0.6rem, 1.5vw, 0.75rem) clamp(0.8rem, 2vw, 1rem);
     border: 1px solid #e0e0e0;
     border-radius: 2px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     color: var(--secondary-color);
     background-color: #f9f9f9;
     transition: all var(--transition-medium);
+    -webkit-appearance: none; /* Remove default styling on iOS */
+    appearance: none;
 }
 
 .form-group input:focus,
@@ -879,10 +890,10 @@ nav ul li a::after {
     background-color: var(--primary-color);
     color: var(--white-color);
     border: none;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
     cursor: pointer;
     width: 100%;
-    padding: 0.85rem;
+    padding: clamp(0.7rem, 2vw, 0.85rem);
     border-radius: 2px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -890,6 +901,8 @@ nav ul li a::after {
     transition: all var(--transition-medium);
     position: relative;
     overflow: hidden;
+    -webkit-appearance: none; /* Remove default styling on iOS */
+    appearance: none;
 }
 
 .btn-submit::before {
@@ -916,31 +929,31 @@ nav ul li a::after {
 footer {
     background-color: var(--dark-color);
     color: var(--light-color);
-    padding: 4rem 0 0;
+    padding: clamp(3rem, 8vw, 4rem) 0 0;
 }
 
 .footer-content {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: clamp(2rem, 5vw, 3rem);
     padding-bottom: 3rem;
 }
 
 .footer-logo h2 {
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 4vw, 2rem);
     margin: 0;
 }
 
 .footer-logo p {
     letter-spacing: 3px;
     margin: 0;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: var(--light-color);
 }
 
 .footer-links h3 {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2.8vw, 1.3rem);
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     position: relative;
@@ -973,7 +986,7 @@ footer {
 
 .footer-links ul li a {
     color: var(--light-color);
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     transition: color var(--transition-medium), transform var(--transition-medium);
     display: inline-block;
 }
@@ -987,24 +1000,24 @@ footer {
     text-align: center;
     padding: 1.5rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.875rem;
+    font-size: clamp(0.8rem, 1.8vw, 0.875rem);
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* WhatsApp Button com pulsação */
+/* WhatsApp Button com pulsação - Ajustado para melhor visualização em dispositivos móveis */
 .whatsapp-btn {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
+    bottom: clamp(15px, 5vw, 25px);
+    right: clamp(15px, 5vw, 25px);
+    width: clamp(50px, 13vw, 60px);
+    height: clamp(50px, 13vw, 60px);
     background-color: #25D366;
     color: var(--white-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
     box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
     z-index: 999;
     transition: all var(--transition-medium);
@@ -1033,14 +1046,14 @@ footer {
     display: none;
 }
 
-/* Tooltip elegante */
+/* Tooltip elegante - Ajustado para responsividade */
 .tooltip {
     position: absolute;
     background-color: var(--secondary-color);
     color: var(--white-color);
-    padding: 0.5rem 1rem;
+    padding: clamp(0.4rem, 1.2vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
     border-radius: 3px;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
     pointer-events: none;
     opacity: 0;
     transform: translateY(10px);
@@ -1087,7 +1100,7 @@ footer {
     }
 }
 
-/* CORREÇÃO - Lightbox para exibir imagens em telas pequenas */
+/* Lightbox para visualização de projetos - Otimizado para todos dispositivos */
 .lightbox-overlay {
     position: fixed;
     top: 0;
@@ -1126,11 +1139,12 @@ footer {
     max-width: 100%;
     max-height: 80vh;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
 }
 
 .lightbox-caption {
     position: absolute;
-    bottom: -40px;
+    bottom: clamp(-50px, -10vw, -40px);
     left: 0;
     width: 100%;
     color: white;
@@ -1139,18 +1153,33 @@ footer {
     font-family: 'Montserrat', sans-serif;
 }
 
+.lightbox-caption h3 {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: 0.3rem;
+}
+
+.lightbox-caption p {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    opacity: 0.8;
+    margin-bottom: 0;
+}
+
 .lightbox-close {
     position: absolute;
-    top: -40px;
+    top: clamp(-35px, -8vw, -40px);
     right: 0;
     width: 30px;
     height: 30px;
     background: transparent;
     border: none;
     color: white;
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
     cursor: pointer;
     transition: transform 0.3s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lightbox-close:hover {
@@ -1161,216 +1190,127 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 45px;
-    height: 45px;
-    background: var(--primary-color); /* Cor primária para maior visibilidade */
-    border: 2px solid white; /* Borda branca para melhor contraste */
+    width: clamp(35px, 10vw, 45px);
+    height: clamp(35px, 10vw, 45px);
+    background: var(--primary-color);
+    border: 2px solid white;
     border-radius: 50%;
     color: white;
-    font-size: 18px;
+    font-size: clamp(12px, 3vw, 18px);
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10; /* Z-index alto para garantir que seja clicável */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para destacar o botão */
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-nav:hover {
-    background: #7d634e; /* Tom mais escuro do primary-color */
+    background: #7d634e;
     transform: translateY(-50%) scale(1.15);
 }
 
 .lightbox-prev {
-    left: 10px; /* Posicionado para ser visível em telas pequenas */
+    left: clamp(5px, 3vw, 20px);
 }
 
 .lightbox-next {
-    right: 10px; /* Posicionado para ser visível em telas pequenas */
+    right: clamp(5px, 3vw, 20px);
 }
 
-/* Responsividade para todos os dispositivos */
-/* Ajustes específicos para melhor visualização em dispositivos móveis */
-@media (max-width: 767px) {
-    .colecao-info {
-        padding: 1.5rem 1.2rem; /* Padding reduzido para telas menores */
-    }
-    
-    .colecao-info h3 {
-        font-size: 1.2rem; /* Fonte reduzida para melhor legibilidade */
-        margin-bottom: 0.3rem;
-    }
-    
-    .colecao-info p {
-        font-size: 0.85rem; /* Fonte reduzida para melhor caber em telas pequenas */
-        line-height: 1.4;
-    }
-    
-    .colecao-item img {
-        height: 350px; /* Altura reduzida para melhor proporção em dispositivos móveis */
-    }
-}
-
+/* Responsividade aprimorada para todos os dispositivos */
 @media (max-width: 575px) {
-    /* Estilos específicos para telas muito pequenas */
-    .hero-content h2 {
-        font-size: 2.2rem; /* Título ainda menor para dispositivos realmente pequenos */
-        word-break: break-word; /* Quebra palavras longas se necessário */
-        letter-spacing: -0.02em; /* Reduz levemente o espaço entre letras */
-    }
-    
-    .hero-content p {
-        font-size: 0.95rem; /* Texto um pouco menor para dispositivos muito pequenos */
-        line-height: 1.4; /* Entrelinhamento mais compacto */
-    }
-    
-    .hero-content {
-        padding: 1.5rem 1rem; /* Reduz ainda mais o padding */
-        margin-top: -30px; /* Ajuste de posição */
-        max-width: 95%; /* Limita levemente a largura */
-    }
-    
+    /* Ajustes específicos para celulares pequenos */
     .hero {
-        height: 100vh; /* Altura total para dispositivos muito pequenos */
+        margin-top: 60px;
+        height: 100vh;
     }
-    
+
     .hero-overlay {
-        background: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.85));
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
     }
-    
-    /* Destacando mais as setas de navegação em telas muito pequenas */
-    .slider-nav-arrow {
-        width: 42px;
-        height: 42px;
-        font-size: 1rem;
-    }
-    
-    .lightbox-nav {
-        width: 42px;
-        height: 42px;
-    }
-}
 
-@media (min-width: 576px) {
-    .destaque-item {
-        width: 90%; /* ALTERAÇÃO: Ajustado para ocupar menos da largura total */
-        max-width: 320px;
+    .colecao-item {
+        margin-bottom: 0.5rem;
     }
-    
-    .colecoes-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-    
-    .hero-content h2 {
-        font-size: 2.8rem; /* Aumenta ligeiramente em telas maiores que 576px */
-    }
-    
-    .hero-content p {
-        font-size: 1.1rem; /* Aumenta ligeiramente em telas maiores que 576px */
-    }
-    
-    .hero-content {
-        padding: 2rem 1.5rem;
-        margin-top: -40px;
-        max-width: 90%;
-    }
-    
-    /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas pequenas */
-    .lightbox-prev {
-        left: 15px;
-    }
-    
-    .lightbox-next {
-        right: 15px;
-    }
-}
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
+    .colecao-item img {
+        height: clamp(250px, 60vw, 350px);
     }
-    
-    .hero {
-        height: 80vh;
-    }
-    
-    .hero-content {
-        padding: 2.5rem 2rem;
-        margin-top: -50px;
-        max-width: 85%;
-        /* Removido: background-color */
-    }
-    
-    .hero-content h2 {
-        font-size: 3.2rem; /* Aumentado para tablets */
-        padding-bottom: 1rem;
-    }
-    
-    .hero-content p {
-        font-size: 1.2rem; /* Aumentado para tablets */
-        max-width: 95%; /* Ligeiramente mais estreito em tablets */
-        margin-bottom: 2.5rem;
-    }
-    
-    .section-header h2 {
-        font-size: 2.5rem;
-    }
-    
+
+    /* Evitar que elementos saiam da tela */
+    .section-header h2,
     .sobre-text h3,
     .contato-info h3 {
-        font-size: 2rem;
+        word-break: break-word;
     }
-    
-    .btn {
-        font-size: 0.9rem;
+
+    /* Touch-friendly para botões em dispositivos móveis */
+    .slider-nav-arrow,
+    .lightbox-nav,
+    .lightbox-close {
+        -webkit-tap-highlight-color: transparent;
     }
-    
-    .sobre, .colecoes, .destaques, .contato {
-        padding: 6rem 0;
+
+    /* Garantir formulário usável em telas pequenas */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Previne zoom automático em iPhones */
     }
-    
-    .testimonial {
-        padding: 3rem;
-    }
-    
+
+    /* Ajustes para melhor visualização em telas muito pequenas */
     .destaque-item {
-        width: 75%; /* ALTERAÇÃO: Reduzindo largura relativa em tablets */
-        max-width: 320px;
+        width: calc(100% - 20px);
+        padding: 1rem;
     }
-    
-    .destaques-slider {
-        gap: 2rem; /* Aumentado o espaçamento entre itens */
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    /* Ajustes para celulares grandes e tablets pequenos */
+    .hero {
+        margin-top: 65px;
+        height: 90vh;
     }
-    
-    /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas médias */
-    .lightbox-prev {
-        left: 20px;
+
+    .colecao-item img {
+        height: 350px;
     }
-    
-    .lightbox-next {
-        right: 20px;
+
+    .destaque-item {
+        width: 85%;
     }
-    
-    /* CORREÇÃO: Ajustando botões do carrossel em tela médias */
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Ajustes para tablets */
+    .hero {
+        margin-top: 70px;
+        height: 80vh;
+    }
+
+    .hero-content {
+        padding: 2.5rem;
+    }
+
+    .destaque-item {
+        width: 300px;
+    }
+
+    .colecoes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Mais espaço para controles do slider */
     .slider-nav-arrow {
-        width: 50px;
-        height: 50px;
-        font-size: 1.3rem;
-    }
-    
-    .slider-arrow-left {
-        left: 10px;
-    }
-    
-    .slider-arrow-right {
-        right: 10px;
+        opacity: 0.9;
     }
 }
 
 @media (min-width: 992px) {
-    /* Header para desktop */
+    /* Desktop e telas maiores */
+    /* Reset navegação para desktop */
     nav {
         position: static;
         width: auto;
@@ -1380,191 +1320,169 @@ footer {
         padding: 0;
         overflow: visible;
     }
-    
+
     nav ul {
+        display: flex;
         flex-direction: row;
+        align-items: center;
     }
-    
+
     nav ul li {
         margin: 0 0 0 2.5rem;
         opacity: 1;
         transform: translateX(0);
     }
-    
+
+    nav ul li a {
+        font-size: 0.9rem;
+        padding: 0.3rem 0;
+    }
+
     .menu-toggle, .menu-close {
         display: none;
     }
-    
-    /* Hero para desktop */
+
+    /* Layout para desktop */
     .hero {
-        height: 90vh;
         margin-top: 80px;
+        height: 90vh;
     }
-    
+
     .hero-content {
         text-align: left;
-        max-width: 650px;
-        padding: 3rem 3rem 3rem 5rem; /* Mais padding à esquerda */
-        margin-top: -80px;
-        /* Removido: background-color, box-shadow, border-radius */
-        transform: translateX(-50px); /* Deslocado para a esquerda inicialmente para animação */
-        animation: fadeSlideIn 1.2s forwards 0.3s;
+        padding: 3rem 3rem 3rem 4rem;
     }
-    
-    @keyframes fadeSlideIn {
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    .hero-content h2 {
-        font-size: 3.8rem; /* Tamanho ajustado para desktop */
-        padding-bottom: 1.2rem;
-    }
-    
-    .hero-content h2::after {
-        height: 4px;
-        width: 150px;
-        background: linear-gradient(to right, var(--primary-color), transparent);
-    }
-    
-    .hero-content p {
-        font-size: 1.3rem;
-        max-width: 90%; /* Mais estreito em desktop */
-        line-height: 1.6;
-        margin-bottom: 3rem;
-    }
-    
-    /* Sobre Section para desktop */
-    .sobre-content {
+
+    .sobre-content, .contato-content {
         flex-direction: row;
-        align-items: center;
-        gap: 5rem;
     }
-    
-    .sobre-img {
-        flex: 1;
-        margin: 0;
-    }
-    
-    .sobre-text {
+
+    .sobre-img, .contato-info {
         flex: 1;
     }
-    
-    /* Contato Section para desktop */
-    .contato-content {
-        flex-direction: row;
-        gap: 4rem;
+
+    .sobre-text, .contato-form {
+        flex: 1.5;
     }
-    
-    .contato-info {
-        flex: 1;
+
+    .colecoes-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
-    
-    .contato-form {
-        flex: 2;
-    }
-    
-    /* Destaque item para desktop */
-    .destaque-item {
-        width: 300px; /* ALTERAÇÃO: largura fixa em desktop */
-        max-width: 300px;
-    }
-    
-    .destaques-container {
-        padding: 0 60px; /* Mais espaço para as setas de navegação */
-    }
-    
-    /* Footer para desktop */
+
     .footer-content {
         flex-direction: row;
         justify-content: space-between;
-        text-align: left;
-        gap: 4rem;
     }
-    
-    .footer-links ul {
-        align-items: flex-start;
-    }
-    
-    /* CORREÇÃO: Ajustando botões de navegação do lightbox para telas grandes */
+
+    /* Posicionamento dos controles do lightbox adaptado para desktop */
     .lightbox-prev {
-        left: -60px;
+        left: 30px;
     }
-    
+
     .lightbox-next {
-        right: -60px;
+        right: 30px;
     }
-    
-    /* CORREÇÃO: Ajustando botões do carrossel em tela grande */
-    .slider-nav-arrow {
-        width: 55px;
-        height: 55px;
-        font-size: 1.4rem;
-    }
-    
-    .slider-arrow-left {
-        left: 20px;
-    }
-    
-    .slider-arrow-right {
-        right: 20px;
+
+    /* Botões do carrossel mais visíveis em hover */
+    .destaques-container:hover .slider-nav-arrow {
+        opacity: 1;
     }
 }
 
 @media (min-width: 1200px) {
-    html {
-        font-size: 18px;
-    }
-    
-    .container {
-        max-width: 1300px;
-    }
-    
-    .section-header h2 {
-        font-size: 2.8rem;
-    }
-    
+    /* Telas extra grandes */
     .hero-content {
-        padding: 4rem 4rem 4rem 6rem; /* Mais espaço em telas grandes */
-        max-width: 700px; /* Um pouco mais largo em telas grandes */
-        margin-top: -90px;
+        padding: 4rem;
+        max-width: 650px;
     }
-    
-    .hero-content h2 {
-        font-size: 4.5rem;
-        padding-bottom: 1.5rem;
-    }
-    
-    .hero-content h2::after {
-        width: 180px;
-        height: 5px;
-    }
-    
-    .hero-content p {
-        font-size: 1.4rem;
-        line-height: 1.7;
-        margin-bottom: 3.5rem;
-    }
-    
+
     .colecoes-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
     }
-    
+
+    /* Controles mais afastados para melhor visualização */
+    .lightbox-prev {
+        left: 50px;
+    }
+
+    .lightbox-next {
+        right: 50px;
+    }
+
     .destaque-item {
-        width: 350px; /* ALTERAÇÃO: Tamanho maior para telas grandes */
-        max-width: 350px;
+        width: 350px;
     }
-    
-    .destaque-item img {
-        height: 300px; /* ALTERAÇÃO: Imagens maiores para telas grandes */
+}
+
+/* Ajustes específicos para Safari */
+@supports (-webkit-touch-callout: none) {
+    /* Safari não suporta bem algumas propriedades */
+    .form-group select {
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
     }
-    
-    /* Ajustar botão para ser mais proeminente em telas grandes */
-    .hero-content .btn {
-        padding: 1rem 2.5rem;
-        font-size: 1rem;
-        letter-spacing: 3px;
+}
+
+/* Fix para iOS input zoom */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select,
+    textarea,
+    input {
+        font-size: 16px;
+    }
+}
+
+/* Ajustes para orientação paisagem em dispositivos móveis */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 450px;
+    }
+
+    .hero-content {
+        margin-top: 0;
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+
+    .colecao-item img {
+        height: 280px;
+    }
+
+    /* Menu mobile ocupa menos espaço vertical */
+    nav {
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+
+    nav ul li {
+        margin: 0.6rem 0;
+    }
+}
+
+/* Média print para impressão */
+@media print {
+    .whatsapp-btn,
+    .menu-toggle,
+    .slider-nav-arrow {
+        display: none !important;
+    }
+
+    .hero,
+    .colecoes,
+    .destaques,
+    .sobre,
+    .contato {
+        page-break-inside: avoid;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+
+    a::after {
+        display: none;
     }
 }

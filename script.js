@@ -2,6 +2,7 @@
 function adjustProjectsDisplay() {
     // Projetos em destaque - remover descrições
     const destaqueItems = document.querySelectorAll('.destaque-item');
+    const isMobile = window.innerWidth <= 767;
     
     destaqueItems.forEach(item => {
         // Remover o parágrafo de descrição (mantendo apenas no HTML para manter a estrutura original)
@@ -14,6 +15,19 @@ function adjustProjectsDisplay() {
         const image = item.querySelector('img');
         if (image) {
             image.style.marginBottom = '1.2rem';
+            
+            // Para telas móveis, maximizar a área da imagem
+            if (isMobile) {
+                item.style.maxWidth = 'none';
+                item.style.width = '100%';
+                item.style.padding = isMobile && window.innerWidth < 576 ? '0.8rem' : '1rem';
+                item.style.margin = '0';
+                item.style.borderRadius = isMobile && window.innerWidth < 576 ? '0' : '2px';
+                
+                if (window.innerWidth < 576) {
+                    image.style.borderRadius = '0';
+                }
+            }
         }
         
         // Remover a margem inferior do título, já que não tem descrição
@@ -22,6 +36,32 @@ function adjustProjectsDisplay() {
             title.style.marginBottom = '0';
         }
     });
+    
+    // Ajustar o container para telas móveis
+    if (isMobile) {
+        const destaquesContainer = document.querySelector('.destaques-container');
+        const destaquesSlider = document.querySelector('.destaques-slider');
+        
+        if (destaquesContainer) {
+            destaquesContainer.style.padding = '0';
+        }
+        
+        if (destaquesSlider) {
+            destaquesSlider.style.gap = window.innerWidth < 576 ? '0.5rem' : '0.8rem';
+            destaquesSlider.style.padding = '1rem 0 3rem 0';
+        }
+        
+        // Posicionar os botões de navegação
+        const prevBtn = document.querySelector('.slider-arrow-left');
+        const nextBtn = document.querySelector('.slider-arrow-right');
+        
+        if (prevBtn && nextBtn) {
+            prevBtn.style.left = '10px';
+            prevBtn.style.zIndex = '10';
+            nextBtn.style.right = '10px';
+            nextBtn.style.zIndex = '10';
+        }
+    }
 }// Script principal com ajustes para responsividade e animações
 document.addEventListener('DOMContentLoaded', function() {
 // Função para quebrar o título em duas linhas em dispositivos móveis
@@ -274,6 +314,11 @@ initScrollAnimations();
 
 // Ajustar elementos dos projetos em destaque
 adjustProjectsDisplay();
+
+// Adicionar evento de redimensionamento para ajustar projetos em telas móveis
+window.addEventListener('resize', function() {
+    adjustProjectsDisplay();
+});
 });
 
 // Função Lightbox para projetos

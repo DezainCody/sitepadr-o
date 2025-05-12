@@ -1287,23 +1287,38 @@ footer {
         font-size: 16px; /* Previne zoom automático em iPhones */
     }
 
-    /* Ajustes para melhor visualização em telas muito pequenas */
+    /* Ajustes ampliados para melhor visualização em telas muito pequenas */
     .destaque-item {
-        width: calc(100% - 20px);
-        padding: 1.2rem;
+        width: 100%;
+        max-width: none;
+        padding: 0.8rem;
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .destaque-item img {
+        height: clamp(450px, 95vw, 600px);
+        border-radius: 0;
     }
     
     /* Ajustes para os botões do slider em telas pequenas */
     .slider-arrow-left {
-        left: -5px;
+        left: 10px;
+        z-index: 10;
     }
     
     .slider-arrow-right {
-        right: -5px;
+        right: 10px;
+        z-index: 10;
     }
     
     .destaques-container {
-        padding: 0 clamp(25px, 6vw, 40px);
+        padding: 0;
+    }
+    
+    .destaques-slider {
+        gap: 0.5rem;
+        padding: 1rem 0 3rem 0;
     }
 }
 

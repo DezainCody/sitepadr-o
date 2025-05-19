@@ -3,32 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Designs | Móveis Planejados</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>BLACKOUT | Moda Masculina Contemporânea em João Pessoa</title>
+    <meta name="description" content="BLACKOUT oferece moda masculina contemporânea com peças exclusivas. Descubra nossa coleção de roupas elegantes e minimalistas com estilo único. Entrega em João Pessoa e região.">
+    <meta name="keywords" content="moda masculina, roupas masculinas, loja de roupas, blackout, moda contemporânea, roupas minimalistas, moda João Pessoa, peças exclusivas">
+    <meta name="author" content="BLACKOUT">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.blackoutstore.com.br/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.blackoutstore.com.br/">
+    <meta property="og:title" content="BLACKOUT | Moda Masculina Contemporânea">
+    <meta property="og:description" content="Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea masculina. Visite nossa loja em João Pessoa.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.blackoutstore.com.br/">
+    <meta property="twitter:title" content="BLACKOUT | Moda Masculina Contemporânea">
+    <meta property="twitter:description" content="Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea masculina. Visite nossa loja em João Pessoa.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=32&h=32&q=80">
+    <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=180&h=180&q=80">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="container">
+    <header class="site-header">
+        <div class="container header-container">
             <div class="logo">
-                <h1>Modern</h1>
-                <p>Designs</p>
+                <a href="#home" aria-label="BLACKOUT - Página Inicial">
+                    <span class="logo-text">BLACKOUT</span>
+                </a>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#projetos">Projetos</a></li>
-                    <li><a href="#contato">Contato</a></li>
+            
+            <nav class="main-nav" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li class="nav-item"><a href="#produtos" class="nav-link">Produtos</a></li>
+                    <li class="nav-item"><a href="#contato" class="nav-link">Contato</a></li>
                 </ul>
-                <!-- Botão de fechar para o menu mobile -->
                 <div class="menu-close">
                     <i class="fas fa-times"></i>
                 </div>
             </nav>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
+            
+            <div class="header-actions">
+                <div class="search-container">
+                    <div class="search-icon" title="Pesquisar">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Pesquisar..." aria-label="Pesquisar">
+                        <button id="search-close" aria-label="Fechar pesquisa">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="search-results">
+                            <!-- Resultados da pesquisa serão adicionados aqui via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
@@ -36,218 +100,333 @@
     <!-- Overlay do menu mobile -->
     <div class="menu-overlay"></div>
 
+    <!-- Carrinho de Compras -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button class="cart-close" aria-label="Fechar carrinho">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Itens do carrinho serão adicionados aqui via JavaScript -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <strong>R$ 0,00</strong>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-checkout">Finalizar Pedido</button>
+            <button class="btn btn-continue">Continuar Comprando</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
     <!-- Home Section -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <!-- Imagem da frente da loja de móveis planejados -->
-            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Showroom Modern Designs">
+    <section id="home" class="hero parallax-section">
+        <div class="hero-background parallax-bg" data-parallax-speed="0.2">
+            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Homem vestindo roupas da marca BLACKOUT, mostrando estilo minimalista e moderno">
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
-            <div class="hero-content">
-                <h2>Design e Funcionalidade</h2>
-                <p>Transformamos espaços em ambientes personalizados com móveis planejados de alta qualidade</p>
-                <a href="#projetos" class="btn">Ver Projetos</a>
+            <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
+                <h1>ESTILO & <span class="typed-element">ATITUDE</span></h1>
+                <p>Peças minimalistas que refletem sua personalidade com o melhor da moda contemporânea masculina</p>
+                <a href="#produtos" class="btn btn-primary animated-btn">EXPLORAR COLEÇÃO</a>
             </div>
         </div>
     </section>
 
     <!-- Sobre Section -->
-    <section id="sobre" class="sobre">
+    <section id="sobre" class="sobre section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2>Sobre a Modern Designs</h2>
-                <div class="divider"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">NOSSA HISTÓRIA</span>
+                <h2>SOBRE A BLACKOUT</h2>
             </div>
             <div class="sobre-content">
-                <div class="sobre-text">
-                    <h3>Nossa História</h3>
-                    <p>Fundada em 2010, a Modern Designs nasceu da paixão por design de interiores e marcenaria de precisão. Trabalhamos com materiais de alta qualidade e profissionais especializados para criar móveis sob medida que otimizam cada espaço.</p>
-                    
-                    <h3>Nossa Missão</h3>
-                    <p>Transformar ambientes através de móveis planejados que unem beleza, funcionalidade e durabilidade, sempre respeitando o estilo e as necessidades específicas de cada cliente.</p>
-                    
-                    <h3>Nossos Valores</h3>
-                    <p>Excelência, inovação, pontualidade e compromisso com a sustentabilidade são os pilares que guiam todos os nossos projetos, desde a concepção até a instalação final.</p>
+                <div class="sobre-text" data-aos="fade-up" data-aos-delay="200">
+                    <div class="sobre-block">
+                        <h3>Nossa Essência</h3>
+                        <p>Fundada em 2020, a BLACKOUT nasceu da paixão por moda urbana e design minimalista. Trabalhamos com tecidos de alta qualidade e designers visionários para criar peças que expressam personalidade e estilo único.
+                         Transformando o visual masculino através de roupas que unem conforto, estilo e exclusividade, sempre respeitando a individualidade e as preferências específicas de cada cliente. Qualidade, inovação, sustentabilidade e compromisso com a produção responsável são os pilares que guiam todas as nossas coleções, desde a escolha dos materiais até a entrega final.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção de vantagens com ícones animados -->
+        <div class="vantagens-section container">
+            <div class="vantagens-header" data-aos="fade-up">
+                <h3>NOSSOS DIFERENCIAIS</h3>
+            </div>
+            <div class="vantagens-container">
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="lottie-container" data-lottie-container="quality"></div>
+                    <h4>QUALIDADE PREMIUM</h4>
+                    <p>Tecidos selecionados e acabamento impecável em todas as peças</p>
+                </div>
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="lottie-container" data-lottie-container="design"></div>
+                    <h4>DESIGN EXCLUSIVO</h4>
+                    <p>Modelagens que valorizam diferentes tipos de corpos</p>
+                </div>
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="lottie-container" data-lottie-container="sustain"></div>
+                    <h4>MODA SUSTENTÁVEL</h4>
+                    <p>Compromisso com práticas responsáveis de produção</p>
+                </div>
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="lottie-container" data-lottie-container="delivery"></div>
+                    <h4>ENTREGA RÁPIDA</h4>
+                    <p>Receba suas compras em até 48h em João Pessoa</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projetos Section (antigo Coleções) -->
-    <section id="projetos" class="colecoes">
+    <!-- Produtos Section -->
+    <section id="produtos" class="produtos section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2>Nossos Projetos</h2>
-                <div class="divider"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">EXCLUSIVIDADE</span>
+                <h2>NOSSA COLEÇÃO</h2>
             </div>
-            <div class="colecoes-grid">
-                <div class="colecao-item">
-                    <img src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Cozinhas Planejadas">
-                    <div class="colecao-info">
-                        <h3>Cozinhas</h3>
-                        <p>Funcionalidade e beleza para o coração do lar</p>
+            
+            <div class="produtos-grid">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="100" data-id="1" data-nome="Camiseta Oversized Black" data-preco="89.90" data-img="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camiseta Oversized Black - Peça confeccionada em algodão premium com corte moderno e amplo">
+                    </div>
+                    <div class="produto-info">
+                        <h3>CAMISETA OVERSIZED BLACK</h3>
+                        <p class="preco">R$ 89,90</p>
+                        <button class="btn-comprar">COMPRAR</button>
                     </div>
                 </div>
-                <div class="colecao-item">
-                    <img src="https://images.unsplash.com/photo-1617104678098-de229db51175?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Dormitórios Planejados">
-                    <div class="colecao-info">
-                        <h3>Dormitórios</h3>
-                        <p>Conforto e organização para seu descanso</p>
+                
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="200" data-id="2" data-nome="Calça Cargo Preta" data-preco="179.90" data-img="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Calça Cargo Preta - Modelo urbano com múltiplos bolsos e tecido resistente">
+                    </div>
+                    <div class="produto-info">
+                        <h3>CALÇA CARGO PRETA</h3>
+                        <p class="preco">R$ 179,90</p>
+                        <button class="btn-comprar">COMPRAR</button>
                     </div>
                 </div>
-                <div class="colecao-item">
-                    <img src="https://i.postimg.cc/J4sgdQGx/sala.jpg" alt="Salas Planejadas">
-                    <div class="colecao-info">
-                        <h3>Salas</h3>
-                        <p>Ambientes integrados e funcionais</p>
+                
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="300" data-id="3" data-nome="Jaqueta Tech Urban" data-preco="259.90" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Jaqueta Tech Urban - Peça corta-vento com detalhes técnicos e design urbano">
+                    </div>
+                    <div class="produto-info">
+                        <h3>JAQUETA TECH URBAN</h3>
+                        <p class="preco">R$ 259,90</p>
+                        <button class="btn-comprar">COMPRAR</button>
                     </div>
                 </div>
-                <div class="colecao-item">
-                    <img src="https://images.unsplash.com/photo-1593476550610-87baa860004a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Home Office Planejado">
-                    <div class="colecao-info">
-                        <h3>Home Office</h3>
-                        <p>Produtividade e conforto para seu trabalho</p>
+                
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="400" data-id="4" data-nome="Moletom Essential" data-preco="149.90" data-img="https://images.unsplash.com/photo-1578681994506-b8f463449011?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1578681994506-b8f463449011?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Moletom Essential - Peça básica em algodão de alta gramatura e corte moderno">
+                    </div>
+                    <div class="produto-info">
+                        <h3>MOLETOM ESSENTIAL</h3>
+                        <p class="preco">R$ 149,90</p>
+                        <button class="btn-comprar">COMPRAR</button>
                     </div>
                 </div>
-                <div class="colecao-item">
-                    <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Banheiros Planejados">
-                    <div class="colecao-info">
-                        <h3>Banheiros</h3>
-                        <p>Elegância e praticidade para seu dia a dia</p>
+                
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="500" data-id="5" data-nome="Bermuda Cargo Minimal" data-preco="119.90" data-img="https://images.unsplash.com/photo-1571945153237-4929e783af4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1571945153237-4929e783af4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Bermuda Cargo Minimal - Modelo versátil em tecido leve e resistente">
+                    </div>
+                    <div class="produto-info">
+                        <h3>BERMUDA CARGO MINIMAL</h3>
+                        <p class="preco">R$ 119,90</p>
+                        <button class="btn-comprar">COMPRAR</button>
                     </div>
                 </div>
-                <div class="colecao-item">
-                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Área Gourmet Planejada">
-                    <div class="colecao-info">
-                        <h3>Área Gourmet</h3>
-                        <p>Espaços completos para seu lazer e recepções</p>
+                
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="600" data-id="6" data-nome="Camiseta Longline Urban" data-preco="99.90" data-img="https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camiseta Longline Urban - Modelo alongado em tecido premium com corte moderno">
+                    </div>
+                    <div class="produto-info">
+                        <h3>CAMISETA LONGLINE URBAN</h3>
+                        <p class="preco">R$ 99,90</p>
+                        <button class="btn-comprar">COMPRAR</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Destaques Section com Setas de Navegação -->
-    <section class="destaques">
+    <!-- Destaques Section -->
+    <section class="destaques section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2>Projetos em Destaque</h2>
-                <div class="divider"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">NOVIDADES</span>
+                <h2>DESTAQUES DA ESTAÇÃO</h2>
             </div>
-            <div class="destaques-container">
-                <!-- Setas de navegação -->
+            
+            <!-- Barra de pesquisa na seção de destaques -->
+            <div class="main-search-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="main-search-bar">
+                    <i class="fas fa-search search-icon-main"></i>
+                    <input type="text" id="main-search-input" placeholder="Pesquisar destaques..." aria-label="Pesquisar destaques">
+                    <button id="main-search-clear" class="main-search-clear" aria-label="Limpar pesquisa">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="destaques-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="slider-nav-arrow slider-arrow-left">
                     <i class="fas fa-chevron-left"></i>
                 </div>
+                
                 <div class="slider-nav-arrow slider-arrow-right">
                     <i class="fas fa-chevron-right"></i>
                 </div>
+                
                 <div class="destaques-slider">
-                    <div class="destaque-item">
-                        <img src="https://images.unsplash.com/photo-1556912998-c57cc6b63cd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Cozinha Moderna">
-                        <h3>Cozinha Contemporânea</h3>
-                        <p>Design clean com acabamento em laca branca</p>
+                    <div class="destaque-item produto animated-card" data-id="7" data-nome="Jaqueta Corta-Vento Tech" data-preco="299.90" data-img="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Jaqueta Corta-Vento Tech - Proteção contra intempéries com estilo urbano e tecnologia">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>JAQUETA CORTA-VENTO TECH</h3>
+                            <p class="preco">R$ 299,90</p>
+                            <button class="btn-comprar">COMPRAR</button>
+                        </div>
                     </div>
-                    <div class="destaque-item">
-                        <img src="https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Escritório">
-                        <h3>Home Office Executivo</h3>
-                        <p>Ambiente produtivo e sofisticado</p>
+                    
+                    <div class="destaque-item produto animated-card" data-id="8" data-nome="Camiseta Premium Street" data-preco="109.90" data-img="https://images.unsplash.com/photo-1516826957135-700dedea698c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1516826957135-700dedea698c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Camiseta Premium Street - Tecido diferenciado com estampa exclusiva e assinatura da marca">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>CAMISETA PREMIUM STREET</h3>
+                            <p class="preco">R$ 109,90</p>
+                            <button class="btn-comprar">COMPRAR</button>
+                        </div>
                     </div>
-                    <div class="destaque-item">
-                        <img src="https://images.unsplash.com/photo-1629079447777-1e605162dc8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Banheiro">
-                        <h3>Banheiro Luxo</h3>
-                        <p>Acabamentos premium com atenção aos detalhes</p>
+                    
+                    <div class="destaque-item produto animated-card" data-id="9" data-nome="Calça Jogger Black" data-preco="159.90" data-img="https://images.unsplash.com/photo-1542574271-7f3b92e6c821?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                        <div class="destaque-img-container">
+                            <img src="https://i.postimg.cc/L4CKNscM/Cal-a-Jogger-Sarja-Mas.jpg" alt="Calça Jogger Black - Conforto e estilo para o dia a dia com acabamento premium">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>CALÇA JOGGER BLACK</h3>
+                            <p class="preco">R$ 159,90</p>
+                            <button class="btn-comprar">COMPRAR</button>
+                        </div>
                     </div>
-                    <div class="destaque-item">
-                        <img src="https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Área Gourmet">
-                        <h3>Área Gourmet</h3>
-                        <p>Espaço completo para receber com estilo</p>
+                    
+                    <div class="destaque-item produto animated-card" data-id="10" data-nome="Blusão Tech Minimal" data-preco="189.90" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Blusão Tech Minimal - Peça versátil com design limpo e tecido tecnológico">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>BLUSÃO TECH MINIMAL</h3>
+                            <p class="preco">R$ 189,90</p>
+                            <button class="btn-comprar">COMPRAR</button>
+                        </div>
                     </div>
-                    <div class="destaque-item">
-                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Varanda">
-                        <h3>Varanda Mobiliada</h3>
-                        <p>Aproveitamento máximo de espaços externos</p>
+                    
+                    <div class="destaque-item produto animated-card" data-id="11" data-nome="Conjunto Casual Urban" data-preco="249.90" data-img="https://images.unsplash.com/photo-1616877562788-d9f7eee84c4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1616877562788-d9f7eee84c4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Conjunto Casual Urban - Kit confortável com camiseta e calça em cores coordenadas">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>CONJUNTO CASUAL URBAN</h3>
+                            <p class="preco">R$ 249,90</p>
+                            <button class="btn-comprar">COMPRAR</button>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- Adicionado div para mensagem de "nenhum produto encontrado" na seção de destaques -->
+                <div class="destaques-nao-encontrados">
+                    <i class="fas fa-search"></i>
+                    <p>Nenhum destaque encontrado para sua pesquisa.</p>
+                    <button id="limpar-pesquisa-destaques" class="btn btn-outline">Limpar Pesquisa</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contato Section -->
-    <section id="contato" class="contato">
+    <section id="contato" class="contato section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2>Solicite seu Orçamento</h2>
-                <div class="divider"></div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">FALE CONOSCO</span>
+                <h2>ENTRE EM CONTATO</h2>
             </div>
+            
             <div class="contato-content">
-                <div class="contato-info">
-                    <h3>Informações</h3>
+                <div class="contato-info" data-aos="fade-right" data-aos-delay="200">
+                    <h3>INFORMAÇÕES</h3>
+                    
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <p>Av. Planejados, 1234, Centro</p>
+                        <p>Av. Street, 1234, Centro, João Pessoa - PB</p>
                     </div>
+                    
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
-                        <p>(83) 99181-6152</p>
+                        <p><a href="tel:+5583991816153">(83) 99181-6153</a></p>
                     </div>
+                    
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <p>contato@moderndesigns.com</p>
+                        <p><a href="mailto:contato@blackoutstore.com">contato@blackoutstore.com</a></p>
                     </div>
+                    
                     <div class="info-item">
                         <i class="fas fa-clock"></i>
-                        <p>Seg-Sex: 9h às 18h | Sáb: 9h às 13h</p>
+                        <p>Seg-Sex: 9h às 20h | Sáb: 9h às 17h</p>
                     </div>
+                    
                     <div class="social-media">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.instagram.com/blackoutstore" aria-label="Siga-nos no Instagram" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/blackoutstore" aria-label="Curta nossa página no Facebook" target="_blank" rel="noopener">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.twitter.com/blackoutstore" aria-label="Siga-nos no Twitter" target="_blank" rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="contato-form">
+                
+                <div class="contato-form" data-aos="fade-left" data-aos-delay="300">
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" id="nome" name="nome" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="telefone">Telefone</label>
                             <input type="tel" id="telefone" name="telefone" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="endereco">Endereço (opcional)</label>
-                            <input type="text" id="endereco" name="endereco">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="ambiente">Ambiente desejado</label>
-                            <select id="ambiente" name="ambiente" required>
-                                <option value="">Selecione uma opção</option>
-                                <option value="cozinha">Cozinha</option>
-                                <option value="dormitorio">Dormitório</option>
-                                <option value="sala">Sala</option>
-                                <option value="homeoffice">Home Office</option>
-                                <option value="banheiro">Banheiro</option>
-                                <option value="closet">Closet</option>
-                                <option value="areagourmet">Área Gourmet</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="horario">Preferência de horário para visita</label>
-                            <select id="horario" name="horario" required>
-                                <option value="">Selecione uma opção</option>
-                                <option value="manha">Manhã (9h-12h)</option>
-                                <option value="tarde">Tarde (13h-18h)</option>
-                                <option value="sabado">Sábado (9h-13h)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="mensagem">Detalhes do projeto</label>
+                            <label for="mensagem">Mensagem</label>
                             <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-submit">Solicitar Orçamento</button>
+                        
+                        <button type="submit" class="btn btn-primary btn-submit animated-btn">ENVIAR MENSAGEM</button>
                     </form>
                 </div>
             </div>
@@ -255,37 +434,207 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>Modern</h2>
-                    <p>Designs</p>
+                <div class="footer-logo" data-aos="fade-up">
+                    <span class="logo-text">BLACKOUT</span>
+                    <p>Moda masculina contemporânea com estilo minimalista e autenticidade</p>
                 </div>
-                <div class="footer-links">
-                    <h3>Links Rápidos</h3>
+                
+                <div class="footer-links" data-aos="fade-up" data-aos-delay="100">
+                    <h3>LINKS RÁPIDOS</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
+
+                <div class="footer-links" data-aos="fade-up" data-aos-delay="200">
+                    <h3>POLÍTICAS</h3>
+                    <ul>
+                        <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+                        <li><a href="/termos-de-uso">Termos de Uso</a></li>
+                        <li><a href="/trocas-e-devolucoes">Trocas e Devoluções</a></li>
+                        <li><a href="/envio-e-entrega">Envio e Entrega</a></li>
+                    </ul>
+                </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Modern Designs. Todos os direitos reservados.</p>
+                <p>&copy; 2025 BLACKOUT. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/5583991816152" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5583991816153" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
     
     <!-- Tooltip para imagens clicáveis -->
     <div id="tooltip" class="tooltip">Clique para conversar no WhatsApp</div>
 
+    <!-- Modal de Detalhes do Produto -->
+    <div class="product-modal">
+        <div class="product-modal-content">
+            <button class="close-modal" aria-label="Fechar modal">&times;</button>
+            <div class="product-details">
+                <div class="product-image">
+                    <img src="" alt="">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title"></h2>
+                    <p class="product-price"></p>
+                    
+                    <div class="product-size">
+                        <h3>Tamanho</h3>
+                        <div class="size-options">
+                            <button class="size-btn" data-size="P">P</button>
+                            <button class="size-btn" data-size="M">M</button>
+                            <button class="size-btn" data-size="G">G</button>
+                            <button class="size-btn" data-size="GG">GG</button>
+                            <button class="size-btn" data-size="XG">XG</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-quantity">
+                        <h3>Quantidade</h3>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" aria-label="Diminuir quantidade">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10" aria-label="Quantidade">
+                            <button class="quantity-btn plus" aria-label="Aumentar quantidade">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary add-to-cart animated-btn">ADICIONAR AO CARRINHO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Finalização de Pedido -->
+    <div class="checkout-modal">
+        <div class="checkout-modal-content">
+            <button class="close-checkout" aria-label="Fechar finalização">&times;</button>
+            <h2>FINALIZAR PEDIDO</h2>
+            
+            <div class="checkout-items">
+                <!-- Itens do pedido serão adicionados aqui via JavaScript -->
+            </div>
+            
+            <form id="checkout-form" class="checkout-form">
+                <div class="form-group">
+                    <label for="checkout-nome">Nome Completo</label>
+                    <input type="text" id="checkout-nome" name="checkout-nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkout-telefone">Telefone</label>
+                    <input type="tel" id="checkout-telefone" name="checkout-telefone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkout-endereco">Endereço Completo</label>
+                    <input type="text" id="checkout-endereco" name="checkout-endereco" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkout-pagamento">Forma de Pagamento</label>
+                    <select id="checkout-pagamento" name="checkout-pagamento" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="cartao">Cartão de Crédito</option>
+                        <option value="pix">PIX</option>
+                        <option value="boleto">Boleto Bancário</option>
+                        <option value="dinheiro">Dinheiro (na entrega)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkout-obs">Observações (opcional)</label>
+                    <textarea id="checkout-obs" name="checkout-obs" rows="3"></textarea>
+                </div>
+                
+                <div class="checkout-total">
+                    <span>Total:</span>
+                    <strong></strong>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-submit animated-btn">CONFIRMAR PEDIDO</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Schema.org estruturado para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "BLACKOUT",
+      "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80",
+      "logo": "https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=32&h=32&q=80",
+      "url": "https://www.blackoutstore.com.br",
+      "telephone": "+5583991816153",
+      "email": "contato@blackoutstore.com",
+      "priceRange": "R$",
+      "description": "Loja de moda masculina contemporânea com peças exclusivas que unem estilo, minimalismo e personalidade.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Street, 1234",
+        "addressLocality": "João Pessoa",
+        "addressRegion": "PB",
+        "postalCode": "58000-000",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -7.115,
+        "longitude": -34.863
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/blackoutstore",
+        "https://www.instagram.com/blackoutstore",
+        "https://www.twitter.com/blackoutstore"
+      ]
+    }
+    </script>
+
+    <!-- JavaScript e Bibliotecas de Animação -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 </body>
 </html>

@@ -1390,6 +1390,30 @@ img {
     color: var(--color-dark);
 }
 
+/* Corrigindo contraste nos labels do formulário de orçamento */
+.product-info .form-group label {
+    color: var(--color-dark);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-info .form-group input,
+.product-info .form-group select,
+.product-info .form-group textarea {
+    background-color: var(--color-grey-100);
+    color: var(--color-dark);
+    border: 1px solid var(--color-grey-300);
+}
+
+.product-info .form-group input:focus,
+.product-info .form-group select:focus,
+.product-info .form-group textarea:focus {
+    border-color: var(--color-dark);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 1px var(--color-grey-400);
+}
+
 .solicitar-orcamento {
     width: 100%;
     margin-top: var(--spacing-md);

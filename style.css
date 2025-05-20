@@ -658,11 +658,13 @@ img {
     width: 50px;
 }
 
-/* Seção de Vantagens com ícones animados */
+/* Seção de Vantagens com ícones animados - visual clean */
 .vantagens-section {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-xl);
     border-top: 1px solid var(--color-grey-200);
+    background-color: var(--color-grey-100);
+    padding: var(--spacing-xl) 0;
 }
 
 .vantagens-header {
@@ -670,44 +672,95 @@ img {
     margin-bottom: var(--spacing-xl);
 }
 
+.vantagens-header h3 {
+    font-weight: 600;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: var(--spacing-sm);
+}
+
+.vantagens-header h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-dark);
+}
+
 .vantagens-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: var(--spacing-xl);
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .vantagem-item {
     text-align: center;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-md);
+    transition: all var(--transition-medium);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-grey-200);
+    overflow: hidden;
+    position: relative;
+}
+
+.vantagem-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
     background-color: var(--color-dark);
-    color: var(--color-white);
+    opacity: 0.8;
+    transition: var(--transition-medium);
 }
 
 .vantagem-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-grey-300);
+}
+
+.vantagem-item:hover::before {
+    width: 8px;
 }
 
 .lottie-container {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     margin: 0 auto var(--spacing-md);
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--color-grey-100);
+    border-radius: 50%;
+    padding: 15px;
+    transition: var(--transition-medium);
+}
+
+.vantagem-item:hover .lottie-container {
+    transform: scale(1.05);
+    background-color: var(--color-grey-200);
 }
 
 .vantagem-item h4 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
-    color: var(--color-white);
+    color: var(--color-dark);
+    font-weight: 600;
+    letter-spacing: 1.5px;
     position: relative;
     display: inline-block;
     padding-bottom: var(--spacing-xs);
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
 }
 
 .vantagem-item h4::after {
@@ -718,19 +771,21 @@ img {
     transform: translateX(-50%);
     width: 30px;
     height: 1px;
-    background-color: var(--color-white);
+    background-color: var(--color-grey-400);
     transition: width var(--transition-medium);
 }
 
 .vantagem-item:hover h4::after {
     width: 50px;
+    background-color: var(--color-dark);
 }
 
 .vantagem-item p {
     font-size: 0.9rem;
-    color: var(--color-grey-200); /* Cor mais clara para melhor contraste */
+    color: var(--color-grey-600);
     margin-bottom: 0;
-    font-weight: 400; /* Aumentar peso da fonte */
+    font-weight: 400;
+    line-height: 1.6;
 }
 
 /* Produtos section */
@@ -1507,9 +1562,10 @@ img {
         width: 400px; /* Ainda maior em tablet */
     }
     
-    /* Vantagens em 2 colunas */
+    /* Vantagens em 2 colunas para clean design */
     .vantagens-container {
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
     }
 }
 

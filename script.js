@@ -24,17 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const lottieContainers = document.querySelectorAll('[data-lottie-container]');
 
     const lottieUrls = {
-        // Ícone de "Matéria-Prima Premium"
-        quality: 'https://assets7.lottiefiles.com/packages/lf20_8cxcnczq.json',
+        // Matéria-Prima Premium - ícone de madeira/qualidade
+        quality: 'https://assets3.lottiefiles.com/private_files/lf30_kop9dsku.json',
         
-        // Ícone de "Design Exclusivo"
-        design: 'https://assets10.lottiefiles.com/packages/lf20_1pxqjqps.json',
+        // Design Exclusivo - ícone de design/casa
+        design: 'https://assets3.lottiefiles.com/private_files/lf30_0hb7wmcg.json',
         
-        // Ícone de "Produção Sustentável"
-        sustain: 'https://assets1.lottiefiles.com/packages/lf20_tnrzlN.json',
+        // Produção Sustentável - ícone de sustentabilidade
+        sustain: 'https://assets6.lottiefiles.com/packages/lf20_in4cufsz.json',
         
-        // Ícone de "Instalação Profissional"
-        delivery: 'https://assets9.lottiefiles.com/packages/lf20_uu0x8lqv.json'
+        // Instalação Profissional - ícone de ferramentas/montagem
+        delivery: 'https://assets5.lottiefiles.com/packages/lf20_ssm0igd3.json'
     };
     
     // Verificar se a biblioteca lottie está disponível
@@ -54,18 +54,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         path: lottieUrls[type]
                     });
                     
-                    // Adicionar evento para detectar quando a animação é carregada
+                                            // Adicionar evento para detectar quando a animação é carregada
                     anim.addEventListener('DOMLoaded', function() {
                         console.log(`Animação ${type} carregada com sucesso!`);
                         
-                        // Alterar a cor para preto e branco
+                        // Ajustar as cores para o novo visual clean
                         if (anim.renderer && anim.renderer.elements && anim.renderer.elements.length > 0) {
                             const elements = anim.renderer.elements[0];
                             if (elements && elements.style) {
-                                elements.style.filter = 'grayscale(100%)';
+                                elements.style.filter = 'brightness(0.8) contrast(1.2)';
                             }
                         }
                     });
+                    
+                    // Verificar se a animação não carregou após um tempo
+                    setTimeout(() => {
+                        if (!anim.isLoaded) {
+                            console.error(`Timeout: Animação ${type} não carregou em tempo hábil`);
+                            container.innerHTML = getFallbackIcon(type);
+                        }
+                    }, 3000); // 3 segundos de timeout
                     
                     // Tratar erros de carregamento
                     anim.addEventListener('error', function() {
@@ -94,13 +102,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Função para fornecer ícones fallback quando as animações Lottie falham
     function getFallbackIcon(type) {
         const icons = {
-            quality: '<i class="fas fa-award" style="font-size: 2.5rem; color: var(--color-white);"></i>',
-            design: '<i class="fas fa-drafting-compass" style="font-size: 2.5rem; color: var(--color-white);"></i>',
-            sustain: '<i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--color-white);"></i>',
-            delivery: '<i class="fas fa-tools" style="font-size: 2.5rem; color: var(--color-white);"></i>'
+            quality: '<i class="fas fa-gem" style="font-size: 2.5rem; color: var(--color-dark);"></i>',
+            design: '<i class="fas fa-home" style="font-size: 2.5rem; color: var(--color-dark);"></i>',
+            sustain: '<i class="fas fa-recycle" style="font-size: 2.5rem; color: var(--color-dark);"></i>',
+            delivery: '<i class="fas fa-hammer" style="font-size: 2.5rem; color: var(--color-dark);"></i>'
         };
         
-        return icons[type] || '<i class="fas fa-star" style="font-size: 2.5rem; color: var(--color-white);"></i>';
+        return icons[type] || '<i class="fas fa-star" style="font-size: 2.5rem; color: var(--color-dark);"></i>';
     }
     
     // Efeito parallax para a hero section
@@ -504,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappMessage += `%0A*Solicito um orçamento para este projeto.*`;
             
             // Redirecionar para o WhatsApp
-            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
             
             // Fechar o modal
             closeProductModal();
@@ -539,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappMessage += `*Mensagem:*%0A${mensagem}%0A%0A`;
             
             // Redirecionar para o WhatsApp usando o formato correto
-            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
             
             // Limpar o formulário
             contactForm.reset();

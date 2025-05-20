@@ -1,5 +1,5 @@
 /* 
- * BLACKOUT - Estilo Masculino Contemporâneo
+ * DESIGNWOOD - Móveis Projetados Contemporâneos
  * Design Minimalista e Elegante
  */
 
@@ -203,7 +203,7 @@ img {
     left: 100%;
 }
 
-.btn-comprar {
+.btn-solicitar {
     display: inline-block;
     background-color: rgba(0, 0, 0, 0.6); /* Aumentar a opacidade do fundo */
     color: var(--color-white);
@@ -218,14 +218,14 @@ img {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra de texto */
 }
 
-.btn-comprar:hover {
+.btn-solicitar:hover {
     background-color: var(--color-white);
     color: var(--color-dark);
     text-shadow: none;
 }
 
-/* Estilo para o botão de compra na seção de destaques */
-.destaque-info .btn-comprar {
+/* Estilo para o botão na seção de destaques */
+.destaque-info .btn-solicitar {
     min-width: 150px;
     padding: 0.8rem 1.5rem;
     letter-spacing: 2px;
@@ -238,7 +238,7 @@ img {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra de texto */
 }
 
-.destaque-info .btn-comprar:hover {
+.destaque-info .btn-solicitar:hover {
     background-color: var(--color-white);
     color: var(--color-dark);
     text-shadow: none;
@@ -500,230 +500,6 @@ img {
     padding: var(--spacing-md);
     text-align: center;
     color: var(--color-grey-500);
-}
-
-/* Carrinho */
-.cart-icon {
-    position: relative;
-    cursor: pointer;
-    color: var(--color-dark);
-    font-size: 1.1rem;
-    transition: color var(--transition-medium);
-}
-
-.cart-icon:hover {
-    color: var(--color-grey-500);
-}
-
-.cart-count {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    font-size: 0.7rem;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: 500;
-}
-
-.cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -400px;
-    width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    background-color: var(--color-white);
-    box-shadow: var(--shadow-lg);
-    z-index: 1000;
-    transition: all var(--transition-slow);
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.cart-sidebar.active {
-    right: 0;
-    opacity: 1;
-    visibility: visible;
-}
-
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-bottom: 1px solid var(--color-grey-200);
-}
-
-.cart-header h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    color: var(--color-dark);
-}
-
-.cart-close {
-    background: none;
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-    color: var(--color-grey-500);
-    transition: color var(--transition-fast);
-}
-
-.cart-close:hover {
-    color: var(--color-dark);
-}
-
-.cart-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: var(--spacing-md);
-}
-
-.cart-item {
-    display: flex;
-    border-bottom: 1px solid var(--color-grey-100);
-    padding-bottom: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-}
-
-.cart-item-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: var(--border-radius-sm);
-    margin-right: var(--spacing-md);
-}
-
-.cart-item-details {
-    flex: 1;
-}
-
-.cart-item-title {
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--color-dark);
-}
-
-.cart-item-price,
-.cart-item-size {
-    font-size: 0.85rem;
-    color: var(--color-grey-600);
-    margin-bottom: 0.25rem;
-}
-
-.cart-item-price {
-    color: var(--color-grey-700);
-    font-weight: 500;
-}
-
-.cart-item-quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-}
-
-.cart-quantity-btn {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-grey-100);
-    border: none;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: var(--color-dark);
-}
-
-.cart-quantity-btn:hover {
-    background-color: var(--color-grey-200);
-}
-
-.cart-quantity-input {
-    width: 32px;
-    height: 24px;
-    text-align: center;
-    border: 1px solid var(--color-grey-200);
-    margin: 0 4px;
-    font-size: 0.85rem;
-    color: var(--color-dark);
-}
-
-.cart-item-price-total {
-    font-size: 0.85rem;
-    color: var(--color-dark);
-    font-weight: 600;
-    margin-top: 0.5rem;
-}
-
-.cart-item-remove {
-    background: none;
-    border: none;
-    color: var(--color-error);
-    font-size: 0.75rem;
-    cursor: pointer;
-    padding: 0;
-    margin-top: 0.5rem;
-    text-decoration: underline;
-}
-
-.cart-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-top: 1px solid var(--color-grey-200);
-    font-size: 1rem;
-    color: var(--color-dark);
-}
-
-.cart-total strong {
-    font-weight: 600;
-    color: var(--color-dark);
-}
-
-.cart-actions {
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.empty-cart {
-    text-align: center;
-    padding: var(--spacing-xl) 0;
-    color: var(--color-grey-500);
-    font-style: italic;
-}
-
-.cart-overlay,
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-medium);
-}
-
-.cart-overlay.active,
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
 }
 
 /* Menu mobile */
@@ -1035,17 +811,9 @@ img {
 
 .produto-info h3 {
     font-size: 1rem;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
     font-weight: 600;
     color: var(--color-white);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
-}
-
-.preco {
-    color: var(--color-white);
-    font-weight: 600; /* Aumentar peso da fonte */
-    margin-bottom: var(--spacing-md);
-    font-size: 1rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
 }
 
@@ -1221,19 +989,10 @@ img {
 
 .destaque-info h3 {
     font-size: 1rem;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
     font-weight: 600;
     color: var(--color-white);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
-}
-
-/* Preço com melhor contraste */
-.destaque-info .preco {
-    color: var(--color-white); /* Cor de destaque para melhor contraste */
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    font-size: 1rem;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .slider-nav-arrow {
@@ -1547,8 +1306,7 @@ img {
 }
 
 /* Modais */
-.product-modal,
-.checkout-modal {
+.product-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -1564,14 +1322,12 @@ img {
     transition: all var(--transition-medium);
 }
 
-.product-modal.active,
-.checkout-modal.active {
+.product-modal.active {
     opacity: 1;
     visibility: visible;
 }
 
-.product-modal-content,
-.checkout-modal-content {
+.product-modal-content {
     background-color: var(--color-white);
     max-width: 900px;
     width: 90%;
@@ -1583,13 +1339,11 @@ img {
     transition: transform var(--transition-medium);
 }
 
-.product-modal.active .product-modal-content,
-.checkout-modal.active .checkout-modal-content {
+.product-modal.active .product-modal-content {
     transform: scale(1);
 }
 
-.close-modal,
-.close-checkout {
+.close-modal {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -1602,8 +1356,7 @@ img {
     transition: color var(--transition-fast);
 }
 
-.close-modal:hover,
-.close-checkout:hover {
+.close-modal:hover {
     color: var(--color-dark);
 }
 
@@ -1630,247 +1383,34 @@ img {
 
 .product-title {
     font-size: 1.5rem;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--color-dark);
 }
 
-.product-price {
-    font-size: 1.25rem;
-    color: var(--color-dark);
-    font-weight: 600;
-    margin-bottom: var(--spacing-lg);
-}
-
-.product-size h3,
-.product-quantity h3 {
-    font-size: 1rem;
-    margin-bottom: var(--spacing-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-dark);
-}
-
-.size-options {
-    display: flex;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-lg);
-}
-
-.size-btn {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-grey-300);
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: var(--color-dark);
-}
-
-.size-btn:hover {
-    border-color: var(--color-dark);
-}
-
-.size-btn.active {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    border-color: var(--color-dark);
-}
-
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--spacing-lg);
-}
-
-.quantity-btn {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-grey-100);
-    border: 1px solid var(--color-grey-300);
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: var(--color-dark);
-}
-
-.quantity-btn:hover {
-    background-color: var(--color-grey-200);
-}
-
-.quantity-input {
-    width: 50px;
-    height: 32px;
-    text-align: center;
-    border: 1px solid var(--color-grey-300);
-    margin: 0 var(--spacing-xs);
-    font-size: 0.9rem;
-    color: var(--color-dark);
-}
-
-.add-to-cart {
+.solicitar-orcamento {
     width: 100%;
+    margin-top: var(--spacing-md);
 }
 
-/* Melhorias específicas para o modal de finalização de pedido */
-.checkout-modal-content {
-    max-width: 600px;
-    padding: var(--spacing-lg);
-    background-color: var(--color-white);
-    color: var(--color-dark);
-    border: 1px solid var(--color-grey-300);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+/* Melhorar visibilidade do texto nos campos do formulário de contato */
+.contato .form-group input::placeholder,
+.contato .form-group textarea::placeholder {
+    color: var(--color-grey-400);
+    opacity: 1;
 }
 
-.checkout-modal-content h2 {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--color-grey-300); /* Borda mais grossa e visível */
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--color-dark);
-    font-size: 1.4rem; /* Aumentar tamanho para maior destaque */
-}
-
-.checkout-items {
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: var(--spacing-lg);
-    border: 1px solid var(--color-grey-200); /* Adicionar borda para separar visualmente */
-    border-radius: var(--border-radius-sm);
-    padding: var(--spacing-sm);
-}
-
-.checkout-item {
-    display: flex;
-    padding-bottom: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-    border-bottom: 1px solid var(--color-grey-200); /* Borda mais visível */
-    background-color: var(--color-grey-100); /* Adicionar fundo sutil */
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-}
-
-.checkout-item:last-child {
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-.checkout-item-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: var(--border-radius-sm);
-    margin-right: var(--spacing-sm);
-    filter: grayscale(100%);
-    border: 1px solid var(--color-grey-300); /* Adicionar borda para destacar imagem */
-}
-
-.checkout-item-details {
-    flex: 1;
-}
-
-.checkout-item-title {
-    font-size: 0.95rem; /* Aumentar tamanho */
-    margin-bottom: 0.25rem;
-    font-weight: 700; /* Mais negrito */
-    text-transform: uppercase;
-    color: var(--color-dark);
-}
-
-.checkout-item-details p {
-    font-size: 0.85rem;
-    margin-bottom: 0.25rem;
-    color: var(--color-grey-700); /* Cor mais escura para melhor contraste */
-    font-weight: 500; /* Aumentar peso da fonte */
-    line-height: 1.4; /* Melhorar espaçamento entre linhas */
-}
-
-.checkout-total {
-    display: flex;
-    justify-content: space-between;
+/* Melhorar contraste para mensagens de sucesso de formulários */
+.success-message {
+    background-color: var(--color-success);
+    color: var(--color-white);
     padding: var(--spacing-md);
-    margin: var(--spacing-md) 0;
-    border-top: 2px solid var(--color-grey-300); /* Borda mais grossa e visível */
-    border-bottom: 2px solid var(--color-grey-300); /* Adicionar borda inferior */
-    font-size: 1.2rem; /* Aumentar tamanho */
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--color-dark);
-    background-color: var(--color-grey-100); /* Adicionar fundo sutil */
     border-radius: var(--border-radius-sm);
-}
-
-.checkout-total strong {
-    color: var(--color-dark);
-    font-weight: 800; /* Mais negrito */
-    font-size: 1.3rem; /* Maior destaque */
-}
-
-/* Melhorar os campos do formulário de checkout */
-.checkout-form .form-group {
-    margin-bottom: var(--spacing-md);
-}
-
-.checkout-form .form-group label {
-    display: block;
-    margin-bottom: var(--spacing-xs);
-    font-weight: 600;
-    color: var(--color-dark);
-    font-size: 0.9rem;
-}
-
-.checkout-form .form-group input,
-.checkout-form .form-group select,
-.checkout-form .form-group textarea {
-    width: 100%;
-    padding: 0.9rem 1rem; /* Campos maiores */
-    border: 1px solid var(--color-grey-300);
-    border-radius: var(--border-radius-sm);
-    font-family: var(--font-body);
-    font-size: 0.95rem; /* Tamanho maior */
-    transition: all var(--transition-fast);
-    background-color: var(--color-white);
-    color: var(--color-dark);
-}
-
-.checkout-form .form-group input:focus,
-.checkout-form .form-group select:focus,
-.checkout-form .form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-dark);
-    box-shadow: 0 0 0 1px var(--color-grey-400);
-}
-
-.checkout-form .btn-submit {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-
-.checkout-form .btn-submit:hover {
-    background-color: var(--color-grey-800);
-    transform: translateY(-2px);
+    margin-top: var(--spacing-md);
+    font-weight: 500;
+    text-align: center;
 }
 
 /* Mensagem de "nenhum destaque encontrado" */
@@ -1970,7 +1510,7 @@ img {
     }
     
     /* Botão maior em desktop */
-    .btn-comprar {
+    .btn-solicitar {
         min-width: 180px;
         padding: 0.9rem 2rem;
     }
@@ -2063,10 +1603,6 @@ img {
         width: 250px;
     }
     
-    .cart-sidebar {
-        max-width: 100%;
-    }
-    
     /* Grade de produtos em 1 coluna para mobile */
     .produtos-grid {
         grid-template-columns: 1fr;
@@ -2094,12 +1630,7 @@ img {
         font-size: 0.9rem;
     }
     
-    .preco {
-        font-size: 0.9rem;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .btn-comprar {
+    .btn-solicitar {
         padding: 0.6rem 1.2rem;
         min-width: 120px;
         font-size: 0.75rem;
@@ -2160,7 +1691,7 @@ img {
         width: 280px; /* Reduzido para telas menores */
     }
     
-    .destaque-info .btn-comprar {
+    .destaque-info .btn-solicitar {
         min-width: 120px;
         padding: 0.6rem 1.2rem;
         font-size: 0.75rem;
@@ -2266,159 +1797,4 @@ img {
 
 .produto-item:hover::before {
     opacity: 1;
-}
-
-/* Melhorias adicionais de contraste */
-/* Melhorar contraste nos formulários de modal */
-.checkout-form input,
-.checkout-form select,
-.checkout-form textarea {
-    border: 1px solid var(--color-grey-300);
-    background-color: var(--color-white);
-    color: var(--color-dark);
-    font-weight: 500;
-}
-
-.checkout-form input:focus,
-.checkout-form select:focus,
-.checkout-form textarea:focus {
-    border-color: var(--color-dark);
-    box-shadow: 0 0 0 1px var(--color-grey-400);
-}
-
-.checkout-form label {
-    color: var(--color-dark);
-    font-weight: 600;
-}
-
-/* Adicionar classe para indicar erro em campos de formulário */
-.form-group input.error,
-.form-group select.error,
-.form-group textarea.error {
-    border: 1px solid var(--color-error);
-    background-color: rgba(198, 40, 40, 0.05);
-}
-
-/* Melhorar contraste em mensagens de erro */
-.error-message {
-    color: var(--color-error);
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
-    font-weight: 500;
-}
-
-/* Melhorar contraste no botão de checkout */
-.btn-checkout {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    font-weight: 600;
-    border: 1px solid var(--color-dark);
-}
-
-.btn-checkout:hover {
-    background-color: var(--color-white);
-    color: var(--color-dark);
-}
-
-/* Melhorar contraste no botão de continuar comprando */
-.btn-continue {
-    background-color: transparent;
-    color: var(--color-dark);
-    border: 1px solid var(--color-dark);
-    font-weight: 500;
-}
-
-.btn-continue:hover {
-    background-color: var(--color-grey-100);
-}
-
-/* Melhorar contraste no modal de detalhes do produto */
-.product-modal-content {
-    border: 1px solid var(--color-grey-300);
-}
-
-/* Melhorar contraste para botões no modal de produto */
-.add-to-cart {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    font-weight: 600;
-    border: 1px solid var(--color-dark);
-}
-
-.add-to-cart:hover {
-    background-color: var(--color-white);
-    color: var(--color-dark);
-}
-
-/* Adicionar contraste para itens selecionados */
-.selected-item {
-    border: 2px solid var(--color-dark) !important;
-}
-
-/* Melhorar contraste nos botões de quantidade */
-.quantity-btn,
-.cart-quantity-btn {
-    background-color: var(--color-grey-200);
-    color: var(--color-dark);
-    font-weight: 600;
-    border: 1px solid var(--color-grey-400);
-}
-
-.quantity-btn:hover,
-.cart-quantity-btn:hover {
-    background-color: var(--color-grey-300);
-}
-
-/* Melhorar contraste nas mensagens de confirmação */
-.confirmation-message {
-    background-color: var(--color-success);
-    color: var(--color-white);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    margin-bottom: var(--spacing-md);
-    font-weight: 500;
-}
-
-/* Melhorar contraste nos textos do carrinho vazio */
-.empty-cart {
-    color: var(--color-grey-600);
-    font-weight: 500;
-}
-
-/* Melhorar contraste no overlay dos produtos */
-.produto-overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7) 70%, transparent);
-}
-
-/* Melhorar contraste para o botão de limpeza de pesquisa */
-#limpar-pesquisa-destaques {
-    background-color: var(--color-white);
-    color: var(--color-dark);
-    border: 1px solid var(--color-white);
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-#limpar-pesquisa-destaques:hover {
-    background-color: var(--color-grey-200);
-}
-
-/* Melhorar visibilidade do texto nos campos do formulário de contato */
-.contato .form-group input::placeholder,
-.contato .form-group textarea::placeholder {
-    color: var(--color-grey-400);
-    opacity: 1;
-}
-
-/* Melhorar contraste para mensagens de sucesso de formulários */
-.success-message {
-    background-color: var(--color-success);
-    color: var(--color-white);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    margin-top: var(--spacing-md);
-    font-weight: 500;
-    text-align: center;
 }

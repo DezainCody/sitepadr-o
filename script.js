@@ -1,4 +1,4 @@
-// Script principal para a loja de roupas BLACKOUT
+// Script principal para a loja de móveis DESIGNWOOD
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar AOS (Animate On Scroll)
     AOS.init({
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar Typed.js na hero section
     if (document.querySelector('.typed-element')) {
         let typed = new Typed('.typed-element', {
-            strings: ['ATITUDE', 'ESTILO', 'AUTENTICIDADE', 'MINIMALISMO'],
+            strings: ['ELEGÂNCIA', 'EXCLUSIVIDADE', 'FUNCIONALIDADE', 'MINIMALISMO'],
             typeSpeed: 80,
             backSpeed: 50,
             backDelay: 2000,
@@ -24,16 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const lottieContainers = document.querySelectorAll('[data-lottie-container]');
 
     const lottieUrls = {
-        // Ícone de "Qualidade Premium"
+        // Ícone de "Matéria-Prima Premium"
         quality: 'https://assets7.lottiefiles.com/packages/lf20_8cxcnczq.json',
         
         // Ícone de "Design Exclusivo"
         design: 'https://assets10.lottiefiles.com/packages/lf20_1pxqjqps.json',
         
-        // Ícone de "Moda Sustentável"
+        // Ícone de "Produção Sustentável"
         sustain: 'https://assets1.lottiefiles.com/packages/lf20_tnrzlN.json',
         
-        // Ícone de "Entrega Rápida"
+        // Ícone de "Instalação Profissional"
         delivery: 'https://assets9.lottiefiles.com/packages/lf20_uu0x8lqv.json'
     };
     
@@ -95,9 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function getFallbackIcon(type) {
         const icons = {
             quality: '<i class="fas fa-award" style="font-size: 2.5rem; color: var(--color-white);"></i>',
-            design: '<i class="fas fa-tshirt" style="font-size: 2.5rem; color: var(--color-white);"></i>',
+            design: '<i class="fas fa-drafting-compass" style="font-size: 2.5rem; color: var(--color-white);"></i>',
             sustain: '<i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--color-white);"></i>',
-            delivery: '<i class="fas fa-shipping-fast" style="font-size: 2.5rem; color: var(--color-white);"></i>'
+            delivery: '<i class="fas fa-tools" style="font-size: 2.5rem; color: var(--color-white);"></i>'
         };
         
         return icons[type] || '<i class="fas fa-star" style="font-size: 2.5rem; color: var(--color-white);"></i>';
@@ -136,34 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     }
 
-    // Carrinho de compras
-    let cart = [];
-    const cartIcon = document.querySelector('.cart-icon');
-    const cartSidebar = document.querySelector('.cart-sidebar');
-    const cartOverlay = document.querySelector('.cart-overlay');
-    const cartCount = document.querySelector('.cart-count');
-    const cartItems = document.querySelector('.cart-items');
-    const cartTotal = document.querySelector('.cart-total strong');
-    const cartClose = document.querySelector('.cart-close');
-    const btnContinue = document.querySelector('.btn-continue');
-    const btnCheckout = document.querySelector('.btn-checkout');
-
-    // Flag para controlar se estamos adicionando a partir do botão plus no carrinho
-    let addingFromCartPlus = false;
-    let plusClickedItemIndex = -1;
-
-    // Garantir que o carrinho comece corretamente fechado sem causar problemas de CSS
-    function resetCartStyles() {
-        cartSidebar.style.right = '-400px';
-        cartSidebar.style.opacity = '0';
-        cartSidebar.style.visibility = 'hidden';
-        cartOverlay.style.opacity = '0';
-        cartOverlay.style.visibility = 'hidden';
-    }
-
-    // Resetar o carrinho no carregamento da página
-    resetCartStyles();
-
     // Sistema de pesquisa
     const searchIcon = document.querySelector('.search-icon');
     const searchBar = document.querySelector('.search-bar');
@@ -181,24 +153,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const productModal = document.querySelector('.product-modal');
     const productImage = document.querySelector('.product-image img');
     const productTitle = document.querySelector('.product-title');
-    const productPrice = document.querySelector('.product-price');
     const closeModal = document.querySelector('.close-modal');
-    const addToCartBtn = document.querySelector('.add-to-cart');
-    const sizeBtns = document.querySelectorAll('.size-btn');
-    const quantityInput = document.querySelector('.quantity-input');
-    const minusBtn = document.querySelector('.quantity-btn.minus');
-    const plusBtn = document.querySelector('.quantity-btn.plus');
-
-    // Modal de Finalização de Pedido
-    const checkoutModal = document.querySelector('.checkout-modal');
-    const closeCheckout = document.querySelector('.close-checkout');
-    const checkoutItems = document.querySelector('.checkout-items');
-    const checkoutTotal = document.querySelector('.checkout-total strong');
-    const checkoutForm = document.getElementById('checkout-form');
-
-    // Variáveis para controle do produto atual
+    const solicitarOrcamentoBtn = document.querySelector('.solicitar-orcamento');
+    
+    // Variável para controle do produto atual
     let currentProduct = null;
-    let selectedSize = null;
 
     // Scroll suave aprimorado para todos os links internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -359,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
         searchResults.innerHTML = '';
         
         if (resultados.length === 0) {
-            searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum produto encontrado</div>';
+            searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum projeto encontrado</div>';
         } else {
             resultados.forEach(produto => {
                 const resultadoItem = document.createElement('div');
@@ -368,7 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="${produto.dataset.img}" alt="${produto.dataset.nome}" class="search-result-img">
                     <div class="search-result-details">
                         <h4>${produto.dataset.nome}</h4>
-                        <p>R$ ${parseFloat(produto.dataset.preco).toFixed(2).replace('.', ',')}</p>
                     </div>
                 `;
                 
@@ -376,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const productData = {
                         id: produto.dataset.id,
                         name: produto.dataset.nome,
-                        price: parseFloat(produto.dataset.preco),
                         image: produto.dataset.img
                     };
                     
@@ -459,153 +416,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Funções para o carrinho de compras
-    function openCart() {
-        // Primeiro, certifique-se de que os estilos sejam resetados para evitar conflitos
-        cartSidebar.style.right = '-400px';
-        cartSidebar.style.opacity = '0';
-        cartSidebar.style.visibility = 'hidden';
-        
-        // Depois aplique as classes e estilos para abrir
-        cartSidebar.classList.add('active');
-        cartOverlay.classList.add('active');
-        
-        // Aguarde um pequeno momento para aplicar a transição visual
-        setTimeout(() => {
-            cartSidebar.style.right = '0';
-            cartSidebar.style.opacity = '1';
-            cartSidebar.style.visibility = 'visible';
-            document.body.style.overflow = 'hidden';
-        }, 10);
-    }
-
-    function closeCart() {
-        cartSidebar.style.right = '-400px';
-        cartSidebar.style.opacity = '0';
-        cartSidebar.style.visibility = 'hidden';
-        
-        cartSidebar.classList.remove('active');
-        cartOverlay.classList.remove('active');
-        
-        document.body.style.overflow = '';
-    }
-
-    function updateCartDisplay() {
-        // Atualiza apenas o contador de itens
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        cartCount.textContent = totalItems;
-        
-        // Atualiza a lista de itens no carrinho
-        cartItems.innerHTML = '';
-        
-        if (cart.length === 0) {
-            cartItems.innerHTML = '<p class="empty-cart">Seu carrinho está vazio</p>';
-            cartTotal.textContent = 'R$ 0,00';
-            return;
-        }
-        
-        // Calcula o total
-        let totalPrice = 0;
-        
-        // Adiciona cada item ao carrinho
-        cart.forEach((item, index) => {
-            const itemTotal = item.price * item.quantity;
-            totalPrice += itemTotal;
-            
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="cart-item-img">
-                <div class="cart-item-details">
-                    <h4 class="cart-item-title">${item.name}</h4>
-                    <p class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
-                    <p class="cart-item-size">Tamanho: ${item.size}</p>
-                    <div class="cart-item-quantity">
-                        <button class="cart-quantity-btn minus" data-index="${index}">-</button>
-                        <input type="number" class="cart-quantity-input" value="${item.quantity}" min="1" max="10" data-index="${index}">
-                        <button class="cart-quantity-btn plus" data-index="${index}">+</button>
-                    </div>
-                    <p class="cart-item-price-total">Total: R$ ${itemTotal.toFixed(2).replace('.', ',')}</p>
-                    <button class="cart-item-remove" data-index="${index}">Remover</button>
-                </div>
-            `;
-            
-            cartItems.appendChild(cartItem);
-        });
-        
-        // Atualiza o total do carrinho
-        cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
-        
-        // Adiciona event listeners para os botões de quantidade e remoção
-        const minusBtns = document.querySelectorAll('.cart-item .minus');
-        const plusBtns = document.querySelectorAll('.cart-item .plus');
-        const quantityInputs = document.querySelectorAll('.cart-quantity-input');
-        const removeBtns = document.querySelectorAll('.cart-item-remove');
-        
-        minusBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                if (cart[index].quantity > 1) {
-                    cart[index].quantity--;
-                    updateCartDisplay();
-                }
-            });
-        });
-        
-        // O botão plus agora abre a modal de produto
-        plusBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                const item = cart[index];
-                
-                // Guardar o índice do item clicado
-                plusClickedItemIndex = index;
-                
-                // Marcar que estamos adicionando a partir do botão plus
-                addingFromCartPlus = true;
-                
-                // Obter os dados do produto para a modal
-                const productData = {
-                    id: item.id,
-                    name: item.name,
-                    price: item.price,
-                    image: item.image
-                };
-                
-                // Fechar o carrinho
-                closeCart();
-                
-                // Abrir a modal do produto
-                openProductModal(productData);
-            });
-        });
-        
-        quantityInputs.forEach(input => {
-            input.addEventListener('change', () => {
-                const index = parseInt(input.dataset.index);
-                const newQuantity = parseInt(input.value);
-                
-                if (newQuantity >= 1 && newQuantity <= 10) {
-                    cart[index].quantity = newQuantity;
-                } else if (newQuantity < 1) {
-                    cart[index].quantity = 1;
-                } else {
-                    cart[index].quantity = 10;
-                }
-                
-                updateCartDisplay();
-            });
-        });
-        
-        removeBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                cart.splice(index, 1);
-                updateCartDisplay();
-            });
-        });
-    }
-
     // Funções para o modal de produto
     function openProductModal(productData) {
         currentProduct = productData;
@@ -613,12 +423,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Preencher os dados do produto no modal
         productImage.src = productData.image;
         productTitle.textContent = productData.name;
-        productPrice.textContent = `R$ ${productData.price.toFixed(2).replace('.', ',')}`;
         
-        // Reset tamanho e quantidade
-        selectedSize = null;
-        sizeBtns.forEach(btn => btn.classList.remove('active'));
-        quantityInput.value = 1;
+        // Resetar os campos do formulário
+        const ambienteSelect = document.getElementById('ambiente');
+        const medidasInput = document.getElementById('medidas');
+        const obsOrcamento = document.getElementById('obs-orcamento');
+        
+        if (ambienteSelect) ambienteSelect.value = '';
+        if (medidasInput) medidasInput.value = '';
+        if (obsOrcamento) obsOrcamento.value = '';
         
         // Mostrar o modal
         productModal.classList.add('active');
@@ -628,121 +441,77 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeProductModal() {
         productModal.classList.remove('active');
         document.body.style.overflow = '';
-        
-        // Se estávamos adicionando a partir do carrinho e cancelamos, abrir o carrinho novamente
-        if (addingFromCartPlus) {
-            addingFromCartPlus = false;
-            plusClickedItemIndex = -1;
-            setTimeout(() => {
-                openCart();
-            }, 300);
-        }
     }
 
-    // Funções para o modal de checkout
-    function openCheckoutModal() {
-        // Mostrar os itens do carrinho no checkout
-        updateCheckoutDisplay();
-        
-        // Mostrar o modal
-        checkoutModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+    // Event listeners
 
-    function closeCheckoutModal() {
-        checkoutModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+    // Mostrar modal de produto ao clicar em "Solicitar Orçamento"
+    const solicitarButtons = document.querySelectorAll('.btn-solicitar');
 
-    function updateCheckoutDisplay() {
-        checkoutItems.innerHTML = '';
-        
-        if (cart.length === 0) {
-            checkoutItems.innerHTML = '<p class="empty-cart">Seu carrinho está vazio</p>';
-            checkoutTotal.textContent = 'R$ 0,00';
-            return;
-        }
-        
-        // Calcula o total
-        let totalPrice = 0;
-        
-        // Adiciona cada item ao checkout
-        cart.forEach((item, index) => {
-            const itemTotal = item.price * item.quantity;
-            totalPrice += itemTotal;
+    solicitarButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productItem = button.closest('.produto');
             
-            const checkoutItem = document.createElement('div');
-            checkoutItem.className = 'checkout-item';
-            checkoutItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="checkout-item-img">
-                <div class="checkout-item-details">
-                    <h4 class="checkout-item-title">${item.name}</h4>
-                    <p>Quantidade: ${item.quantity} | Tamanho: ${item.size}</p>
-                    <p>Preço: R$ ${itemTotal.toFixed(2).replace('.', ',')}</p>
-                </div>
-            `;
-            
-            checkoutItems.appendChild(checkoutItem);
+            if (productItem) {
+                const productData = {
+                    id: productItem.dataset.id,
+                    name: productItem.dataset.nome,
+                    image: productItem.dataset.img
+                };
+                
+                openProductModal(productData);
+            }
         });
-        
-        // Atualiza o total do checkout
-        checkoutTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    });
+
+    // Fechar modal de produto
+    if (closeModal) {
+        closeModal.addEventListener('click', closeProductModal);
     }
 
-    // Função para adicionar ao carrinho
-    function addToCart() {
-        if (!currentProduct || !selectedSize) {
-            alert('Por favor, selecione um tamanho antes de adicionar ao carrinho.');
-            return;
-        }
-        
-        const quantity = parseInt(quantityInput.value);
-        
-        if (quantity < 1 || quantity > 10) {
-            alert('A quantidade deve estar entre 1 e 10 itens.');
-            return;
-        }
-        
-        // Verifica se estamos adicionando a partir do botão "mais" no carrinho
-        if (addingFromCartPlus && plusClickedItemIndex >= 0) {
-            // Criar o novo item com os dados do produto atual
-            const newItem = {
-                id: currentProduct.id,
-                name: currentProduct.name,
-                price: currentProduct.price,
-                image: currentProduct.image,
-                size: selectedSize,
-                quantity: quantity
-            };
+    // Enviar solicitação de orçamento para WhatsApp
+    if (solicitarOrcamentoBtn) {
+        solicitarOrcamentoBtn.addEventListener('click', function() {
+            if (!currentProduct) {
+                alert('Erro ao identificar o projeto selecionado.');
+                return;
+            }
             
-            // Inserir o novo item logo após o item atual no carrinho
-            cart.splice(plusClickedItemIndex + 1, 0, newItem);
+            // Obter os dados do formulário
+            const ambiente = document.getElementById('ambiente').value.trim();
+            const medidas = document.getElementById('medidas').value.trim();
+            const observacoes = document.getElementById('obs-orcamento').value.trim();
             
-            // Resetar as flags
-            addingFromCartPlus = false;
-            plusClickedItemIndex = -1;
-        } else {
-            // Comportamento original: adicionar novo item
-            const newItem = {
-                id: currentProduct.id,
-                name: currentProduct.name,
-                price: currentProduct.price,
-                image: currentProduct.image,
-                size: selectedSize,
-                quantity: quantity
-            };
+            if (!ambiente) {
+                alert('Por favor, selecione o tipo de ambiente.');
+                return;
+            }
             
-            cart.push(newItem);
-        }
-        
-        // Atualizar o carrinho e fechar o modal
-        closeProductModal();
-        
-        // Pequeno delay para garantir que a modal feche completamente antes de abrir o carrinho
-        setTimeout(() => {
-            updateCartDisplay();
-            openCart();
-        }, 300);
+            // Formatar a mensagem para o WhatsApp
+            let whatsappMessage = `*Solicitação de Orçamento - DESIGNWOOD*%0A%0A`;
+            whatsappMessage += `*Projeto:* ${currentProduct.name}%0A`;
+            whatsappMessage += `*Ambiente:* ${ambiente}%0A`;
+            
+            if (medidas) {
+                whatsappMessage += `*Medidas:* ${medidas}%0A`;
+            }
+            
+            if (observacoes) {
+                whatsappMessage += `%0A*Observações:*%0A${observacoes}%0A`;
+            }
+            
+            whatsappMessage += `%0A*Solicito um orçamento para este projeto.*`;
+            
+            // Redirecionar para o WhatsApp
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
+            
+            // Fechar o modal
+            closeProductModal();
+            
+            // Mensagem de confirmação
+            alert('Sua solicitação de orçamento foi enviada! Em breve entraremos em contato.');
+        });
     }
 
     // Event Listener para o formulário de contato
@@ -763,7 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Contato via Site - BLACKOUT*%0A%0A`;
+            let whatsappMessage = `*Contato via Site - DESIGNWOOD*%0A%0A`;
             whatsappMessage += `*Nome:* ${nome}%0A`;
             whatsappMessage += `*Telefone:* ${telefone}%0A`;
             whatsappMessage += `*Email:* ${email}%0A%0A`;
@@ -777,226 +546,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Mostrar confirmação
             alert('Sua mensagem foi enviada com sucesso! Em breve entraremos em contato.');
-        });
-    }
-
-    // Event Listeners
-
-    // Abrir/fechar carrinho
-    if (cartIcon) {
-        cartIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            openCart();
-        });
-    }
-
-    if (cartClose) {
-        cartClose.addEventListener('click', function(e) {
-            e.preventDefault();
-            closeCart();
-        });
-    }
-
-    if (cartOverlay) {
-        cartOverlay.addEventListener('click', function() {
-            closeCart();
-        });
-    }
-
-    if (btnContinue) {
-        btnContinue.addEventListener('click', function() {
-            closeCart();
-        });
-    }
-
-    // Mostrar modal de produto ao clicar em "Comprar"
-    const buyButtons = document.querySelectorAll('.btn-comprar');
-
-    buyButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const productItem = button.closest('.produto');
-            
-            if (productItem) {
-                const productData = {
-                    id: productItem.dataset.id,
-                    name: productItem.dataset.nome,
-                    price: parseFloat(productItem.dataset.preco),
-                    image: productItem.dataset.img
-                };
-                
-                openProductModal(productData);
-            }
-        });
-    });
-
-    // Fechar modal de produto
-    if (closeModal) {
-        closeModal.addEventListener('click', closeProductModal);
-    }
-
-    // Selecionar tamanho no modal de produto
-    sizeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            sizeBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedSize = btn.dataset.size;
-        });
-    });
-
-    // Controle de quantidade no modal de produto
-    if (minusBtn) {
-        minusBtn.addEventListener('click', () => {
-            const currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-    }
-
-    if (plusBtn) {
-        plusBtn.addEventListener('click', () => {
-            const currentValue = parseInt(quantityInput.value);
-            if (currentValue < 10) {
-                quantityInput.value = currentValue + 1;
-            }
-        });
-    }
-
-    if (quantityInput) {
-        quantityInput.addEventListener('change', () => {
-            const newValue = parseInt(quantityInput.value);
-            if (newValue < 1) {
-                quantityInput.value = 1;
-            } else if (newValue > 10) {
-                quantityInput.value = 10;
-            }
-        });
-    }
-
-    // Adicionar ao carrinho do modal de produto
-    if (addToCartBtn) {
-        addToCartBtn.addEventListener('click', addToCart);
-    }
-
-    // Abrir modal de checkout
-    if (btnCheckout) {
-        btnCheckout.addEventListener('click', () => {
-            if (cart.length === 0) {
-                alert('Seu carrinho está vazio.');
-                return;
-            }
-            
-            // Fechar carrinho
-            closeCart();
-            
-            // Abrir checkout
-            openCheckoutModal();
-        });
-    }
-
-    // Fechar modal de checkout
-    if (closeCheckout) {
-        closeCheckout.addEventListener('click', closeCheckoutModal);
-    }
-
-    // Enviar pedido para WhatsApp
-    if (checkoutForm) {
-        checkoutForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-    
-            // Validação rápida e centralizada
-            const formFields = {
-                nome: document.getElementById('checkout-nome'),
-                telefone: document.getElementById('checkout-telefone'),
-                endereco: document.getElementById('checkout-endereco'),
-                pagamento: document.getElementById('checkout-pagamento')
-            };
-    
-            // Verificação de campos vazios com feedback visual
-            const validateFields = () => {
-                let isValid = true;
-                Object.entries(formFields).forEach(([key, field]) => {
-                    if (!field.value.trim()) {
-                        field.classList.add('error');
-                        isValid = false;
-                    } else {
-                        field.classList.remove('error');
-                    }
-                });
-                return isValid;
-            };
-    
-            // Verificações iniciais
-            if (cart.length === 0) {
-                alert('Seu carrinho está vazio.');
-                return;
-            }
-    
-            if (!validateFields()) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-    
-            // Preparar dados do pedido de forma mais eficiente
-            const pedidoData = {
-                cliente: {
-                    nome: formFields.nome.value.trim(),
-                    telefone: formFields.telefone.value.trim(),
-                    endereco: formFields.endereco.value.trim(),
-                    pagamento: formFields.pagamento.options[formFields.pagamento.selectedIndex].text
-                },
-                itens: cart.map(item => ({
-                    nome: item.name,
-                    quantidade: item.quantity,
-                    tamanho: item.size,
-                    valorTotal: (item.price * item.quantity).toFixed(2),
-                    imagem: item.image // Adicionamos a imagem aos dados do pedido
-                })),
-                observacoes: document.getElementById('checkout-obs').value.trim(),
-                totalPedido: cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
-            };
-    
-            // Função para formatar mensagem incluindo links das imagens
-            const formatWhatsAppMessage = (data) => {
-                let message = `*Novo Pedido - BLACKOUT*%0A%0A`;
-                
-                // Dados do cliente
-                message += `*Cliente:* ${data.cliente.nome}%0A`;
-                message += `*Telefone:* ${data.cliente.telefone}%0A`;
-                message += `*Endereço:* ${data.cliente.endereco}%0A`;
-                message += `*Pagamento:* ${data.cliente.pagamento}%0A%0A`;
-    
-                // Itens do pedido com links para as imagens
-                message += `*Itens do Pedido:*%0A`;
-                data.itens.forEach(item => {
-                    message += `- ${item.quantidade}x ${item.nome} (Tam: ${item.tamanho})%0A`;
-                    message += `   R$ ${item.valorTotal.replace('.', ',')}%0A`;
-                });
-    
-                // Total e observações
-                message += `%0A*Total:* R$ ${data.totalPedido.replace('.', ',')}%0A`;
-                
-                if (data.observacoes) {
-                    message += `%0A*Obs:* ${data.observacoes}%0A`;
-                }
-    
-                return message;
-            };
-    
-            // Link WhatsApp otimizado
-            const whatsappLink = `https://wa.me/5583991816153?text=${formatWhatsAppMessage(pedidoData)}`;
-            
-            // Abrir WhatsApp em nova aba
-            window.open(whatsappLink, '_blank');
-    
-            // Resetar estado
-            cart = [];
-            updateCartDisplay();
-            closeCheckoutModal();
-    
-            // Confirmação suave
-            alert('Pedido enviado com sucesso! Entraremos em contato em breve.');
         });
     }
 
@@ -1124,18 +673,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (productModal.classList.contains('active')) {
                 closeProductModal();
             }
-            if (cartSidebar.classList.contains('active')) {
-                closeCart();
-            }
-            if (checkoutModal.classList.contains('active')) {
-                closeCheckoutModal();
-            }
         }
     });
-
-    // Apenas atualiza o contador, sem mostrar o carrinho
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    if (cartCount) {
-        cartCount.textContent = totalItems || '0';
-    }
 });

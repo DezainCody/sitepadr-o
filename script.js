@@ -1,686 +1,597 @@
-// Script principal para a loja de móveis DESIGNWOOD
+// Função para garantir que os ícones do Font Awesome estejam carregados corretamente
+function verificarIcones() {
+    // Verificar se a biblioteca Font Awesome foi carregada corretamente
+    if (typeof FontAwesome === 'undefined' && !window.FontAwesomeTimeoutStarted) {
+        window.FontAwesomeTimeoutStarted = true;
+        console.warn('Font Awesome não foi detectado. Tentando carregar novamente...');
+        
+        // Tentar carregar o CSS do Font Awesome novamente
+        const fontAwesomeLink = document.createElement('link');
+        fontAwesomeLink.rel = 'stylesheet';
+        fontAwesomeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
+        document.head.appendChild(fontAwesomeLink);
+        
+        // Verificar se os ícones estão visíveis após um atraso
+        setTimeout(function() {
+            const icones = document.querySelectorAll('.fas, .fab, .far, .fa');
+            if (icones.length === 0) {
+                console.error('Não foi possível carregar os ícones do Font Awesome.');
+            } else {
+                console.log('Ícones do Font Awesome carregados com sucesso!');
+            }
+        }, 2000);
+    }
+}
+
+// Inicialização da animação de digitação
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar AOS (Animate On Scroll)
+    // Verificar carregamento dos ícones
+    verificarIcones();
+    
+    // Adicionar ícones contextuais aos elementos do site
+    adicionarIconesContextuais();
+    
+    // Typed.js para animação de texto na hero section
+    const typedOptions = {
+        strings: ['ELEGÂNCIA', 'SOFISTICAÇÃO', 'QUALIDADE', 'EXCLUSIVIDADE'],
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 2000,
+        loop: true
+    };
+    
+    if (document.querySelector('.typed-element')) {
+        new Typed('.typed-element', typedOptions);
+    }
+    
+    // Inicialização do AOS (Animate on Scroll)
     AOS.init({
         duration: 800,
         easing: 'ease-in-out',
-        once: false,
-        mirror: true
+        once: false
     });
     
-    // Inicializar Typed.js na hero section
-    if (document.querySelector('.typed-element')) {
-        let typed = new Typed('.typed-element', {
-            strings: ['ELEGÂNCIA', 'EXCLUSIVIDADE', 'FUNCIONALIDADE', 'MINIMALISMO'],
-            typeSpeed: 80,
-            backSpeed: 50,
-            backDelay: 2000,
-            startDelay: 500,
-            loop: true
-        });
-    }
-    
-    // Inicializar animações Lottie
+    // Inicialização das animações Lottie com fallback garantido
     const lottieContainers = document.querySelectorAll('[data-lottie-container]');
-
-    const lottieUrls = {
-        // Matéria-Prima Premium - ícone de madeira/qualidade
-        quality: 'https://assets3.lottiefiles.com/private_files/lf30_kop9dsku.json',
+    lottieContainers.forEach(container => {
+        const type = container.getAttribute('data-lottie-container');
+        let path = '';
+        let iconClass = '';
         
-        // Design Exclusivo - ícone de design/casa
-        design: 'https://assets3.lottiefiles.com/private_files/lf30_0hb7wmcg.json',
+        // Definir path e ícone de fallback para cada tipo
+        switch(type) {
+            case 'quality':
+                path = 'https://assets5.lottiefiles.com/packages/lf20_tfb3estx.json'; // Ícone de madeira/árvore
+                iconClass = 'fas fa-tree';
+                break;
+            case 'design':
+                path = 'https://assets9.lottiefiles.com/private_files/lf30_rdghasit.json'; // Nova URL para o ícone de design
+                iconClass = 'fas fa-drafting-compass'; // Ícone de compasso de desenho
+                break;
+            case 'sustain':
+                path = 'https://assets8.lottiefiles.com/packages/lf20_ky4luhot.json'; // Ícone de sustentabilidade/folha
+                iconClass = 'fas fa-leaf';
+                break;
+            case 'delivery':
+                path = 'https://assets2.lottiefiles.com/packages/lf20_to91uv3t.json'; // Ícone de ferramentas/instalação
+                iconClass = 'fas fa-tools';
+                break;
+        }
         
-        // Produção Sustentável - ícone de sustentabilidade
-        sustain: 'https://assets6.lottiefiles.com/packages/lf20_in4cufsz.json',
+        // Exibir imediatamente o ícone de fallback
+        const icon = document.createElement('i');
+        icon.className = iconClass;
+        icon.style.fontSize = '48px';
+        icon.style.color = '#7d5a44'; // Cor marrom para contraste
+        icon.style.display = 'block';
+        icon.style.textShadow = '0 1px 3px rgba(0, 0, 0, 0.3)';
+        container.appendChild(icon);
         
-        // Instalação Profissional - ícone de ferramentas/montagem
-        delivery: 'https://assets5.lottiefiles.com/packages/lf20_ssm0igd3.json'
-    };
-    
-    // Verificar se a biblioteca lottie está disponível
-    if (typeof lottie !== 'undefined') {
-        console.log('Biblioteca Lottie carregada com sucesso!');
-        
-        // Inicializar cada animação Lottie
-        lottieContainers.forEach(container => {
-            const type = container.getAttribute('data-lottie-container');
-            if (lottieUrls[type]) {
-                try {
-                    const anim = lottie.loadAnimation({
-                        container: container,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        path: lottieUrls[type]
-                    });
-                    
-                                            // Adicionar evento para detectar quando a animação é carregada
-                    anim.addEventListener('DOMLoaded', function() {
-                        console.log(`Animação ${type} carregada com sucesso!`);
-                        
-                        // Ajustar as cores para o novo visual clean
-                        if (anim.renderer && anim.renderer.elements && anim.renderer.elements.length > 0) {
-                            const elements = anim.renderer.elements[0];
-                            if (elements && elements.style) {
-                                elements.style.filter = 'brightness(0.8) contrast(1.2)';
-                            }
-                        }
-                    });
-                    
-                    // Verificar se a animação não carregou após um tempo
-                    setTimeout(() => {
-                        if (!anim.isLoaded) {
-                            console.error(`Timeout: Animação ${type} não carregou em tempo hábil`);
-                            container.innerHTML = getFallbackIcon(type);
-                        }
-                    }, 3000); // 3 segundos de timeout
-                    
-                    // Tratar erros de carregamento
-                    anim.addEventListener('error', function() {
-                        console.error(`Erro ao carregar a animação ${type}`);
-                        // Fallback para ícones estáticos caso a animação falhe
-                        container.innerHTML = getFallbackIcon(type);
-                    });
-                    
-                } catch (error) {
-                    console.error(`Erro ao inicializar a animação ${type}:`, error);
-                    container.innerHTML = getFallbackIcon(type);
+        // Tentar carregar a animação Lottie
+        if (path && typeof lottie !== 'undefined') {
+            try {
+                const anim = lottie.loadAnimation({
+                    container: container,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: path
+                });
+                
+                // Se a animação carregar, esconder o ícone de fallback
+                anim.addEventListener('DOMLoaded', function() {
+                    if (icon && icon.parentNode) {
+                        icon.style.display = 'none';
+                    }
+                });
+                
+                // Se ocorrer erro, garantir que o ícone permaneça visível
+                anim.addEventListener('error', function() {
+                    if (icon && icon.parentNode) {
+                        icon.style.display = 'block';
+                    }
+                });
+            } catch (error) {
+                console.warn('Erro ao carregar animação Lottie:', error);
+                // Garantir que o ícone de fallback esteja visível
+                if (icon && icon.parentNode) {
+                    icon.style.display = 'block';
                 }
-            } else {
-                console.warn(`URL não encontrada para o tipo de animação: ${type}`);
-                container.innerHTML = getFallbackIcon(type);
             }
-        });
-    } else {
-        console.warn('Biblioteca Lottie não encontrada. Usando ícones estáticos como fallback.');
-        lottieContainers.forEach(container => {
-            const type = container.getAttribute('data-lottie-container');
-            container.innerHTML = getFallbackIcon(type);
-        });
-    }
+        }
+    });
     
-    // Função para fornecer ícones fallback quando as animações Lottie falham
-    function getFallbackIcon(type) {
-        const icons = {
-            quality: '<i class="fas fa-gem" style="font-size: 2.5rem; color: var(--color-dark);"></i>',
-            design: '<i class="fas fa-home" style="font-size: 2.5rem; color: var(--color-dark);"></i>',
-            sustain: '<i class="fas fa-recycle" style="font-size: 2.5rem; color: var(--color-dark);"></i>',
-            delivery: '<i class="fas fa-hammer" style="font-size: 2.5rem; color: var(--color-dark);"></i>'
-        };
+    // Efeito Parallax
+    window.addEventListener('scroll', function() {
+        const parallaxElements = document.querySelectorAll('.parallax-bg');
+        let scrollPosition = window.pageYOffset;
         
-        return icons[type] || '<i class="fas fa-star" style="font-size: 2.5rem; color: var(--color-dark);"></i>';
-    }
-    
-    // Efeito parallax para a hero section
-    const parallaxBg = document.querySelector('.parallax-bg');
-    if (parallaxBg) {
-        window.addEventListener('scroll', function() {
-            let scrollPosition = window.pageYOffset;
-            let speed = parseFloat(parallaxBg.getAttribute('data-parallax-speed') || 0.2);
-            parallaxBg.style.transform = 'translateY(' + (scrollPosition * speed) + 'px)';
+        parallaxElements.forEach(element => {
+            const speed = element.getAttribute('data-parallax-speed') || 0.5;
+            element.style.transform = `translateY(${scrollPosition * speed}px)`;
         });
-    }
+    });
     
-    // Ativar efeito de menu mobile
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuClose = document.querySelector('.menu-close');
-    const nav = document.querySelector('.main-nav');
-    const menuOverlay = document.querySelector('.menu-overlay');
-
-    if (menuToggle && menuClose) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.add('active');
-            menuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        menuClose.addEventListener('click', closeMenu);
-        menuOverlay.addEventListener('click', closeMenu);
-    }
-
-    function closeMenu() {
-        nav.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    // Sistema de pesquisa
+    // Funcionalidade da barra de pesquisa no header
     const searchIcon = document.querySelector('.search-icon');
     const searchBar = document.querySelector('.search-bar');
     const searchInput = document.getElementById('search-input');
     const searchClose = document.getElementById('search-close');
-    const searchResults = document.querySelector('.search-results');
     
-    // Barra de pesquisa principal na seção de destaques
+    if (searchIcon && searchBar) {
+        searchIcon.addEventListener('click', function() {
+            searchBar.classList.add('active');
+            searchInput.focus();
+        });
+        
+        searchClose.addEventListener('click', function() {
+            searchBar.classList.remove('active');
+            searchInput.value = '';
+        });
+    }
+    
+    // Funcionalidade da pesquisa principal na seção de destaques
     const mainSearchInput = document.getElementById('main-search-input');
     const mainSearchClear = document.getElementById('main-search-clear');
+    const destaqueItems = document.querySelectorAll('.destaque-item');
     const destaquesNaoEncontrados = document.querySelector('.destaques-nao-encontrados');
     const limparPesquisaDestaques = document.getElementById('limpar-pesquisa-destaques');
-
-    // Modal de Produto
+    
+    if (mainSearchInput) {
+        mainSearchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let encontrados = 0;
+            
+            destaqueItems.forEach(item => {
+                const produtoNome = item.getAttribute('data-nome').toLowerCase();
+                if (produtoNome.includes(searchTerm) || searchTerm === '') {
+                    item.style.display = 'block';
+                    encontrados++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            if (encontrados === 0 && searchTerm !== '') {
+                destaquesNaoEncontrados.style.display = 'flex';
+            } else {
+                destaquesNaoEncontrados.style.display = 'none';
+            }
+        });
+        
+        if (mainSearchClear) {
+            mainSearchClear.addEventListener('click', function() {
+                mainSearchInput.value = '';
+                mainSearchInput.dispatchEvent(new Event('input'));
+            });
+        }
+        
+        if (limparPesquisaDestaques) {
+            limparPesquisaDestaques.addEventListener('click', function() {
+                mainSearchInput.value = '';
+                mainSearchInput.dispatchEvent(new Event('input'));
+            });
+        }
+    }
+    
+    // Slider de destaques
+    const sliderContainer = document.querySelector('.destaques-slider');
+    const sliderArrowLeft = document.querySelector('.slider-arrow-left');
+    const sliderArrowRight = document.querySelector('.slider-arrow-right');
+    
+    if (sliderContainer && sliderArrowLeft && sliderArrowRight) {
+        let slidePosition = 0;
+        const slideWidth = 300; // Largura do slide em px
+        const slidesCount = document.querySelectorAll('.destaque-item').length;
+        const visibleSlides = window.innerWidth > 768 ? 3 : 1;
+        const maxSlidePosition = slidesCount - visibleSlides;
+        
+        sliderArrowLeft.addEventListener('click', function() {
+            if (slidePosition > 0) {
+                slidePosition--;
+                updateSliderPosition();
+            }
+        });
+        
+        sliderArrowRight.addEventListener('click', function() {
+            if (slidePosition < maxSlidePosition) {
+                slidePosition++;
+                updateSliderPosition();
+            }
+        });
+        
+        function updateSliderPosition() {
+            sliderContainer.style.transform = `translateX(-${slidePosition * slideWidth}px)`;
+        }
+        
+        // Atualizar quando a janela for redimensionada
+        window.addEventListener('resize', function() {
+            const newVisibleSlides = window.innerWidth > 768 ? 3 : 1;
+            const newMaxSlidePosition = slidesCount - newVisibleSlides;
+            
+            if (slidePosition > newMaxSlidePosition) {
+                slidePosition = newMaxSlidePosition;
+                updateSliderPosition();
+            }
+        });
+    }
+    
+    // Navegação Mobile
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuClose = document.querySelector('.menu-close');
+    const mainNav = document.querySelector('.main-nav');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    
+    if (menuToggle && menuClose && mainNav && menuOverlay) {
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        function closeMenu() {
+            mainNav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        menuClose.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+        
+        // Fechar menu ao clicar em links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
+    
+    // Animação de cards ao passar o mouse
+    const animatedCards = document.querySelectorAll('.animated-card');
+    
+    animatedCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.classList.add('card-hover');
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.classList.remove('card-hover');
+        });
+    });
+    
+    // Modal do produto para orçamento
+    const btnsOrcamento = document.querySelectorAll('.btn-solicitar');
     const productModal = document.querySelector('.product-modal');
-    const productImage = document.querySelector('.product-image img');
-    const productTitle = document.querySelector('.product-title');
     const closeModal = document.querySelector('.close-modal');
+    
+    if (btnsOrcamento.length > 0 && productModal && closeModal) {
+        btnsOrcamento.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Verificar se é um pedido de redirecionamento direto (Ctrl+Click)
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    // Obter dados do produto diretamente do elemento pai
+                    const produtoItem = this.closest('.produto-item') || this.closest('.destaque-item');
+                    if (!produtoItem) return;
+                    
+                    const produtoNome = produtoItem.getAttribute('data-nome');
+                    
+                    // Redirecionar diretamente para WhatsApp com informações básicas
+                    const mensagemRapida = `*Solicitação Rápida de Orçamento - DESIGNWOOD*%0A%0A*Produto:* ${produtoNome}%0A`;
+                    window.open(`https://wa.me/5583991816152?text=${mensagemRapida}`, '_blank');
+                    return;
+                }
+                
+                // Comportamento normal de abrir o modal
+                const produtoItem = this.closest('.produto-item') || this.closest('.destaque-item');
+                if (!produtoItem) return;
+                
+                const produtoId = produtoItem.getAttribute('data-id');
+                const produtoNome = produtoItem.getAttribute('data-nome');
+                const produtoImg = produtoItem.getAttribute('data-img');
+                
+                document.querySelector('.product-title').textContent = produtoNome;
+                document.querySelector('.product-image img').src = produtoImg;
+                document.querySelector('.product-image img').alt = produtoNome;
+                
+                productModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            productModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Fechar modal ao clicar fora do conteúdo
+        productModal.addEventListener('click', function(e) {
+            if (e.target === productModal) {
+                productModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Otimização do redirecionamento para WhatsApp
     const solicitarOrcamentoBtn = document.querySelector('.solicitar-orcamento');
     
-    // Variável para controle do produto atual
-    let currentProduct = null;
-
-    // Scroll suave aprimorado para todos os links internos
+    if (solicitarOrcamentoBtn) {
+        solicitarOrcamentoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Pega os valores do formulário
+            const produtoTitulo = document.querySelector('.product-title').textContent;
+            const ambiente = document.getElementById('ambiente').value;
+            const medidas = document.getElementById('medidas').value;
+            const observacoes = document.getElementById('obs-orcamento').value;
+            
+            // Construir a mensagem para o WhatsApp
+            let mensagem = `*Solicitação de Orçamento - DESIGNWOOD*%0A%0A`;
+            mensagem += `*Produto:* ${produtoTitulo}%0A`;
+            mensagem += ambiente ? `*Ambiente:* ${ambiente}%0A` : '';
+            mensagem += medidas ? `*Medidas:* ${medidas}%0A` : '';
+            mensagem += observacoes ? `*Observações:* ${observacoes}%0A` : '';
+            
+            // Redirecionar imediatamente para o WhatsApp com a mensagem
+            window.open(`https://wa.me/5583991816152?text=${mensagem}`, '_blank');
+            
+            // Fechar o modal após o redirecionamento
+            document.querySelector('.product-modal').classList.remove('active');
+        });
+    }
+    
+    // Formulário de contato
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const telefone = document.getElementById('telefone').value;
+            const email = document.getElementById('email').value;
+            const mensagem = document.getElementById('mensagem').value;
+            
+            // Simulação de envio de formulário
+            const submitBtn = document.querySelector('.btn-submit');
+            submitBtn.textContent = 'ENVIANDO...';
+            submitBtn.disabled = true;
+            
+            // Timeout para simular envio
+            setTimeout(function() {
+                // Aqui você pode implementar o envio real do formulário via AJAX
+                // Para fins de demonstração, vamos apenas mostrar um alerta
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                
+                // Redefinir formulário e botão
+                contactForm.reset();
+                submitBtn.textContent = 'ENVIAR MENSAGEM';
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+    }
+    
+    // Tooltip para botão WhatsApp
+    const whatsappBtn = document.querySelector('.whatsapp-btn');
+    const tooltip = document.getElementById('tooltip');
+    
+    if (whatsappBtn && tooltip) {
+        whatsappBtn.addEventListener('mouseenter', function() {
+            tooltip.style.opacity = '1';
+            tooltip.style.visibility = 'visible';
+            
+            // Posicionamento do tooltip
+            const btnRect = whatsappBtn.getBoundingClientRect();
+            tooltip.style.top = (btnRect.top - tooltip.offsetHeight - 10) + 'px';
+            tooltip.style.left = (btnRect.left + (btnRect.width / 2) - (tooltip.offsetWidth / 2)) + 'px';
+        });
+        
+        whatsappBtn.addEventListener('mouseleave', function() {
+            tooltip.style.opacity = '0';
+            tooltip.style.visibility = 'hidden';
+        });
+    }
+    
+    // Função para rolagem suave
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             
-            const targetElement = document.querySelector(this.getAttribute('href'));
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // Fechar o menu mobile se estiver aberto
-                if (nav && nav.classList.contains('active')) {
-                    closeMenu();
-                }
-                
-                // Calcular a posição considerando o header fixo
-                const headerHeight = document.querySelector('.site-header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
-                // Animação de scroll suave com opções personalizadas
                 window.scrollTo({
-                    top: targetPosition,
+                    top: targetElement.offsetTop - 70, // Considerar a altura do header
                     behavior: 'smooth'
                 });
             }
         });
     });
+});
 
-    // Função para posicionar resultados de pesquisa
-    function posicionarResultadosPesquisa() {
-        if (!searchBar || !searchResults) return;
-        
-        // Obter a posição e dimensões da barra de pesquisa
-        const searchBarRect = searchBar.getBoundingClientRect();
-        
-        // Posicionar resultados exatamente abaixo da barra de pesquisa
-        searchResults.style.top = (searchBarRect.bottom + 5) + 'px';
-        searchResults.style.left = searchBarRect.left + 'px';
-        searchResults.style.width = searchBarRect.width + 'px';
-    }
-
-    // Função para abrir/fechar a barra de pesquisa
-    function toggleSearchBar() {
-        searchBar.classList.toggle('active');
-        
-        if (searchBar.classList.contains('active')) {
-            searchInput.focus();
-            searchResults.classList.remove('active');
-            searchResults.style.display = 'none';
-            searchInput.value = '';
-            
-            setTimeout(() => {
-                const headerHeight = document.querySelector('.site-header').offsetHeight;
-                searchResults.style.top = '';
-                searchResults.style.left = '';
-                searchResults.style.width = '100%';
-            }, 50);
-        } else {
-            closeSearchBar();
-        }
-    }
-
-    // Função para fechar a barra de pesquisa
-    function closeSearchBar() {
-        searchBar.classList.remove('active');
-        searchResults.classList.remove('active');
-        searchResults.style.display = 'none';
-        searchInput.value = '';
-    }
-
-    // Função para remover acentos para comparação
-    function removerAcentos(texto) {
-        return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    }
-
-    // Função para realizar a pesquisa na barra principal (seção de destaques)
-    function realizarPesquisaDestaques(termoPesquisa) {
-        // Se o termo de pesquisa estiver vazio, reset tudo
-        if (!termoPesquisa || termoPesquisa.trim() === '') {
-            // Mostrar todos os destaques
-            const itensDestaque = document.querySelectorAll('.destaques-slider .destaque-item');
-            itensDestaque.forEach(item => {
-                item.classList.remove('destaque-hidden');
-            });
-            
-            // Esconder a mensagem de nenhum resultado
-            if (destaquesNaoEncontrados) {
-                destaquesNaoEncontrados.classList.remove('active');
-                destaquesNaoEncontrados.style.display = 'none';
-            }
-            
-            if (mainSearchClear) {
-                mainSearchClear.classList.remove('active');
-            }
-            
-            return;
-        }
-        
-        // Normalizar o termo de pesquisa
-        termoPesquisa = removerAcentos(termoPesquisa.trim());
-        
-        // Selecionar APENAS os produtos da seção "Destaques da Estação"
-        const itensDestaque = document.querySelectorAll('.destaques-slider .destaque-item');
-        
-        let destaquesVisiveis = 0;
-        
-        itensDestaque.forEach(item => {
-            const nomeProduto = removerAcentos(item.dataset.nome);
-            
-            if (nomeProduto.includes(termoPesquisa)) {
-                item.classList.remove('destaque-hidden');
-                destaquesVisiveis++;
-            } else {
-                item.classList.add('destaque-hidden');
-            }
-        });
-        
-        // Mostrar ou esconder a mensagem de "nenhum destaque encontrado"
-        if (destaquesVisiveis === 0 && destaquesNaoEncontrados) {
-            destaquesNaoEncontrados.classList.add('active');
-            destaquesNaoEncontrados.style.display = 'flex';
-        } else if (destaquesNaoEncontrados) {
-            destaquesNaoEncontrados.classList.remove('active');
-            destaquesNaoEncontrados.style.display = 'none';
-        }
-        
-        if (mainSearchClear) {
-            mainSearchClear.classList.add('active');
-        }
-    }
-
-    // Função para pesquisa no header (mostra resultados em dropdown e não filtra nada)
-    function realizarPesquisa(termoPesquisa) {
-        // Se o termo de pesquisa estiver vazio, reset
-        if (!termoPesquisa || termoPesquisa.trim() === '') {
-            searchResults.classList.remove('active');
-            searchResults.style.display = 'none';
-            return;
-        }
-        
-        // Normalizar o termo de pesquisa
-        termoPesquisa = removerAcentos(termoPesquisa.trim());
-        
-        // Obter todos os produtos para o dropdown de resultados
-        const todosProdutos = document.querySelectorAll('.produto');
-        
-        // Filtrar para o dropdown
-        const resultados = Array.from(todosProdutos).filter(produto => {
-            const nomeProduto = removerAcentos(produto.dataset.nome);
-            return nomeProduto.includes(termoPesquisa);
-        });
-        
-        // Atualizar o dropdown de resultados
-        atualizarResultadosPesquisa(resultados);
-    }
-
-    // Função para atualizar os resultados de pesquisa no dropdown
-    function atualizarResultadosPesquisa(resultados) {
-        searchResults.innerHTML = '';
-        
-        if (resultados.length === 0) {
-            searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum projeto encontrado</div>';
-        } else {
-            resultados.forEach(produto => {
-                const resultadoItem = document.createElement('div');
-                resultadoItem.className = 'search-result-item';
-                resultadoItem.innerHTML = `
-                    <img src="${produto.dataset.img}" alt="${produto.dataset.nome}" class="search-result-img">
-                    <div class="search-result-details">
-                        <h4>${produto.dataset.nome}</h4>
-                    </div>
-                `;
-                
-                resultadoItem.addEventListener('click', () => {
-                    const productData = {
-                        id: produto.dataset.id,
-                        name: produto.dataset.nome,
-                        image: produto.dataset.img
-                    };
-                    
-                    openProductModal(productData);
-                    
-                    // Fechar a pesquisa
-                    closeSearchBar();
-                });
-                
-                searchResults.appendChild(resultadoItem);
-            });
-        }
-        
-        // Mostrar os resultados e posicioná-los corretamente
-        searchResults.style.display = 'block';
-        
-        // Usar setTimeout para garantir que a renderização complete antes de animar
-        setTimeout(() => {
-            searchResults.classList.add('active');
-        }, 10);
-    }
-
-    // Efeito de header scroll
-    const header = document.querySelector('.site-header');
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Reposicionar resultados da pesquisa ao fazer scroll
-        if (searchResults.classList.contains('active')) {
-            posicionarResultadosPesquisa();
+// Função para adicionar ícones contextuais aos elementos do site
+function adicionarIconesContextuais() {
+    // Adicionar ícones aos botões de orçamento
+    document.querySelectorAll('.btn-solicitar').forEach(btn => {
+        // Verificar se o botão já tem um ícone
+        if (!btn.querySelector('i')) {
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-calculator';
+            icon.style.marginRight = '8px';
+            btn.prepend(icon);
         }
     });
-
-    // Controle do slider de destaques
-    const destaquesSlider = document.querySelector('.destaques-slider');
-    const slideItems = document.querySelectorAll('.destaque-item');
-    const prevBtn = document.querySelector('.slider-arrow-left');
-    const nextBtn = document.querySelector('.slider-arrow-right');
-
-    if (destaquesSlider && slideItems.length > 0) {
-        // Recalcular após as alterações do tamanho dos itens
-        const itemWidth = slideItems[0].offsetWidth;
-        const slideGap = parseInt(window.getComputedStyle(destaquesSlider).columnGap) || 24;
-        const moveDistance = itemWidth + slideGap;
-        
-        prevBtn.addEventListener('click', () => {
-            destaquesSlider.scrollBy({
-                left: -moveDistance,
-                behavior: 'smooth'
-            });
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            destaquesSlider.scrollBy({
-                left: moveDistance,
-                behavior: 'smooth'
-            });
-        });
+    
+    // Adicionar ícones aos campos do formulário no modal
+    if (document.getElementById('ambiente')) {
+        adicionarIconeAoLabel('ambiente', 'fas fa-home');
     }
-
-    // Tooltip para o botão de WhatsApp
-    const whatsappBtn = document.querySelector('.whatsapp-btn');
-    const tooltip = document.getElementById('tooltip');
-
-    if (whatsappBtn && tooltip) {
-        whatsappBtn.addEventListener('mouseenter', () => {
-            const rect = whatsappBtn.getBoundingClientRect();
-            tooltip.style.top = rect.top - 40 + 'px';
-            tooltip.style.left = rect.left + rect.width / 2 + 'px';
-            tooltip.classList.add('visible');
-        });
-        
-        whatsappBtn.addEventListener('mouseleave', () => {
-            tooltip.classList.remove('visible');
-        });
+    if (document.getElementById('medidas')) {
+        adicionarIconeAoLabel('medidas', 'fas fa-ruler-combined');
     }
-
-    // Funções para o modal de produto
-    function openProductModal(productData) {
-        currentProduct = productData;
-        
-        // Preencher os dados do produto no modal
-        productImage.src = productData.image;
-        productTitle.textContent = productData.name;
-        
-        // Resetar os campos do formulário
-        const ambienteSelect = document.getElementById('ambiente');
-        const medidasInput = document.getElementById('medidas');
-        const obsOrcamento = document.getElementById('obs-orcamento');
-        
-        if (ambienteSelect) ambienteSelect.value = '';
-        if (medidasInput) medidasInput.value = '';
-        if (obsOrcamento) obsOrcamento.value = '';
-        
-        // Mostrar o modal
-        productModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeProductModal() {
-        productModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    // Event listeners
-
-    // Mostrar modal de produto ao clicar em "Solicitar Orçamento"
-    const solicitarButtons = document.querySelectorAll('.btn-solicitar');
-
-    solicitarButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const productItem = button.closest('.produto');
-            
-            if (productItem) {
-                const productData = {
-                    id: productItem.dataset.id,
-                    name: productItem.dataset.nome,
-                    image: productItem.dataset.img
-                };
-                
-                openProductModal(productData);
-            }
-        });
-    });
-
-    // Fechar modal de produto
-    if (closeModal) {
-        closeModal.addEventListener('click', closeProductModal);
-    }
-
-    // Enviar solicitação de orçamento para WhatsApp
-    if (solicitarOrcamentoBtn) {
-        solicitarOrcamentoBtn.addEventListener('click', function() {
-            if (!currentProduct) {
-                alert('Erro ao identificar o projeto selecionado.');
-                return;
-            }
-            
-            // Obter os dados do formulário
-            const ambiente = document.getElementById('ambiente').value.trim();
-            const medidas = document.getElementById('medidas').value.trim();
-            const observacoes = document.getElementById('obs-orcamento').value.trim();
-            
-            if (!ambiente) {
-                alert('Por favor, selecione o tipo de ambiente.');
-                return;
-            }
-            
-            // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Solicitação de Orçamento - DESIGNWOOD*%0A%0A`;
-            whatsappMessage += `*Projeto:* ${currentProduct.name}%0A`;
-            whatsappMessage += `*Ambiente:* ${ambiente}%0A`;
-            
-            if (medidas) {
-                whatsappMessage += `*Medidas:* ${medidas}%0A`;
-            }
-            
-            if (observacoes) {
-                whatsappMessage += `%0A*Observações:*%0A${observacoes}%0A`;
-            }
-            
-            whatsappMessage += `%0A*Solicito um orçamento para este projeto.*`;
-            
-            // Redirecionar para o WhatsApp
-            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
-            
-            // Fechar o modal
-            closeProductModal();
-            
-            // Mensagem de confirmação
-            alert('Sua solicitação de orçamento foi enviada! Em breve entraremos em contato.');
-        });
-    }
-
-    // Event Listener para o formulário de contato
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Coletar dados do formulário
-            const nome = document.getElementById('nome').value.trim();
-            const telefone = document.getElementById('telefone').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const mensagem = document.getElementById('mensagem').value.trim();
-            
-            if (!nome || !telefone || !email || !mensagem) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-            
-            // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Contato via Site - DESIGNWOOD*%0A%0A`;
-            whatsappMessage += `*Nome:* ${nome}%0A`;
-            whatsappMessage += `*Telefone:* ${telefone}%0A`;
-            whatsappMessage += `*Email:* ${email}%0A%0A`;
-            whatsappMessage += `*Mensagem:*%0A${mensagem}%0A%0A`;
-            
-            // Redirecionar para o WhatsApp usando o formato correto
-            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
-            
-            // Limpar o formulário
-            contactForm.reset();
-            
-            // Mostrar confirmação
-            alert('Sua mensagem foi enviada com sucesso! Em breve entraremos em contato.');
-        });
-    }
-
-    // Event listeners para a funcionalidade de pesquisa da lupa no header
-    if (searchIcon) {
-        searchIcon.addEventListener('click', toggleSearchBar);
+    if (document.getElementById('obs-orcamento')) {
+        adicionarIconeAoLabel('obs-orcamento', 'fas fa-comment-alt');
     }
     
-    if (searchClose) {
-        searchClose.addEventListener('click', () => {
-            closeSearchBar();
-        });
+    // Adicionar ícones aos botões de solicitar orçamento
+    const btnSolicitarOrcamento = document.querySelector('.solicitar-orcamento');
+    if (btnSolicitarOrcamento && !btnSolicitarOrcamento.querySelector('i')) {
+        const icon = document.createElement('i');
+        icon.className = 'fab fa-whatsapp';
+        icon.style.marginRight = '8px';
+        btnSolicitarOrcamento.prepend(icon);
     }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            realizarPesquisa(this.value);
-        });
+    
+    // Adicionar ícones aos campos do formulário de contato
+    if (document.getElementById('nome')) {
+        adicionarIconeAoLabel('nome', 'fas fa-user');
+    }
+    if (document.getElementById('telefone')) {
+        adicionarIconeAoLabel('telefone', 'fas fa-phone-alt');
+    }
+    if (document.getElementById('email')) {
+        adicionarIconeAoLabel('email', 'fas fa-envelope');
+    }
+    if (document.getElementById('mensagem')) {
+        adicionarIconeAoLabel('mensagem', 'fas fa-comment');
+    }
+    
+    // Adicionar ícones aos links de navegação
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        let iconClass = '';
         
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeSearchBar();
-            }
-        });
-    }
-
-    // Fechar resultados de pesquisa quando clicar fora
-    document.addEventListener('click', (e) => {
-        if (searchBar && searchIcon && searchBar.classList.contains('active') && 
-            !searchBar.contains(e.target) && !searchIcon.contains(e.target) && !searchResults.contains(e.target)) {
-            // Verificação adicional para não fechar ao clicar nos resultados
-            closeSearchBar();
+        switch(href) {
+            case '#home':
+                iconClass = 'fas fa-home';
+                break;
+            case '#sobre':
+                iconClass = 'fas fa-info-circle';
+                break;
+            case '#produtos':
+                iconClass = 'fas fa-couch';
+                break;
+            case '#contato':
+                iconClass = 'fas fa-envelope';
+                break;
         }
-    });
-
-    // Event listeners para a pesquisa principal na seção de destaques
-    if (mainSearchInput) {
-        mainSearchInput.addEventListener('input', function() {
-            realizarPesquisaDestaques(this.value);
-        });
         
-        mainSearchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.value = '';
-                // Resetar todos os destaques
-                const itensDestaque = document.querySelectorAll('.destaques-slider .destaque-item');
-                itensDestaque.forEach(item => {
-                    item.classList.remove('destaque-hidden');
-                });
-                
-                if (destaquesNaoEncontrados) {
-                    destaquesNaoEncontrados.classList.remove('active');
-                    destaquesNaoEncontrados.style.display = 'none';
-                }
-                
-                if (mainSearchClear) {
-                    mainSearchClear.classList.remove('active');
-                }
-            }
-        });
-    }
-
-    // Botão para limpar a pesquisa principal
-    if (mainSearchClear) {
-        mainSearchClear.addEventListener('click', function() {
-            if (mainSearchInput) {
-                mainSearchInput.value = '';
-            }
-            
-            // Resetar todos os destaques
-            const itensDestaque = document.querySelectorAll('.destaques-slider .destaque-item');
-            itensDestaque.forEach(item => {
-                item.classList.remove('destaque-hidden');
-            });
-            
-            if (destaquesNaoEncontrados) {
-                destaquesNaoEncontrados.classList.remove('active');
-                destaquesNaoEncontrados.style.display = 'none';
-            }
-            
-            mainSearchClear.classList.remove('active');
-        });
-    }
-
-    // Botão para limpar a pesquisa na mensagem de "nenhum destaque encontrado"
-    if (limparPesquisaDestaques) {
-        limparPesquisaDestaques.addEventListener('click', () => {
-            // Resetar todos os destaques
-            const itensDestaque = document.querySelectorAll('.destaques-slider .destaque-item');
-            itensDestaque.forEach(item => {
-                item.classList.remove('destaque-hidden');
-            });
-            
-            if (destaquesNaoEncontrados) {
-                destaquesNaoEncontrados.classList.remove('active');
-                destaquesNaoEncontrados.style.display = 'none';
-            }
-            
-            if (mainSearchInput) {
-                mainSearchInput.value = '';
-                if (mainSearchClear) {
-                    mainSearchClear.classList.remove('active');
-                }
-            }
-        });
-    }
-
-    // Impedir que o formulário de pesquisa envie
-    if (searchBar) {
-        searchBar.addEventListener('submit', (e) => {
-            e.preventDefault();
-        });
-    }
-
-    // Adicionar evento de redimensionamento para atualizar a posição dos resultados
-    window.addEventListener('resize', () => {
-        if (searchResults.classList.contains('active')) {
-            posicionarResultadosPesquisa();
+        if (iconClass && !link.querySelector('i')) {
+            const icon = document.createElement('i');
+            icon.className = iconClass;
+            icon.style.marginRight = '8px';
+            link.prepend(icon);
         }
     });
-
-    // Adicionar manipulador para fechamento de modal ao apertar ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (productModal.classList.contains('active')) {
-                closeProductModal();
-            }
+    
+    // Adicionar ícones aos links do footer
+    document.querySelectorAll('.footer-links ul li a').forEach(link => {
+        const href = link.getAttribute('href');
+        let iconClass = '';
+        
+        if (href.includes('#home')) {
+            iconClass = 'fas fa-home';
+        } else if (href.includes('#sobre')) {
+            iconClass = 'fas fa-info-circle';
+        } else if (href.includes('#produtos')) {
+            iconClass = 'fas fa-couch';
+        } else if (href.includes('#contato')) {
+            iconClass = 'fas fa-envelope';
+        } else if (href.includes('privacidade')) {
+            iconClass = 'fas fa-shield-alt';
+        } else if (href.includes('termos')) {
+            iconClass = 'fas fa-file-contract';
+        } else if (href.includes('garantia')) {
+            iconClass = 'fas fa-certificate';
+        } else if (href.includes('instalacao')) {
+            iconClass = 'fas fa-tools';
+        }
+        
+        if (iconClass && !link.querySelector('i')) {
+            const icon = document.createElement('i');
+            icon.className = iconClass;
+            icon.style.marginRight = '8px';
+            link.prepend(icon);
         }
     });
-});
+    
+    // Melhorar os ícones da seção de vantagens
+    adicionarIconesVantagens();
+    
+    // Adicionar ícones aos botões de ação principais
+    const btnPrimary = document.querySelector('.hero-content .btn-primary');
+    if (btnPrimary && !btnPrimary.querySelector('i')) {
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-arrow-right';
+        icon.style.marginLeft = '8px';
+        btnPrimary.appendChild(icon);
+    }
+}
+
+// Função para adicionar ícone a um label de campo de formulário
+function adicionarIconeAoLabel(fieldId, iconClass) {
+    // Não adicionar ícones aos labels - apenas usar os ícones dentro dos campos
+    // Esta função foi modificada para evitar duplicação
+    return;
+}
+
+// Função para adicionar ícones às vantagens como fallback para Lottie
+function adicionarIconesVantagens() {
+    const vantagemItems = document.querySelectorAll('.vantagem-item');
+    
+    vantagemItems.forEach(item => {
+        const title = item.querySelector('h4');
+        if (!title) return;
+        
+        let iconClass = '';
+        const titleText = title.textContent.trim();
+        
+        if (titleText.includes('MATÉRIA-PRIMA')) {
+            iconClass = 'fas fa-tree';
+        } else if (titleText.includes('DESIGN')) {
+            iconClass = 'fas fa-drafting-compass';
+        } else if (titleText.includes('SUSTENTÁVEL')) {
+            iconClass = 'fas fa-leaf';
+        } else if (titleText.includes('INSTALAÇÃO')) {
+            iconClass = 'fas fa-tools';
+        }
+        
+        // Verificar se já existe um ícone de fallback visível
+        const lottieContainer = item.querySelector('.lottie-container');
+        const existingIcon = lottieContainer.querySelector('i');
+        
+        if (iconClass && !existingIcon) {
+            lottieContainer.setAttribute('data-fallback-icon', iconClass);
+            
+            // Adicionar ícone de fallback adicional caso o anterior não tenha funcionado
+            const icon = document.createElement('i');
+            icon.className = iconClass;
+            icon.style.fontSize = '48px';
+            icon.style.color = '#7d5a44'; // Cor marrom para contraste
+            icon.style.display = 'block';
+            icon.style.textShadow = '0 1px 3px rgba(0, 0, 0, 0.3)';
+            lottieContainer.appendChild(icon);
+        }
+    });
+}

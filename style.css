@@ -224,6 +224,26 @@ img {
     text-shadow: none;
 }
 
+/* CSS para indicação de redirecionamento rápido */
+.btn-solicitar::after {
+    content: "Ctrl+Click para contato rápido";
+    display: none;
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.btn-solicitar:hover::after {
+    display: block;
+}
+
 /* Estilo para o botão na seção de destaques */
 .destaque-info .btn-solicitar {
     min-width: 150px;
@@ -520,6 +540,25 @@ img {
     cursor: pointer;
 }
 
+/* Menu mobile overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Hero section com Parallax e Typed.js */
 .hero {
     position: relative;
@@ -658,13 +697,11 @@ img {
     width: 50px;
 }
 
-/* Seção de Vantagens com ícones animados - visual clean */
+/* Seção de Vantagens com ícones animados */
 .vantagens-section {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-xl);
     border-top: 1px solid var(--color-grey-200);
-    background-color: var(--color-grey-100);
-    padding: var(--spacing-xl) 0;
 }
 
 .vantagens-header {
@@ -672,95 +709,55 @@ img {
     margin-bottom: var(--spacing-xl);
 }
 
-.vantagens-header h3 {
-    font-weight: 600;
-    letter-spacing: 2px;
-    position: relative;
-    display: inline-block;
-    padding-bottom: var(--spacing-sm);
-}
-
-.vantagens-header h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background-color: var(--color-dark);
-}
-
 .vantagens-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: var(--spacing-xl);
-    max-width: 1100px;
-    margin: 0 auto;
 }
 
 .vantagem-item {
     text-align: center;
-    transition: all var(--transition-medium);
-    padding: var(--spacing-lg);
-    border-radius: 8px;
-    background-color: var(--color-white);
-    color: var(--color-dark);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--color-grey-200);
-    overflow: hidden;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    background-color: #333333; /* Fundo mais escuro para melhor contraste */
+    color: var(--color-white);
     position: relative;
-}
-
-.vantagem-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background-color: var(--color-dark);
-    opacity: 0.8;
-    transition: var(--transition-medium);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
 }
 
 .vantagem-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    border-color: var(--color-grey-300);
-}
-
-.vantagem-item:hover::before {
-    width: 8px;
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
 }
 
 .lottie-container {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto var(--spacing-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-grey-100);
-    border-radius: 50%;
-    padding: 15px;
-    transition: var(--transition-medium);
 }
 
-.vantagem-item:hover .lottie-container {
-    transform: scale(1.05);
-    background-color: var(--color-grey-200);
+/* Estilos para os ícones de vantagens */
+.vantagem-item .icon-fallback {
+    font-size: 48px;
+    color: #7d5a44;
+    margin-bottom: 15px;
+    display: inline-block;
 }
 
 .vantagem-item h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: var(--spacing-sm);
-    color: var(--color-dark);
-    font-weight: 600;
-    letter-spacing: 1.5px;
+    color: var(--color-white);
     position: relative;
     display: inline-block;
     padding-bottom: var(--spacing-xs);
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
 }
 
 .vantagem-item h4::after {
@@ -771,21 +768,19 @@ img {
     transform: translateX(-50%);
     width: 30px;
     height: 1px;
-    background-color: var(--color-grey-400);
+    background-color: var(--color-white);
     transition: width var(--transition-medium);
 }
 
 .vantagem-item:hover h4::after {
     width: 50px;
-    background-color: var(--color-dark);
 }
 
 .vantagem-item p {
     font-size: 0.9rem;
-    color: var(--color-grey-600);
+    color: var(--color-grey-200); /* Cor mais clara para melhor contraste */
     margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.6;
+    font-weight: 400; /* Aumentar peso da fonte */
 }
 
 /* Produtos section */
@@ -882,6 +877,25 @@ img {
     box-shadow: var(--shadow-lg);
 }
 
+/* Efeito hover em produtos */
+.produto-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.produto-item:hover::before {
+    opacity: 1;
+}
+
 /* Campo de pesquisa principal */
 .main-search-container {
     max-width: 600px;
@@ -964,6 +978,11 @@ img {
     margin-bottom: var(--spacing-md);
     color: var(--color-white); /* Aumentar contraste */
     font-weight: 500; /* Aumentar peso da fonte */
+}
+
+/* Classe para produtos escondidos após pesquisa */
+.produto-hidden {
+    display: none !important;
 }
 
 /* Destaques section */
@@ -1080,6 +1099,46 @@ img {
     right: 0;
 }
 
+/* Mensagem de "nenhum destaque encontrado" */
+.destaques-nao-encontrados {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: var(--spacing-xl);
+    z-index: 10;
+    color: var(--color-white);
+}
+
+.destaques-nao-encontrados i {
+    font-size: 2rem;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+}
+
+.destaques-nao-encontrados p {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-white);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Classe para destaques escondidos após pesquisa */
+.destaque-hidden {
+    display: none !important;
+}
+
+/* Ajustes para garantir vazio da mensagem de não encontrado */
+.destaques-nao-encontrados.active {
+    display: flex;
+}
+
 /* Contato section */
 .contato {
     background-color: var(--color-dark);
@@ -1121,10 +1180,43 @@ img {
     background-color: var(--color-white);
 }
 
+/* Regras específicas para os ícones nos itens de informação */
 .info-item {
     display: flex;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 20px;
+}
+
+.icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    margin-right: 15px;
+    border-radius: 50%;
+    background-color: #7d5a44;
+    color: white;
+    position: relative;
+}
+
+.icon-container i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    line-height: 1;
+}
+
+.info-item p {
+    margin: 0;
+    line-height: 1.4;
 }
 
 .info-item i {
@@ -1175,7 +1267,49 @@ img {
 
 /* Formulário */
 .form-group {
-    margin-bottom: var(--spacing-md);
+    position: relative;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* Remover todos os input-icon anteriores */
+.input-icon {
+    display: none;
+}
+
+/* Nova abordagem com ícones prefixados nos labels */
+label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+label i {
+    margin-right: 8px;
+    color: #7d5a44;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Estilos para inputs e textareas */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #7d5a44;
+    box-shadow: 0 0 0 2px rgba(125, 90, 68, 0.2);
+    outline: none;
 }
 
 .form-group label {
@@ -1210,8 +1344,64 @@ img {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2); /* Adicionar contorno ao focar */
 }
 
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group .input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7d5a44;
+    z-index: 1;
+}
+
+/* Ajustes para posicionamento dos ícones */
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group select {
+    padding-left: 35px !important;
+    height: 45px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Correção específica para o ícone em textareas */
+.form-group textarea {
+    padding-left: 35px !important;
+    padding-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group textarea + .input-icon {
+    top: 15px !important;
+    transform: none !important;
+}
+
 .btn-submit {
     width: 100%;
+}
+
+/* Melhorar visibilidade do texto nos campos do formulário de contato */
+.contato .form-group input::placeholder,
+.contato .form-group textarea::placeholder {
+    color: var(--color-grey-400);
+    opacity: 1;
+}
+
+/* Melhorar contraste para mensagens de sucesso de formulários */
+.success-message {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin-top: var(--spacing-md);
+    font-weight: 500;
+    text-align: center;
 }
 
 /* Footer com texto preto para melhor contraste */
@@ -1307,7 +1497,6 @@ img {
     margin-bottom: 0;
     font-weight: 500;
 }
-
 
 /* WhatsApp Button */
 .whatsapp-btn {
@@ -1474,52 +1663,72 @@ img {
     margin-top: var(--spacing-md);
 }
 
-/* Melhorar visibilidade do texto nos campos do formulário de contato */
-.contato .form-group input::placeholder,
-.contato .form-group textarea::placeholder {
-    color: var(--color-grey-400);
-    opacity: 1;
+/* Estilos para botões com ícones */
+.btn i {
+    margin-right: 8px;
 }
 
-/* Melhorar contraste para mensagens de sucesso de formulários */
-.success-message {
-    background-color: var(--color-success);
-    color: var(--color-white);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    margin-top: var(--spacing-md);
-    font-weight: 500;
-    text-align: center;
+.btn-primary i.fa-arrow-right {
+    margin-left: 8px;
+    margin-right: 0;
+    transition: transform 0.3s ease;
 }
 
-/* Mensagem de "nenhum destaque encontrado" */
-.destaques-nao-encontrados {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: var(--spacing-xl);
-    z-index: 10;
-    color: var(--color-white);
+.btn-primary:hover i.fa-arrow-right {
+    transform: translateX(5px);
 }
 
-.destaques-nao-encontrados i {
-    font-size: 2rem;
-    color: var(--color-white);
-    margin-bottom: var(--spacing-md);
+.btn-solicitar i {
+    margin-right: 8px;
 }
 
-.destaques-nao-encontrados p {
-    margin-bottom: var(--spacing-md);
-    color: var(--color-white);
-    font-weight: 500;
-    text-align: center;
+.solicitar-orcamento i {
+    margin-right: 8px;
+}
+
+/* Estilos para ícones nos botões */
+.btn-primary i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover i {
+    transform: translateX(5px);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.6s ease forwards;
+}
+
+/* Ajustes de acessibilidade */
+:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
 }
 
 /* Responsividade - AJUSTADA PARA O ESTILO DO SITE DE REFERÊNCIA */
@@ -1562,10 +1771,9 @@ img {
         width: 400px; /* Ainda maior em tablet */
     }
     
-    /* Vantagens em 2 colunas para clean design */
+    /* Vantagens em 2 colunas */
     .vantagens-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-md);
     }
 }
 
@@ -1808,73 +2016,4 @@ img {
         font-size: 0.8rem;
         color: var(--color-grey-200); /* Cor mais clara para melhor contraste */
     }
-}
-
-/* Animações */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.fade-in {
-    animation: fadeIn 0.6s ease forwards;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.slide-up {
-    animation: slideUp 0.6s ease forwards;
-}
-
-/* Classe para produtos escondidos após pesquisa */
-.produto-hidden {
-    display: none !important;
-}
-
-/* Classe para destaques escondidos após pesquisa */
-.destaque-hidden {
-    display: none !important;
-}
-
-/* Ajustes para garantir vazio da mensagem de não encontrado */
-.destaques-nao-encontrados.active {
-    display: flex;
-}
-
-/* Ajustes de acessibilidade */
-:focus-visible {
-    outline: 2px solid var(--color-white);
-    outline-offset: 2px;
-}
-
-/* Efeito hover em produtos */
-.produto-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transition: opacity var(--transition-medium);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.produto-item:hover::before {
-    opacity: 1;
 }

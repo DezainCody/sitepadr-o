@@ -81,10 +81,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Exibir imediatamente o ícone de fallback
         const icon = document.createElement('i');
         icon.className = iconClass;
-        icon.style.fontSize = '48px';
-        icon.style.color = '#7d5a44'; // Cor marrom para contraste
+        icon.style.fontSize = '60px'; // Aumentando tamanho
+        icon.style.color = '#f0c096'; // Cor mais clara para melhor contraste
         icon.style.display = 'block';
-        icon.style.textShadow = '0 1px 3px rgba(0, 0, 0, 0.3)';
+        icon.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.5)'; // Sombra mais pronunciada
         container.appendChild(icon);
         
         // Tentar carregar a animação Lottie
@@ -132,21 +132,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Funcionalidade da barra de pesquisa no header
+    // Funcionalidade da barra de pesquisa no header - versão corrigida
     const searchIcon = document.querySelector('.search-icon');
     const searchBar = document.querySelector('.search-bar');
     const searchInput = document.getElementById('search-input');
     const searchClose = document.getElementById('search-close');
+    const searchResults = document.querySelector('.search-results');
     
-    if (searchIcon && searchBar) {
+    if (searchIcon && searchBar && searchInput) {
+        // Ativar a barra de pesquisa ao clicar no ícone
         searchIcon.addEventListener('click', function() {
             searchBar.classList.add('active');
             searchInput.focus();
         });
         
-        searchClose.addEventListener('click', function() {
-            searchBar.classList.remove('active');
-            searchInput.value = '';
+        // Fechar a barra de pesquisa
+        if (searchClose) {
+            searchClose.addEventListener('click', function() {
+                searchBar.classList.remove('active');
+                searchInput.value = '';
+                if (searchResults) {
+                    searchResults.classList.remove('active');
+                    searchResults.innerHTML = '';
+                }
+            });
+        }
+        
+        // Funcionalidade de pesquisa
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            // Só processa se tiver pelo menos 2 caracteres
+            if (searchTerm.length >= 2 && searchResults) {
+                // Coletar todos os produtos do site
+                const allProducts = [];
+                document.querySelectorAll('.produto-item, .destaque-item').forEach(item => {
+                    const nome = item.getAttribute('data-nome');
+                    const img = item.getAttribute('data-img');
+                    if (nome) {
+                        allProducts.push({
+                            nome: nome,
+                            img: img,
+                            element: item
+                        });
+                    }
+                });
+                
+                // Filtrar produtos baseado no termo de pesquisa
+                const matchingProducts = allProducts.filter(product => 
+                    product.nome.toLowerCase().includes(searchTerm)
+                );
+                
+                // Mostrar resultados
+                searchResults.innerHTML = '';
+                
+                if (matchingProducts.length > 0) {
+                    matchingProducts.forEach(product => {
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'search-result-item';
+                        resultItem.innerHTML = `
+                            <img src="${product.img}" alt="${product.nome}" class="search-result-img">
+                            <div class="search-result-details">
+                                <h4>${product.nome}</h4>
+                            </div>
+                        `;
+                        
+                        // Ao clicar no resultado, rola a página até o produto
+                        resultItem.addEventListener('click', function() {
+                            const element = product.element;
+                            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                            // Destacar o item encontrado
+                            element.classList.add('produto-highlight');
+                            setTimeout(() => {
+                                element.classList.remove('produto-highlight');
+                            }, 2000);
+                            
+                            // Fechar a pesquisa
+                            searchBar.classList.remove('active');
+                            searchInput.value = '';
+                            searchResults.classList.remove('active');
+                        });
+                        
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.classList.add('active');
+                } else {
+                    searchResults.innerHTML = '<div class="search-no-results">Nenhum produto encontrado</div>';
+                    searchResults.classList.add('active');
+                }
+            } else if (searchResults) {
+                searchResults.classList.remove('active');
+            }
+        });
+        
+        // Esconder resultados ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (!searchBar.contains(e.target) && !searchIcon.contains(e.target)) {
+                searchBar.classList.remove('active');
+                if (searchResults) {
+                    searchResults.classList.remove('active');
+                }
+            }
         });
     }
     
@@ -194,46 +281,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Slider de destaques
+    // Slider de destaques - Versão corrigida e otimizada
     const sliderContainer = document.querySelector('.destaques-slider');
     const sliderArrowLeft = document.querySelector('.slider-arrow-left');
     const sliderArrowRight = document.querySelector('.slider-arrow-right');
     
     if (sliderContainer && sliderArrowLeft && sliderArrowRight) {
         let slidePosition = 0;
-        const slideWidth = 300; // Largura do slide em px
-        const slidesCount = document.querySelectorAll('.destaque-item').length;
-        const visibleSlides = window.innerWidth > 768 ? 3 : 1;
-        const maxSlidePosition = slidesCount - visibleSlides;
+        const slides = document.querySelectorAll('.destaque-item');
+        const slideCount = slides.length;
         
+        // Função para atualizar a navegação do slider
+        function updateSlider() {
+            // Determinar quantos slides são visíveis com base no tamanho da tela
+            let visibleSlides = 1;
+            if (window.innerWidth >= 1200) {
+                visibleSlides = 3;
+            } else if (window.innerWidth >= 768) {
+                visibleSlides = 2;
+            }
+            
+            // Calcular largura total e largura do item + margem
+            const containerWidth = sliderContainer.parentElement.clientWidth - 80; // Subtrai o espaço das setas
+            const itemWidth = containerWidth / visibleSlides;
+            
+            // Ajustar a largura dos itens
+            slides.forEach(slide => {
+                slide.style.flex = `0 0 ${itemWidth}px`;
+                slide.style.width = `${itemWidth}px`;
+            });
+            
+            // Garantir que não ultrapasse os limites
+            const maxPosition = Math.max(0, slideCount - visibleSlides);
+            if (slidePosition > maxPosition) {
+                slidePosition = maxPosition;
+            }
+            
+            // Aplicar a transformação
+            const offset = slidePosition * itemWidth;
+            sliderContainer.style.transform = `translateX(-${offset}px)`;
+            
+            // Atualizar estado visual das setas
+            sliderArrowLeft.classList.toggle('disabled', slidePosition === 0);
+            sliderArrowRight.classList.toggle('disabled', slidePosition >= maxPosition);
+        }
+        
+        // Adicionar ouvintes de eventos para as setas
         sliderArrowLeft.addEventListener('click', function() {
             if (slidePosition > 0) {
                 slidePosition--;
-                updateSliderPosition();
+                updateSlider();
             }
         });
         
         sliderArrowRight.addEventListener('click', function() {
-            if (slidePosition < maxSlidePosition) {
+            const visibleSlides = window.innerWidth >= 1200 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+            const maxPosition = slideCount - visibleSlides;
+            
+            if (slidePosition < maxPosition) {
                 slidePosition++;
-                updateSliderPosition();
+                updateSlider();
             }
         });
         
-        function updateSliderPosition() {
-            sliderContainer.style.transform = `translateX(-${slidePosition * slideWidth}px)`;
-        }
+        // Inicializar o slider
+        updateSlider();
         
         // Atualizar quando a janela for redimensionada
-        window.addEventListener('resize', function() {
-            const newVisibleSlides = window.innerWidth > 768 ? 3 : 1;
-            const newMaxSlidePosition = slidesCount - newVisibleSlides;
-            
-            if (slidePosition > newMaxSlidePosition) {
-                slidePosition = newMaxSlidePosition;
-                updateSliderPosition();
-            }
-        });
+        window.addEventListener('resize', updateSlider);
     }
     
     // Navegação Mobile
@@ -587,10 +702,10 @@ function adicionarIconesVantagens() {
             // Adicionar ícone de fallback adicional caso o anterior não tenha funcionado
             const icon = document.createElement('i');
             icon.className = iconClass;
-            icon.style.fontSize = '48px';
-            icon.style.color = '#7d5a44'; // Cor marrom para contraste
+            icon.style.fontSize = '60px'; // Aumentando tamanho
+            icon.style.color = '#f0c096'; // Cor mais clara para melhor contraste
             icon.style.display = 'block';
-            icon.style.textShadow = '0 1px 3px rgba(0, 0, 0, 0.3)';
+            icon.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.5)'; // Sombra mais pronunciada
             lottieContainer.appendChild(icon);
         }
     });

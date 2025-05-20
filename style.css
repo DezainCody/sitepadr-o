@@ -834,7 +834,7 @@ img {
     display: block;
     width: 100%;
     height: auto; /* Altura ajustada automaticamente mantendo proporção */
-    object-fit: cover; /* Alterado para cover para melhor exibição */
+    object-fit: cover; /* Garante que a imagem cubra todo o espaço disponível */
     max-height: none; /* Remove qualquer limite de altura máxima */
     transition: transform var(--transition-slow), filter var(--transition-slow);
 }
@@ -852,10 +852,10 @@ img {
     width: 100%;
     padding: var(--spacing-md);
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Removido o gradient, mantendo apenas um fundo sólido mais discreto na parte inferior */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo sólido escuro mais discreto */
     color: var(--color-white);
     z-index: 2;
-    transform: translateY(0); /* Garante posicionamento correto */
+    transform: translateY(0);
 }
 
 .produto-info h3 {
@@ -863,7 +863,7 @@ img {
     margin-bottom: var(--spacing-md);
     font-weight: 600;
     color: var(--color-white);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Animação para cards (produtos) */
@@ -992,34 +992,27 @@ img {
 
 .destaques-container {
     position: relative;
-    padding: 0 40px;
+    padding: 0 50px; /* Aumentado para dar mais espaço para as setas */
     max-width: 100%;
+    overflow: hidden; /* Importante para esconder o overflow do slider */
 }
 
 .destaques-slider {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: var(--spacing-lg); /* Aumentado para dar mais espaço entre os itens */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: var(--spacing-md) 0 var(--spacing-xl); /* Mais espaço vertical */
-}
-
-.destaques-slider::-webkit-scrollbar {
-    display: none;
+    gap: var(--spacing-md);
+    transition: transform 0.5s ease;
+    width: 100%;
 }
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 350px; /* Aumentado de 280px para 350px */
-    scroll-snap-align: center;
+    position: relative;
     background-color: var(--color-grey-900);
-    box-shadow: var(--shadow-md); /* Sombra mais pronunciada */
+    box-shadow: var(--shadow-md);
     transition: all var(--transition-medium);
     overflow: hidden;
-    position: relative;
     border-radius: var(--border-radius-sm);
+    margin: 10px 0;
 }
 
 .destaque-item:hover {
@@ -1037,8 +1030,8 @@ img {
 .destaque-item img {
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: cover; /* Alterado para cover para melhor exibição */
+    height: auto; /* Altura ajustada automaticamente */
+    object-fit: cover; /* Garante que a imagem cubra todo o espaço disponível */
     transition: transform var(--transition-slow);
 }
 
@@ -1054,7 +1047,7 @@ img {
     width: 100%;
     padding: var(--spacing-md);
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Removido o gradient, mantendo apenas um fundo sólido na parte inferior */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo sólido escuro mais discreto */
     color: var(--color-white);
     z-index: 2;
 }
@@ -1064,37 +1057,48 @@ img {
     margin-bottom: var(--spacing-md);
     font-weight: 600;
     color: var(--color-white);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Adicionar sombra para melhorar legibilidade */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* Navegação do slider */
 .slider-nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
-    background-color: var(--color-dark);
-    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     z-index: 5;
-    transition: all var(--transition-medium);
+    transition: all 0.3s ease;
     color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .slider-nav-arrow:hover {
-    background-color: var(--color-grey-700);
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.slider-nav-arrow.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .slider-arrow-left {
-    left: 0;
+    left: 10px;
 }
 
 .slider-arrow-right {
-    right: 0;
+    right: 10px;
 }
 
 /* Mensagem de "nenhum destaque encontrado" */

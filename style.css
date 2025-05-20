@@ -834,18 +834,17 @@ img {
     display: block;
     width: 100%;
     height: auto; /* Altura ajustada automaticamente mantendo proporção */
-    object-fit: contain; /* Garante que a imagem seja exibida por completo */
+    object-fit: cover; /* Alterado para cover para melhor exibição */
     max-height: none; /* Remove qualquer limite de altura máxima */
     transition: transform var(--transition-slow), filter var(--transition-slow);
-    filter: grayscale(100%);
 }
 
 .produto-item:hover img {
     transform: scale(1.03); /* Efeito de zoom suave ao passar o mouse */
-    filter: grayscale(50%); /* Reduz um pouco o grayscale ao passar o mouse */
+    filter: brightness(1.05); /* Apenas um leve aumento de brilho em vez de alteração de grayscale */
 }
 
-/* Estilo para informações do produto SOBREPOSTAS à imagem */
+/* Estilo para informações do produto */
 .produto-info {
     position: absolute;
     bottom: 0;
@@ -853,7 +852,7 @@ img {
     width: 100%;
     padding: var(--spacing-md);
     text-align: center;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7) 60%, transparent);
+    background-color: rgba(0, 0, 0, 0.7); /* Removido o gradient, mantendo apenas um fundo sólido mais discreto na parte inferior */
     color: var(--color-white);
     z-index: 2;
     transform: translateY(0); /* Garante posicionamento correto */
@@ -1039,14 +1038,13 @@ img {
     display: block;
     width: 100%;
     height: auto;
-    object-fit: contain; /* Garante que a imagem seja exibida por completo */
+    object-fit: cover; /* Alterado para cover para melhor exibição */
     transition: transform var(--transition-slow);
-    filter: grayscale(100%);
 }
 
 .destaque-item:hover img {
     transform: scale(1.05);
-    filter: grayscale(50%);
+    filter: brightness(1.05); /* Apenas um leve aumento de brilho */
 }
 
 .destaque-info {
@@ -1056,7 +1054,7 @@ img {
     width: 100%;
     padding: var(--spacing-md);
     text-align: center;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7) 70%, transparent);
+    background-color: rgba(0, 0, 0, 0.7); /* Removido o gradient, mantendo apenas um fundo sólido na parte inferior */
     color: var(--color-white);
     z-index: 2;
 }
